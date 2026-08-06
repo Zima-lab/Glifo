@@ -17,7 +17,7 @@
   const STORE_KEY = 'glifo-profile';
 
   const defaults = {
-    viewedClass: {}, viewedEvent: {}, viewedDesigner: {}, viewedTerm: {}, viewedTechnique: {},
+    viewedClass: {}, viewedEvent: {}, viewedDesigner: {}, viewedTerm: {}, viewedTechnique: {}, viewedTypeface: {},
     bestFont: 0, bestHistory: 0, bestTerms: 0, bestTechnique: 0, xp: 0,
   };
 
@@ -29,6 +29,7 @@
     theme: localStorage.getItem('glifo-theme') || 'light',
     section: 'home',
     open: { class: {}, event: {}, designer: {}, term: {}, technique: {} },
+    typeface: null,           // id del carattere aperto nella sezione Type
     profile: Object.assign({}, defaults, saved),
     // quiz
     exMode: 'menu',           // menu | quiz
@@ -88,6 +89,7 @@
     book: '<path d="M4 5.5C4 5 5 4.5 7 4.5c2.5 0 4 .8 5 1.5v13c-1-.7-2.5-1.5-5-1.5-2 0-3 .5-3 1V5.5Z"/><path d="M20 5.5c0-.5-1-1-3-1-2.5 0-4 .8-5 1.5v13c1-.7 2.5-1.5 5-1.5 2 0 3 .5 3 1V5.5Z"/>',
     glyph: '<path d="M7 19V7.5C7 5.6 8.6 4 10.5 4S14 5.6 14 7.5V19"/><path d="M7 12.5h7"/><path d="M17 9v10"/>',
     press: '<rect x="4" y="4" width="16" height="6" rx="1"/><path d="M8 10v3h8v-3"/><rect x="6" y="13" width="12" height="7" rx="1"/>',
+    type: '<path d="M5 7V5h14v2"/><path d="M12 5v14"/><path d="M9 19h6"/>',
     clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.5 2"/>',
     people: '<circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9.5" r="2.3"/><path d="M15.5 19c.2-2 1.7-3.6 3.7-4"/>',
     cap: '<path d="M12 5 2 9.5l10 4.5 10-4.5L12 5Z"/><path d="M6 12v4.5c0 1 2.7 2 6 2s6-1 6-2V12"/>',
@@ -106,6 +108,7 @@
     { key: 'glossary',  icon: 'book',   label: 'navGlossary' },
     { key: 'terms',     icon: 'glyph',  label: 'navTerms' },
     { key: 'technique', icon: 'press',  label: 'navTechnique' },
+    { key: 'type',      icon: 'type',   label: 'navType' },
     { key: 'history',   icon: 'clock',  label: 'navHistory' },
     { key: 'designers', icon: 'people', label: 'navDesigners' },
     { key: 'exercises', icon: 'cap',    label: 'navExercises' },
@@ -114,13 +117,14 @@
 
   // In basso su mobile ci stanno cinque voci: le altre restano raggiungibili
   // dalle card della home e dalla barra laterale su schermi larghi.
-  const TABBAR = ['home', 'glossary', 'history', 'exercises', 'profile'];
+  const TABBAR = ['home', 'type', 'glossary', 'exercises', 'profile'];
 
   function goto(section) {
     state.section = section;
     // Uscendo dagli esercizi si torna sempre al menu: evita di rientrare
     // a metà di un quiz senza contesto.
     if (section !== 'exercises') state.exMode = 'menu';
+    if (section !== 'type') state.typeface = null;
     render();
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
@@ -161,6 +165,7 @@
       des: Object.keys(state.profile.viewedDesigner).length,
       ter: Object.keys(state.profile.viewedTerm).length,
       tec: Object.keys(state.profile.viewedTechnique).length,
+      typ: Object.keys(state.profile.viewedTypeface).length,
     };
   }
 
@@ -188,6 +193,8 @@
         title: t('navTerms'), desc: t('termsIntro'), n: TERMS.length, go: 'terms' },
       { glyph: '¶', font: "'PT Serif', serif", color: 'var(--accent2-dark)',
         title: t('navTechnique'), desc: t('techniqueIntro'), n: TECHNIQUES.length, go: 'technique' },
+      { glyph: 'Aa', font: "'Inter', sans-serif", color: 'var(--accent1)',
+        title: t('navType'), desc: t('typeIntro'), n: TYPEFACES.length, go: 'type' },
       { glyph: '1501', font: "'Blacker Pro Text', serif", color: 'var(--accent4)',
         title: t('navHistory'), desc: t('historyIntro'), n: TIMELINE.length, go: 'history' },
       { glyph: '&', font: "'Cormorant Garamond', serif", color: 'var(--accent1)',
@@ -219,6 +226,7 @@
       { v: n.cls + '/' + CLASSIFICATIONS.length, l: t('statClassifications'), c: 'var(--accent1)' },
       { v: n.ter + '/' + TERMS.length, l: t('statTerms'), c: 'var(--accent3)' },
       { v: n.tec + '/' + TECHNIQUES.length, l: t('statTechniques'), c: 'var(--accent2-dark)' },
+      { v: n.typ + '/' + TYPEFACES.length, l: t('statTypefaces'), c: 'var(--accent1)' },
       { v: n.ev + '/' + TIMELINE.length, l: t('statTimeline'), c: 'var(--accent4)' },
       { v: n.des + '/' + DESIGNERS.length, l: t('statDesigners'), c: 'var(--accent1)' },
     ];
@@ -394,6 +402,164 @@
     });
   }
 
+
+  /* ---- Type: schede-specimen e carta d'identità ---- */
+
+  // Il colore della scheda viene dalla classificazione, non dal singolo
+  // carattere: due neogrottesche avranno sempre lo stesso fondo.
+  function classColor(tf) {
+    return (tf.cls && CLASS_COLORS[tf.cls]) || CLASS_COLOR_FALLBACK;
+  }
+  function className(tf) {
+    const c = tf.cls && CLASSIFICATIONS.find(function (x) { return x.id === tf.cls; });
+    return c ? tr(c.name) : '';
+  }
+
+  // L'alfabeto della scheda, nelle quattro righe del modello a stampa
+  const SPECIMEN_ROWS = [
+    'abcdefghijklmnopqrstuvwxyz',
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    '1234567890',
+    '.,;:?!“”$€-&~%*+−×/=)]}#',
+  ];
+
+  function typeCard(tf, onClick) {
+    const card = el('button', 'tcard');
+    card.type = 'button';
+    card.style.background = classColor(tf);
+
+    // Le due lettere grandi, in diagonale: sono il segno distintivo del carattere
+    const a = el('span', 'tcard-glyph tcard-a', tf.glyphA);
+    const b = el('span', 'tcard-glyph tcard-b', tf.glyphB);
+    a.style.fontFamily = tf.font; b.style.fontFamily = tf.font;
+    card.appendChild(a); card.appendChild(b);
+
+    const cn = className(tf);
+    if (cn) card.appendChild(el('span', 'tcard-cls', cn));
+
+    const box = el('div', 'tcard-spec');
+    const nm = el('div', 'tcard-name', tf.name);
+    nm.style.fontFamily = tf.font;
+    box.appendChild(nm);
+    SPECIMEN_ROWS.forEach(function (row) {
+      const r = el('div', 'tcard-row', row);
+      r.style.fontFamily = tf.font;
+      box.appendChild(r);
+    });
+    card.appendChild(box);
+
+    card.addEventListener('click', onClick);
+    return card;
+  }
+
+  function renderType() {
+    const grid = $('typeGrid'), detail = $('typeDetail');
+    const open = state.typeface && TYPEFACES.find(function (x) { return x.id === state.typeface; });
+    grid.hidden = !!open;
+    detail.hidden = !open;
+    if (open) return renderTypeDetail(detail, open);
+
+    $('typeTitle').textContent = t('navType');
+    $('typeIntro').textContent = t('typeIntro');
+    // Legenda: senza, il colore resta un vezzo. Con, diventa una chiave
+    // di lettura che si impara guardando la griglia due volte.
+    const leg = $('typeLegend');
+    clear(leg);
+    const FAMILIES = [
+      {ids: ['umanista','garalda','transizionale'],
+       lb: {it:'Classiche', en:'Classicals', de:'Klassische'}},
+      {ids: ['didone','meccana'],
+       lb: {it:'Moderne', en:'Moderns', de:'Moderne'}},
+      {ids: ['grottesca','neogrottesca','geometrica','umanisticalineare'],
+       lb: {it:'Lineari', en:'Lineals', de:'Lineare'}},
+      {ids: ['incisa','scritta','manuale','gotica','nonlatine'],
+       lb: {it:'Calligrafiche', en:'Calligraphics', de:'Kalligrafische'}},
+    ];
+    FAMILIES.forEach(function (f) {
+      const item = el('span', 'legend-item');
+      const sw = el('span', 'legend-sw');
+      // la pastiglia mostra le tinte del gruppo, dalla più chiara alla più scura
+      sw.style.background = 'linear-gradient(90deg,' +
+        f.ids.map(function (i) { return CLASS_COLORS[i]; }).join(',') + ')';
+      item.appendChild(sw);
+      item.appendChild(document.createTextNode(tr(f.lb)));
+      leg.appendChild(item);
+    });
+
+    const list = $('typeList');
+    clear(list);
+    TYPEFACES.forEach(function (tf) {
+      list.appendChild(typeCard(tf, function () {
+        state.typeface = tf.id;
+        markViewed('viewedTypeface', tf.id);
+        render();
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }));
+    });
+  }
+
+  function renderTypeDetail(box, tf) {
+    clear(box);
+
+    const back = el('button', 'back-link', '← ' + t('backToType'));
+    back.type = 'button';
+    back.addEventListener('click', function () { state.typeface = null; render(); });
+    box.appendChild(back);
+
+    const head = el('div', 'tdetail-head');
+    const h1 = el('h1', 'tdetail-name', tf.name);
+    h1.style.fontFamily = tf.font;
+    head.appendChild(h1);
+    const meta = [className(tf), tf.year, tf.designer, tf.foundry]
+      .filter(function (x) { return x && x !== '—'; });
+    if (meta.length) head.appendChild(el('p', 'tdetail-meta', meta.join('  ·  ')));
+    box.appendChild(head);
+
+    // La riga di campione, nel carattere stesso
+    const spec = el('div', 'tdetail-spec');
+    spec.style.background = classColor(tf);
+    SPECIMEN_ROWS.slice(0, 2).forEach(function (row) {
+      const r = el('div', 'tdetail-row', row);
+      r.style.fontFamily = tf.font;
+      spec.appendChild(r);
+    });
+    box.appendChild(spec);
+
+    if (tf.quote) {
+      const q = el('blockquote', 'tdetail-quote');
+      q.appendChild(el('p', null, tr(tf.quote.text)));
+      q.appendChild(el('cite', null, '— ' + tf.quote.author));
+      box.appendChild(q);
+    }
+
+    box.appendChild(el('p', 'tdetail-body', tr(tf.desc)));
+
+    [['recognize', 'recognizeLabel'], ['where', 'whereLabel']].forEach(function (pair) {
+      if (!tf[pair[0]]) return;
+      box.appendChild(el('h2', 'tdetail-sub', t(pair[1])));
+      box.appendChild(el('p', 'tdetail-body', tr(tf[pair[0]])));
+    });
+
+    // Il link esterno chiude la scheda, come il rimando in fondo a una voce
+    if (tf.link) {
+      const a = document.createElement('a');
+      a.className = 'tdetail-link';
+      a.href = tf.link.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = tf.link.label + ' ↗';
+      box.appendChild(a);
+    }
+
+    // La nota sul campione va in fondo: è un avvertimento, non il contenuto
+    if (tf.substitute) {
+      const n = el('div', 'tdetail-note');
+      n.appendChild(el('span', 'tdetail-note-lb', t('substituteLabel')));
+      n.appendChild(el('p', null, tr(tf.substitute)));
+      box.appendChild(n);
+    }
+  }
+
   /* ---- Storia ---- */
   function renderHistory() {
     $('historyTitle').textContent = t('navHistory');
@@ -490,6 +656,7 @@
       { v: n.cls + '/' + CLASSIFICATIONS.length, l: t('statClassifications') },
       { v: n.ter + '/' + TERMS.length, l: t('statTerms') },
       { v: n.tec + '/' + TECHNIQUES.length, l: t('statTechniques') },
+      { v: n.typ + '/' + TYPEFACES.length, l: t('statTypefaces') },
       { v: n.ev + '/' + TIMELINE.length, l: t('statTimeline') },
       { v: n.des + '/' + DESIGNERS.length, l: t('statDesigners') },
       { v: state.profile.bestFont + '/' + QUIZ_LEN, l: t('statBestFont') },
@@ -762,6 +929,7 @@
       case 'glossary': renderGlossary(); break;
       case 'terms': renderTerms(); break;
       case 'technique': renderTechnique(); break;
+      case 'type': renderType(); break;
       case 'history': renderHistory(); break;
       case 'designers': renderDesigners(); break;
       case 'exercises': renderExercises(); break;

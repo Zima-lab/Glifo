@@ -37,6 +37,7 @@ const UI = {
   navGlossary: {it:'Glossario', en:'Glossary', de:'Glossar'},
   navTerms: {it:'Anatomia', en:'Anatomy', de:'Anatomie'},
   navTechnique: {it:'Tecnica', en:'Technique', de:'Technik'},
+  navType: {it:'Type', en:'Type', de:'Type'},
   navHistory: {it:'Storia', en:'History', de:'Geschichte'},
   navDesigners: {it:'Designer', en:'Designers', de:'Designer'},
   navExercises: {it:'Esercizi', en:'Exercises', de:'Übungen'},
@@ -93,6 +94,14 @@ const UI = {
   whichClass: {it:'A quale classificazione appartiene questo carattere?', en:'Which classification does this typeface belong to?', de:'Zu welcher Klassifikation gehört diese Schrift?'},
   whichTerm: {it:'Quale termine descrive questa definizione?', en:'Which term matches this definition?', de:'Welcher Begriff passt zu dieser Definition?'},
 
+  typeIntro: {it:'Carte d’identità dei caratteri: chi li ha disegnati, perché hanno quella forma, come riconoscerli a colpo d’occhio e dove incontrarli nel mondo. Tocca una scheda per aprirla.', en:'Identity cards for typefaces: who designed them, why they look the way they do, how to recognise them at a glance and where to meet them in the world. Tap a card to open it.', de:'Steckbriefe der Schriften: wer sie entworfen hat, warum sie so aussehen, wie man sie auf einen Blick erkennt und wo man ihnen begegnet. Tippe auf eine Karte, um sie zu öffnen.'},
+  classLabel: {it:'Classificazione', en:'Classification', de:'Klassifikation'},
+  recognizeLabel: {it:'Come riconoscerlo?', en:'How to recognise it?', de:'Woran erkennt man sie?'},
+  whereLabel: {it:'Dove trovarlo?', en:'Where to find it?', de:'Wo findet man sie?'},
+  substituteLabel: {it:'Nota sul campione', en:'Note on the specimen', de:'Hinweis zum Muster'},
+  designerLabel: {it:'Disegnato da', en:'Designed by', de:'Entworfen von'},
+  backToType: {it:'Tutti i caratteri', en:'All typefaces', de:'Alle Schriften'},
+  statTypefaces: {it:'Caratteri scoperti', en:'Typefaces discovered', de:'Schriften entdeckt'},
   novareseLabel: {it:'Novarese', en:'Novarese', de:'Novarese'},
   plateLabel: {it:'Tavola', en:'Plate', de:'Tafel'},
   exampleLabel: {it:'Esempi', en:'Examples', de:'Beispiele'},
@@ -897,4 +906,149 @@ const DESIGNERS = [
       it:'Nata a Bratislava ed emigrata negli Stati Uniti da bambina, fondò nel 1984 con Rudy VanderLans la rivista e fonderia Emigre, proprio mentre usciva il primo Macintosh. Invece di considerare i limiti dei primi schermi un ostacolo, li assunse come materiale di progetto: i suoi caratteri Emperor, Oakland ed Emigre sono disegnati direttamente sulla griglia di pixel a bassa risoluzione. La rivista Emigre divenne il luogo di un dibattito acceso sulla tipografia digitale, con posizioni molto distanti da quelle della tradizione modernista. Alla critica di illeggibilità rispose con una frase diventata celebre: «si legge meglio ciò che si legge di più». Con caratteri successivi come Mrs Eaves, ispirato a Baskerville, e Filosofia, ispirato a Bodoni, mostrò di saper lavorare anche dentro la tradizione.',
       en:'Born in Bratislava and emigrated to the United States as a child, in 1984 she founded the magazine and foundry Emigre with Rudy VanderLans, just as the first Macintosh appeared. Instead of treating the limits of early screens as an obstacle, she took them as design material: her Emperor, Oakland and Emigre typefaces are drawn directly on the low-resolution pixel grid. Emigre magazine became the site of a heated debate on digital typography, with positions far from modernist tradition. To the charge of illegibility she replied with a line that became famous: “you read best what you read most”. With later faces such as Mrs Eaves, inspired by Baskerville, and Filosofia, inspired by Bodoni, she showed she could work within the tradition too.',
       de:'In Bratislava geboren und als Kind in die USA emigriert, gründete sie 1984 mit Rudy VanderLans die Zeitschrift und Schriftgießerei Emigre — genau als der erste Macintosh erschien. Statt die Grenzen der frühen Bildschirme als Hindernis zu sehen, nahm sie sie als Gestaltungsmaterial: Ihre Schriften Emperor, Oakland und Emigre sind unmittelbar auf dem grobpixeligen Raster gezeichnet. Die Zeitschrift Emigre wurde zum Ort einer hitzigen Debatte über digitale Typografie, mit Positionen weit jenseits der modernistischen Tradition. Dem Vorwurf der Unlesbarkeit begegnete sie mit einem berühmt gewordenen Satz: „Man liest am besten, was man am meisten liest.“ Mit späteren Schriften wie Mrs Eaves nach Baskerville und Filosofia nach Bodoni zeigte sie, dass sie auch innerhalb der Tradition arbeiten kann.'}},
+];
+
+/* ---------- CARATTERI (sezione Type) ----------
+   Schede-specimen con carta d'identità, sul modello delle "carte d'identità
+   tipografiche" del Piccolo manuale illustrato per cercatori di font.
+
+   SCHEMA DI UNA VOCE — per aggiungerne una si copia questo blocco:
+
+   {
+     id: 'nome-univoco',            // senza spazi né accenti
+     name: 'Nome del carattere',
+     year: '1957',                  // anno di pubblicazione
+     designer: 'Nome Cognome',
+     foundry: 'Fonderia',
+     cls: 'neogrottesca',           // id di una classe in CLASSIFICATIONS
+     glyphA: 'G', glyphB: 'e',      // le due lettere grandi della scheda:
+                                    // scegliere quelle più caratterizzanti
+     font: "'Inter', sans-serif",   // carattere del campione
+     substitute: {…} | null,        // se il campione NON è il carattere vero
+     quote: {text, author},         // citazione d'apertura (facoltativa)
+     desc: {it, en, de},            // la storia: 6-8 frasi
+     recognize: {it, en, de},       // « Come riconoscerlo? »
+     where: {it, en, de},           // « Dove trovarlo? »
+     link: {url, label},            // Wikipedia, fonderia o designer
+   }
+
+   Il colore della scheda NON si indica: viene dalla classificazione `cls`.
+
+   Solo `id`, `name`, `font`, `glyphA`, `glyphB`, `cls` e `desc` sono
+   obbligatori: tutto il resto può mancare e l'app non lo mostra. */
+
+/* Fondi delle schede, uno per classificazione.
+   Il colore non è decorativo: dice a quale famiglia Vox appartiene il
+   carattere, così la griglia si legge a colpo d'occhio anche senza
+   leggere i nomi. Le quattro tinte derivano dai quattro accenti del
+   design system, una per macro-gruppo Vox:
+
+     azzurro  → classiche    (umanista, garalda, transizionale)
+     corallo  → moderne      (didone, meccana)
+     ambra    → lineari      (le quattro sottoclassi senza grazie)
+     verde    → calligrafiche (incisa, scritta, manuale, gotica, non latine)
+
+   Dentro ogni famiglia la tinta si scurisce col procedere del secolo.
+   Tutte hanno contrasto ≥ 7:1 col testo scuro delle schede: molto sopra
+   la soglia AA, perché sulle schede il testo è anche piccolo. */
+const CLASS_COLORS = {
+  umanista: '#AED8E5',
+  garalda: '#9FCEDD',
+  transizionale: '#92C3D3',
+  didone: '#E5AEBA',
+  meccana: '#D392A1',
+  grottesca: '#E5D5AE',
+  neogrottesca: '#E0CEA4',
+  geometrica: '#D9C79B',
+  umanisticalineare: '#D3C092',
+  incisa: '#AEE5D6',
+  scritta: '#A6E1D1',
+  manuale: '#9FDDCC',
+  gotica: '#99D8C7',
+  nonlatine: '#92D3C1',
+};
+
+// Tinta di riserva, se un carattere non dichiara la classificazione
+const CLASS_COLOR_FALLBACK = '#D6CFC4';
+
+const TYPEFACES = [
+
+  {
+    id: 'helvetica', name: 'Helvetica', year: '1957',
+    designer: 'Max Miedinger, Eduard Hoffmann',
+    foundry: 'Haas’sche Schriftgiesserei',
+    cls: 'neogrottesca',
+    glyphA: 'G', glyphB: 'e',
+    font: "'Inter', sans-serif",
+    substitute: {
+      name: 'Inter',
+      it: 'Helvetica è un carattere commerciale e non può essere incluso in questa app. Il campione qui accanto è composto in Inter, una neogrottesca libera con licenza SIL OFL: le proporzioni e lo spirito sono affini, ma alcuni dettagli — lo sperone della « G », il taglio dei terminali — differiscono dall’originale.',
+      en: 'Helvetica is a commercial typeface and cannot be bundled with this app. The specimen alongside is set in Inter, a free neo-grotesque under the SIL OFL: proportions and spirit are close, but some details — the spur of the « G », the cut of the terminals — differ from the original.',
+      de: 'Helvetica ist eine kommerzielle Schrift und kann dieser App nicht beigelegt werden. Das Muster daneben ist in Inter gesetzt, einer freien Neogrotesk unter der SIL OFL: Proportionen und Geist sind verwandt, doch einige Details — der Sporn des « G », der Schnitt der Endungen — weichen vom Original ab.',
+    },
+    quote: {
+      text: {
+        it: '«L’Helvetica è un font che è stato disegnato con l’intento di avere una migliore leggibilità. È un carattere moderno, molto pulito, che va bene per ogni occasione.»',
+        en: '“Helvetica is a typeface that was designed with the intent of having better legibility. It is a modern typeface, very clean, that works for every occasion.”',
+        de: '„Helvetica ist eine Schrift, die mit dem Ziel besserer Lesbarkeit entworfen wurde. Eine moderne, sehr saubere Schrift, die zu jedem Anlass passt.“',
+      },
+      author: 'Massimo Vignelli',
+    },
+    desc: {
+      it: 'Nel 1956 Eduard Hoffmann, direttore della fonderia svizzera Haas, commissionò a Max Miedinger l’aggiornamento di una vecchia grottesca del catalogo. L’obiettivo era competere con l’onnipresente Akzidenz-Grotesk, richiestissima dai grafici della Scuola svizzera. Il risultato uscì nel 1957 come Neue Haas Grotesk e nel 1960 fu ribattezzato Helvetica — nome latino della Svizzera — in una mossa di marketing che lo rese pronunciabile su tutti i mercati. Il suo punto di forza è la neutralità: una lettera che non interferisce col messaggio, ma lo trasmette e basta. Questa qualità ne fece il carattere dell’identità aziendale globale, adottato da governi, metropolitane e multinazionali. Massimo Vignelli, che nel 1972 lo scelse per la segnaletica della metropolitana di New York, ne fu il più grande estimatore: i suoi collaboratori gli progettarono un’urna funeraria con l’iscrizione in Helvetica. Non tutti però lo amano: c’è chi, stanco della sua ubiquità, ne addita proprio l’inespressività come il difetto principale.',
+      en: 'In 1956 Eduard Hoffmann, director of the Swiss Haas foundry, commissioned Max Miedinger to update an old grotesque in the catalogue. The aim was to compete with the ubiquitous Akzidenz-Grotesk, much in demand among Swiss School designers. The result appeared in 1957 as Neue Haas Grotesk and in 1960 was renamed Helvetica — the Latin name for Switzerland — a marketing move that made it pronounceable in every market. Its strength is neutrality: a letter that does not interfere with the message but simply carries it. That quality made it the typeface of global corporate identity, adopted by governments, metros and multinationals. Massimo Vignelli, who chose it in 1972 for the New York subway signage, was its greatest admirer: his collaborators designed him a funerary urn with the inscription in Helvetica. Not everyone loves it, though: some, weary of its ubiquity, point to that very inexpressiveness as its main flaw.',
+      de: '1956 beauftragte Eduard Hoffmann, Leiter der Schweizer Haas’schen Schriftgiesserei, Max Miedinger mit der Überarbeitung einer alten Grotesk des Katalogs. Ziel war es, mit der allgegenwärtigen Akzidenz-Grotesk zu konkurrieren, die bei den Gestaltern der Schweizer Schule stark gefragt war. Das Ergebnis erschien 1957 als Neue Haas Grotesk und wurde 1960 in Helvetica umbenannt — den lateinischen Namen der Schweiz — ein Marketingschachzug, der sie in allen Märkten aussprechbar machte. Ihre Stärke ist die Neutralität: ein Buchstabe, der die Botschaft nicht stört, sondern sie bloß überträgt. Diese Eigenschaft machte sie zur Schrift der globalen Corporate Identity, übernommen von Regierungen, U-Bahnen und Konzernen. Massimo Vignelli, der sie 1972 für das Leitsystem der New Yorker U-Bahn wählte, war ihr größter Bewunderer: Seine Mitarbeiter entwarfen ihm eine Urne mit der Inschrift in Helvetica. Doch nicht alle lieben sie: Manche, ihrer Allgegenwart überdrüssig, sehen gerade in dieser Ausdruckslosigkeit ihren größten Mangel.',
+    },
+    recognize: {
+      it: 'I terminali delle lettere hanno sempre un taglio orizzontale o perpendicolare rispetto alla linea di base. La pancia della « a » minuscola si curva nella parte superiore per congiungersi all’asta e assecondarla. La gamba della « R » è ricurva, non una linea dritta. Lo sperone della « G » sembra la punta di una freccia, perché forma un angolo retto. L’altezza-x è elevata, il che rende poco differenti fra loro maiuscole e minuscole.',
+      en: 'The terminals of the letters always have a horizontal cut, perpendicular to the baseline. The bowl of the lowercase « a » curves at the top to join the stem and follow it. The leg of the « R » is curved, not a straight line. The spur of the « G » looks like an arrowhead, because it forms a right angle. The x-height is tall, which makes capitals and lowercase differ little from one another.',
+      de: 'Die Endungen der Buchstaben sind stets waagerecht, senkrecht zur Grundlinie geschnitten. Der Bogen des kleinen « a » krümmt sich oben, um sich an den Schaft anzuschließen. Das Bein des « R » ist geschwungen, keine gerade Linie. Der Sporn des « G » wirkt wie eine Pfeilspitze, weil er einen rechten Winkel bildet. Die x-Höhe ist groß, wodurch sich Versalien und Kleinbuchstaben wenig unterscheiden.',
+    },
+    where: {
+      it: 'Nei loghi di American Airlines e Knoll, entrambi progettati da Vignelli, e poi Jeep, Toyota, Mattel, Lufthansa, The North Face. Nella segnaletica della metropolitana di New York. Nei titoli dei film Funny Games (2007) e Little Miss Sunshine.',
+      en: 'In the logos of American Airlines and Knoll, both designed by Vignelli, and then Jeep, Toyota, Mattel, Lufthansa, The North Face. In the New York subway signage. In the titles of the films Funny Games (2007) and Little Miss Sunshine.',
+      de: 'In den Logos von American Airlines und Knoll, beide von Vignelli gestaltet, sowie Jeep, Toyota, Mattel, Lufthansa, The North Face. Im Leitsystem der New Yorker U-Bahn. In den Titeln der Filme Funny Games (2007) und Little Miss Sunshine.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Helvetica', label: 'Wikipedia — Helvetica'},
+  },
+
+  {
+    id: 'garamond', name: 'Garamond', year: '1530 ca.',
+    designer: 'Claude Garamond',
+    foundry: '—',
+    cls: 'garalda',
+    glyphA: 'Q', glyphB: 'a',
+    font: "'EB Garamond', serif",
+    substitute: {
+      name: 'EB Garamond',
+      it: 'Il campione è composto in EB Garamond, revival digitale libero di Georg Duffner e Octavio Pardo basato sui caratteri originali di Garamond conservati ad Anversa. È un Garamond a tutti gli effetti, non un’approssimazione.',
+      en: 'The specimen is set in EB Garamond, a free digital revival by Georg Duffner and Octavio Pardo based on Garamond’s original types preserved in Antwerp. It is a Garamond in the full sense, not an approximation.',
+      de: 'Das Muster ist in EB Garamond gesetzt, einer freien digitalen Neuinterpretation von Georg Duffner und Octavio Pardo nach Garamonds in Antwerpen bewahrten Originalschriften. Es ist ein echter Garamond, keine Annäherung.',
+    },
+    quote: {
+      text: {
+        it: '«Un carattere che non si nota è un carattere che funziona.»',
+        en: '“A typeface you do not notice is a typeface that works.”',
+        de: '„Eine Schrift, die man nicht bemerkt, ist eine Schrift, die funktioniert.“',
+      },
+      author: 'Beatrice Warde (parafrasi)',
+    },
+    desc: {
+      it: 'Claude Garamond fu incisore a Parigi nella prima metà del Cinquecento e uno dei primi a fare della fornitura di punzoni un mestiere autonomo: vendeva a stampatori diversi invece di essere legato a un’unica officina. È un cambiamento importante, perché separa il disegnatore di caratteri dallo stampatore e crea una figura professionale che prima non esisteva. Le sue romane si ispirano al modello di Francesco Griffo, ma ne affinano le proporzioni fino a un equilibrio che sarà lo standard europeo del libro per due secoli. Su incarico di Francesco I incise anche i Grecs du Roi, una serie di caratteri greci di complessità straordinaria. C’è però un equivoco durato fino al Novecento: molti caratteri che oggi portano il suo nome derivano in realtà dai punzoni di Jean Jannon, incisi settant’anni dopo. Il Garamond di Adobe, del 1989, torna finalmente agli originali conservati al Museo Plantin-Moretus di Anversa.',
+      en: 'Claude Garamond was a punchcutter in Paris in the first half of the 16th century and among the first to make the supply of punches an independent trade: he sold to different printers rather than being tied to a single workshop. This is an important shift, because it separates the type designer from the printer and creates a profession that had not existed before. His romans take Francesco Griffo’s model as their starting point but refine its proportions into a balance that would be the European standard for books for two centuries. Commissioned by Francis I, he also cut the Grecs du Roi, a set of Greek types of extraordinary complexity. There is, however, a confusion that lasted into the 20th century: many typefaces bearing his name today in fact derive from the punches of Jean Jannon, cut seventy years later. Adobe Garamond, from 1989, finally returns to the originals preserved at the Plantin-Moretus Museum in Antwerp.',
+      de: 'Claude Garamond war in der ersten Hälfte des 16. Jahrhunderts Stempelschneider in Paris und einer der Ersten, die aus der Lieferung von Stempeln ein eigenständiges Gewerbe machten: Er verkaufte an verschiedene Drucker, statt an eine Werkstatt gebunden zu sein. Das ist ein wichtiger Wandel, denn er trennt den Schriftgestalter vom Drucker und schafft einen Beruf, den es zuvor nicht gab. Seine Antiquaschriften gehen von Francesco Griffos Vorbild aus, verfeinern dessen Proportionen aber zu einem Gleichgewicht, das zwei Jahrhunderte lang europäischer Buchstandard sein sollte. Im Auftrag Franz’ I. schnitt er auch die Grecs du Roi, eine außerordentlich komplexe griechische Schriftserie. Es gibt allerdings eine bis ins 20. Jahrhundert währende Verwechslung: Viele heute seinen Namen tragende Schriften stammen tatsächlich von den siebzig Jahre später geschnittenen Stempeln Jean Jannons. Das Adobe Garamond von 1989 kehrt endlich zu den im Museum Plantin-Moretus in Antwerpen bewahrten Originalen zurück.',
+    },
+    recognize: {
+      it: 'L’asse di contrasto è nettamente obliquo, eredità del pennino tenuto inclinato: la parte più sottile della « o » sta in alto a destra. La « e » minuscola ha l’occhio piccolo e la traversa orizzontale. Le grazie sono sottili e raccordate all’asta con una curva morbida. L’altezza-x è bassa e le ascendenti sono lunghe, il che dà alla pagina un ritmo arioso. La coda della « Q » è lunga e svolazzante, uno dei dettagli più riconoscibili.',
+      en: 'The stress axis is markedly oblique, an inheritance of the tilted nib: the thinnest part of the « o » sits at the top right. The lowercase « e » has a small eye and a horizontal crossbar. Serifs are fine and bracketed to the stem with a soft curve. The x-height is low and the ascenders long, which gives the page an airy rhythm. The tail of the « Q » is long and sweeping, one of the most recognisable details.',
+      de: 'Die Kontrastachse ist deutlich schräg, ein Erbe der geneigten Feder: Die dünnste Stelle des « o » liegt oben rechts. Das kleine « e » hat ein kleines Auge und einen waagerechten Querbalken. Die Serifen sind fein und weich an den Schaft angebunden. Die x-Höhe ist niedrig, die Oberlängen sind lang, was der Seite einen luftigen Rhythmus gibt. Der Schwanz des « Q » ist lang und ausschwingend — eines der erkennbarsten Details.',
+    },
+    where: {
+      it: 'Nei libri: è uno dei caratteri da lettura più usati dell’editoria occidentale. Nel logo di Apple fino agli anni Ottanta. Nelle edizioni Adelphi e in gran parte della saggistica italiana. Nei titoli dei film di Wes Anderson, che ne fa un uso riconoscibile.',
+      en: 'In books: it is one of the most used reading typefaces in Western publishing. In the Apple logo until the 1980s. In Adelphi editions and much of Italian non-fiction. In the titles of Wes Anderson’s films, which make a recognisable use of it.',
+      de: 'In Büchern: eine der meistgenutzten Leseschriften des westlichen Verlagswesens. Im Apple-Logo bis in die 1980er Jahre. In den Ausgaben von Adelphi und weiten Teilen der italienischen Sachliteratur. In den Titeln der Filme von Wes Anderson, die sie erkennbar einsetzen.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Garamond', label: 'Wikipedia — Garamond'},
+  },
+
 ];
