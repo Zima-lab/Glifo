@@ -7,6 +7,12 @@
    Le fonti usate per verificare date e definizioni sono elencate in
    CLAUDE.md, nella stessa cartella. */
 
+/* ---------- VERSIONE ----------
+   Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
+   due punti diversi, e se divergono il numero in fondo alla pagina mente.
+   Un controllo automatico verifica che coincidano. */
+const APP_VERSION = 'v8';
+
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
    Gli accenti sono scelti per passare il contrasto WCAG AA sul rispettivo fondo. */

@@ -778,3 +778,13 @@ button, a, [role="button"], [tabindex] { touch-action: manipulation; }
   border: 1px solid rgba(27,23,18,.14); flex-shrink: 0;
 }
 [data-theme="dark"] .legend-sw { border-color: rgba(255,255,255,.16); }
+
+/* ---------- VERSIONE ----------
+   Serve a distinguere subito una pubblicazione nuova da una copia rimasta
+   nella cache del service worker. */
+.app-version {
+  max-width: 920px; margin: var(--sp-8) auto 0;
+  padding-top: var(--sp-4); border-top: 1px solid var(--border);
+  text-align: center; font-size: var(--fs-2xs);
+  color: var(--text-soft); opacity: .8; letter-spacing: .3px;
+}

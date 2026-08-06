@@ -904,6 +904,7 @@
     document.documentElement.lang = state.lang;
 
     $('tagline').textContent = t('tagline');
+    $('appVersion').textContent = 'Glifo ' + APP_VERSION;
     renderXp();
 
     Array.prototype.forEach.call(document.querySelectorAll('.lang-opt'), function (b) {

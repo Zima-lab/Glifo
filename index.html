@@ -91,6 +91,16 @@
       <div class="list" id="techniqueList"></div>
     </section>
 
+    <section id="view-type" class="view" hidden>
+      <div id="typeGrid">
+        <h1 class="view-title" id="typeTitle"></h1>
+        <p class="view-intro" id="typeIntro"></p>
+        <div class="type-legend" id="typeLegend"></div>
+        <div class="type-grid" id="typeList"></div>
+      </div>
+      <div id="typeDetail" hidden></div>
+    </section>
+
     <section id="view-history" class="view" hidden>
       <h1 class="view-title" id="historyTitle"></h1>
       <p class="view-intro" id="historyIntro"></p>
@@ -126,6 +136,10 @@
       <div class="stat-grid" id="profileStats"></div>
       <button type="button" class="link-btn" id="resetBtn"></button>
     </section>
+
+    <!-- Versione dell'app: per capire al volo se si sta vedendo l'ultima
+         pubblicazione o una copia rimasta nella cache. -->
+    <div class="app-version" id="appVersion"></div>
 
   </main>
 </div>
