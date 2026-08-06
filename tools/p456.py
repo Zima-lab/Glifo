@@ -1,7 +1,9 @@
-import sys, math; sys.path.insert(0,'.')
+import sys, os, math
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from lib import *
 from glyphs import glyph_path
-FD='/sessions/tender-stoic-carson/mnt/Pictures/Glifo/Glifo App/fonts/specimen/'
+FD = APP + '/fonts/specimen/'
 F={'uman':FD+'eb-garamond-400-latin.woff2','gara':FD+'cormorant-garamond-500-latin.woff2',
    'tran':FD+'pt-serif-400-latin.woff2','dido':FD+'playfair-display-600-latin.woff2',
    'slab':FD+'roboto-slab-500-latin.woff2','sans':FD+'archivo-500-latin.woff2'}
@@ -36,7 +38,7 @@ for i,(k,nm,sec,ang) in enumerate(cols):
 b.append(ink(wobble_line(60,462,880,462,0.6),1.0,INK2))
 b.append(label(470,492,'L\'asse obliquo è l\'impronta del pennino tenuto inclinato; raddrizzandosi, la lettera smette','middle',11.5,INK2,style='italic'))
 b.append(label(470,510,'di imitare la mano e comincia a essere costruita.','middle',11.5,INK2,style='italic'))
-open('/sessions/tender-stoic-carson/out_asse.svg','w').write(
+open(APP + '/plates/asse.svg','w').write(
  plate(W,H,''.join(b),title='L\'ASSE DI CONTRASTO',subtitle='Come si data un carattere guardando una sola lettera',figno='Tav. IV'))
 
 # ══════════ TAV. V — CRENATURA E SPAZIATURA ══════════
@@ -64,52 +66,75 @@ for i,ch in enumerate('AVANTI'):
     x+=adv+(-9 if ch=='A' and i==0 else 0)
 b.append(label(470,548,'La crenatura agisce su coppie singole; l\'avvicinamento su tutto il blocco.','middle',11.5,INK2,style='italic'))
 b.append(label(470,566,'Allargare le minuscole di un testo corrente è invece considerato un errore.','middle',11.5,INK2,style='italic'))
-open('/sessions/tender-stoic-carson/out_crenatura.svg','w').write(
+open(APP + '/plates/crenatura.svg','w').write(
  plate(W,H,''.join(b),title='CRENATURA',subtitle='Perché due lettere vicine non bastano a fare una parola',figno='Tav. V'))
 
 # ══════════ TAV. VI — TIPOMETRIA ══════════
-W,H=940,620; seeded(67); b=[]
-# il blocco di piombo, con il corpo e l'occhio
-BX,BY,BW,BH=140,180,230,300
+W,H=940,660; seeded(67); b=[]
+
+# ── Il carattere di piombo, per mostrare che cos'è il « corpo » ──
+BX,BY,BW,BH=136,168,220,286
 b.append(ink(wobble_rect(BX,BY,BW,BH,0.8),2.0))
 b.append(f'<path d="M {BX},{BY} L {BX+22},{BY-22} L {BX+BW+22},{BY-22} L {BX+BW},{BY} Z" fill="url(#h1)" opacity="0.3"/>')
 b.append(ink(f'M {BX},{BY} L {BX+22},{BY-22} L {BX+BW+22},{BY-22} L {BX+BW},{BY} Z',1.4))
 b.append(f'<path d="M {BX+BW},{BY} L {BX+BW+22},{BY-22} L {BX+BW+22},{BY+BH-22} L {BX+BW},{BY+BH} Z" fill="url(#hx)" opacity="0.28"/>')
 b.append(ink(f'M {BX+BW},{BY} L {BX+BW+22},{BY-22} L {BX+BW+22},{BY+BH-22} L {BX+BW},{BY+BH} Z',1.4))
 # a rovescio, come sul carattere vero
-d,_=glyph_path(F['tran'],'R',150,0,0)
-b.append(f'<g transform="translate({BX+BW/2+52},{BY+230}) scale(-1,1)">'
+d,_=glyph_path(F['tran'],'R',142,0,0)
+b.append(f'<g transform="translate({BX+BW/2+48},{BY+214}) scale(-1,1)">'
          f'<path d="{d}" fill="url(#h1)" opacity="0.26"/>'
          f'<path d="{d}" fill="none" stroke="{INK}" stroke-width="2.2" stroke-linejoin="round"/></g>')
-b.append(label(BX+BW/2,BY+BH+52,'la lettera è a rovescio: si raddrizza solo sulla carta','middle',10.5,RED,style='italic'))
 # quota del corpo
-QX=BX-46
+QX=BX-42
 b.append(ink(wobble_line(QX,BY,QX,BY+BH,0.4),1.2,RED))
 for yy in (BY,BY+BH):
     b.append(ink(wobble_line(QX-8,yy,QX+8,yy,0.3),1.2,RED))
 b.append(f'<g transform="rotate(-90 {QX-14} {BY+BH/2})">'+label(QX-14,BY+BH/2,'corpo','middle',13,RED,style='italic')+'</g>')
-b.append(label(BX+BW/2,BY+BH+34,'il corpo è l\'altezza del blocco, non della lettera','middle',11.5,INK2,style='italic'))
+b.append(label(BX+BW/2,BY+BH+30,'il corpo è l\'altezza del blocco, non della lettera','middle',11,INK2,style='italic'))
+b.append(label(BX+BW/2,BY+BH+48,'la lettera è a rovescio: si raddrizza solo sulla carta','middle',10.5,RED,style='italic'))
 
-# la scala del tipometro: Didot contro Pica
-SX,SY=520,220
-b.append(caps(700,182,'LE DUE SCALE DEL TIPOMETRO',size=11.5))
-for j,(nm,mm,col) in enumerate([('Didot','0,376 mm',INK),('Pica','0,351 mm',RED)]):
-    yy=SY+j*120
-    b.append(label(SX-8,yy+5,nm,'end',13,col))
-    px=SX+14
-    step=13.4 if j==0 else 12.5      # rapporto reale fra i due punti
-    for i in range(13):
-        h=22 if i%12==0 else (14 if i%6==0 else 8)
-        b.append(ink(wobble_line(px+i*step,yy,px+i*step,yy-h,0.3),1.1,col))
-    b.append(ink(wobble_line(px,yy,px+12*step,yy,0.4),1.3,col))
-    b.append(label(px+12*step+10,yy+4,f'1 riga = 12 pt',"start",11,INK2,style='italic'))
-    b.append(label(px,yy+20,f'1 punto = {mm}','start',11,col,style='italic'))
-b.append(label(700,468,'Il punto Didot nasce dal « piede del re »: la sua 864ª parte.','middle',11.5,INK2,style='italic'))
-b.append(label(700,486,'Il punto Pica dal pollice inglese. Il punto PostScript, oggi lo standard','middle',11.5,INK2,style='italic'))
-b.append(label(700,504,'digitale, vale esattamente 1/72 di pollice: 0,3528 mm.','middle',11.5,INK2,style='italic'))
-b.append(ink(wobble_line(60,536,880,536,0.6),1.0,INK2))
-b.append(label(470,566,'Due caratteri nello stesso corpo possono apparire di dimensioni molto diverse:','middle',11.5,INK2,style='italic'))
-b.append(label(470,584,'ciò che si vede è l\'altezza-x, non il corpo.','middle',11.5,INK2,style='italic'))
-open('/sessions/tender-stoic-carson/out_tipometria.svg','w').write(
- plate(W,H,''.join(b),title='TIPOMETRIA',subtitle='Il corpo, il punto e le due scale storiche',figno='Tav. VI'))
+# ── Le quattro scale, tutte sulla stessa lunghezza fisica ──
+# Sessanta millimetri reali, tracciati con lo stesso rapporto: solo così il
+# confronto è vero e si vede a occhio che il punto Didot è più grande del
+# Pica. È il principio del tipometro, che affianca la scala decimale a
+# quella duodecimale sullo stesso righello.
+SX, SY, GAP = 500, 210, 74
+MM, SPAN = 5.3, 60
+
+b.append(caps(SX + SPAN*MM/2, 158, 'LE QUATTRO SCALE, SULLA STESSA LUNGHEZZA', size=11))
+
+SCALES = [
+    ('cm',      INK, 10.0,  10, 2, '1 cm = 10 mm'),
+    ('pollice', INK, 25.4,   8, 2, '1 inch = 25,4 mm = 72 punti PostScript'),
+    ('Didot',   RED,  4.512,12, 2, '1 riga (cicero) = 12 pt  ·  1 pt = 0,376 mm'),
+    ('Pica',    RED,  4.212,12, 2, '1 pica = 12 pt  ·  1 pt = 0,351 mm'),
+]
+for j,(nm,col,major,minor,med,leg) in enumerate(SCALES):
+    yy = SY + j*GAP
+    b.append(ink(wobble_line(SX, yy, SX+SPAN*MM, yy, 0.35), 1.3, col))
+    step = major/minor
+    i = 0
+    while i*step <= SPAN + 1e-6:
+        x = SX + i*step*MM
+        if i % minor == 0:            h,w = 18, 1.3
+        elif i % (minor//med) == 0:   h,w = 11, 0.95
+        else:                         h,w = 5.5, 0.65
+        b.append(ink(wobble_line(x, yy, x, yy-h, 0.22), w, col))
+        i += 1
+    # numerazione: sotto la linea, così non urta la scala di sopra
+    n = 1
+    while n*major <= SPAN + 1e-6:
+        b.append(label(SX + n*major*MM, yy+12, str(n), 'middle', 8, col))
+        n += 1
+    b.append(label(SX-12, yy+4, nm, 'end', 12.5, col))
+    b.append(label(SX, yy+27, leg, 'start', 9.5, INK2, style='italic'))
+
+# ── Chiusa ──
+b.append(ink(wobble_line(60,548,880,548,0.6),1.0,INK2))
+b.append(label(470,576,'Il punto Didot nasce dal « piede del re »: ne è la 864ª parte. Il punto Pica dal pollice inglese.','middle',11,INK2,style='italic'))
+b.append(label(470,594,'Il punto PostScript, oggi lo standard digitale, vale esattamente 1/72 di pollice: 0,3528 mm.','middle',11,INK2,style='italic'))
+b.append(label(470,612,'Due caratteri nello stesso corpo possono apparire di dimensioni diverse: ciò che si vede è l\'altezza-x.','middle',11,INK2,style='italic'))
+
+open(APP + '/plates/tipometria.svg','w').write(
+ plate(W,H,''.join(b),title='TIPOMETRIA',subtitle='Il corpo, il punto e le quattro scale a confronto',figno='Tav. VI'))
 print('tre tavole create')

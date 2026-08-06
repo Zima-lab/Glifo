@@ -1,8 +1,10 @@
-import sys, math; sys.path.insert(0,'.')
+import sys, os, math
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from lib import *
 from glyphs import glyph_path
 
-FD='/sessions/tender-stoic-carson/mnt/Pictures/Glifo/Glifo App/fonts/specimen/'
+FD = APP + '/fonts/specimen/'
 GOT=FD+'unifrakturcook-700-latin.woff2'; SER=FD+'eb-garamond-400-latin.woff2'
 W,H=940,680; seeded(23); b=[]
 
@@ -82,6 +84,6 @@ for i,(k,nm,yr,desc) in enumerate(fam):
     b.append(label(cx,610,yr,'middle',11,RED,style='italic'))
     b.append(label(cx,630,desc,'middle',10,INK2,style='italic'))
 
-open('/sessions/tender-stoic-carson/out_gotiche.svg','w').write(
+open(APP + '/plates/gotiche.svg','w').write(
   plate(W,H,''.join(b),title='LE SCRITTURE GOTICHE',
         subtitle='La rottura dell\'arco e le quattro varietà storiche',figno='Tav. II'))

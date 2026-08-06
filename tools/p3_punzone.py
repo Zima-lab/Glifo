@@ -1,7 +1,9 @@
-import sys; sys.path.insert(0,'.')
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # la cartella dell'app
 from lib import *
 from glyphs import glyph_path
-FD='/sessions/tender-stoic-carson/mnt/Pictures/Glifo/Glifo App/fonts/specimen/'
+FD = APP + '/fonts/specimen/'
 SER=FD+'eb-garamond-400-latin.woff2'
 W,H=940,600; seeded(31); b=[]
 
@@ -51,6 +53,6 @@ for x1,x2 in ((166,296),(406,536),(646,766)):
 b.append(label(470,494,'Ogni corpo richiedeva un punzone diverso, inciso da capo: nel piombo l\'ingrandimento non esisteva.','middle',11.5,INK2,style='italic'))
 b.append(label(470,514,'La lettera è a rovescio in tre fasi su quattro — torna diritta solo sulla carta.','middle',11.5,INK2,style='italic'))
 
-open('/sessions/tender-stoic-carson/out_punzone.svg','w').write(
+open(APP + '/plates/punzone.svg','w').write(
  plate(W,H,''.join(b),title='DAL PUNZONE ALLA CARTA',
    subtitle='La catena di fabbricazione del carattere mobile',figno='Tav. III'))

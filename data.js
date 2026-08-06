@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v8';
+const APP_VERSION = 'v9';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
@@ -153,8 +153,8 @@ const PLATES = {
   tipometria: {src:'plates/tipometria.svg', n:'VI',
     title:{it:'Tipometria', en:'Typometry', de:'Typometrie'},
     cap:{it:'Il corpo è l’altezza del blocco, non della lettera. Le due scale storiche, Didot e Pica, non coincidono.',
-         en:'Type size is the height of the block, not of the letter. The two historical scales, Didot and pica, do not coincide.',
-         de:'Der Schriftgrad ist die Höhe des Kegels, nicht des Buchstabens. Die beiden historischen Skalen, Didot und Pica, stimmen nicht überein.'}},
+         en:'Type size is the height of the block, not of the letter. Four scales over the same length: sixty millimetres hold 13 Didot lines but 14 picas.',
+         de:'Der Schriftgrad ist die Höhe des Kegels, nicht des Buchstabens. Vier Skalen auf derselben Länge: Sechzig Millimeter fassen 13 Didot-Zeilen, aber 14 Pica.'}},
 };
 
 /* Quale tavola apre quale sezione */

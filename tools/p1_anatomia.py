@@ -1,8 +1,10 @@
-import sys; sys.path.insert(0,'.')
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # la cartella dell'app
 from lib import *
 from glyphs import glyph_path, metrics
 
-FD = '/sessions/tender-stoic-carson/mnt/Pictures/Glifo/Glifo App/fonts/specimen/'
+FD = APP + '/fonts/specimen/'
 SERIF = FD + 'eb-garamond-400-latin.woff2'
 W, H = 940, 640
 seeded(11)
@@ -66,6 +68,6 @@ for k, txt, side in [('asc','ascendenti','L'), ('cap','maiuscole','R'), ('x','al
 b.append(caps(292, 566, 'FIG. 1 — LE PARTI DEL SEGNO', size=11, color=INK2))
 b.append(caps(700, 566, 'FIG. 2 — LE QUOTE VERTICALI', size=11, color=INK2))
 
-open('/sessions/tender-stoic-carson/out_anatomia.svg','w').write(
+open(APP + '/plates/anatomia.svg','w').write(
     plate(W, H, ''.join(b), title='ANATOMIA DELLA LETTERA',
           subtitle='Le parti del segno e le linee su cui è costruito', figno='Tav. I'))
