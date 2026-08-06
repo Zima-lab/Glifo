@@ -1,0 +1,30 @@
+CARATTERI CAMPIONE — LICENZE
+============================
+
+I file .woff2 in questa cartella sono i caratteri usati per illustrare le
+classificazioni tipografiche nel glossario e nel quiz di riconoscimento.
+
+Sono tutti distribuiti con SIL Open Font License 1.1, che ne consente
+liberamente l'uso, l'incorporamento e la ridistribuzione, anche in progetti
+commerciali, purché i font non siano venduti da soli.
+
+Testo completo della licenza: https://openfontlicense.org
+
+  Archivo             Omnibus-Type
+  Cinzel              Natanael Gama
+  Cormorant Garamond  Christian Thalmann / Catharsis Fonts
+  Dancing Script      Impallari Type
+  DM Sans             Colophon Foundry, Jonny Pinhorn, Indian Type Foundry
+  EB Garamond         Georg Duffner, Octavio Pardo
+  Playfair Display    Claus Eggers Sørensen
+  PT Serif            ParaType
+  Roboto Slab         Christian Robertson
+  UnifrakturCook      j. 'mach' wust
+
+I file sono stati scaricati da Google Fonts e limitati al sottoinsieme
+"latin" (U+0000-00FF e segni correlati), sufficiente per l'italiano,
+l'inglese e il tedesco usati dall'app.
+
+I caratteri in ../ (Blacker Pro Text e Blacker Sans Pro, Latinotype) NON
+rientrano in questa licenza: sono usati su licenza per progetti non
+commerciali.

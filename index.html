@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Glifo">
+<meta name="theme-color" content="#FBF7F2">
+<title>Glifo — Atelier di tipografia</title>
+<meta name="description" content="Glossario, storia e designer della tipografia in italiano, inglese e tedesco. Classificazioni Vox-ATypI, anatomia della lettera, quiz.">
+
+<!-- Icone. Il .ico serve ai browser più vecchi e alla barra dei preferiti;
+     i PNG a schede, segnalibri e schermata home di iOS. -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+
+<!-- I caratteri sono tutti locali: l'app si vede identica anche offline.
+     Precarico i due tagli sempre a schermo (testo e interfaccia): partono
+     subito, senza aspettare che il CSS venga analizzato. -->
+<link rel="preload" href="fonts/Blacker-Sans-Pro-Book.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Blacker-Pro-Text-Medium.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-name">Glifo</span>
+      <span class="brand-tag" id="tagline">Atelier di tipografia</span>
+    </div>
+    <div class="topbar-actions">
+      <span class="xp-chip" id="xpChip">0 XP</span>
+      <div class="lang-toggle" id="langToggle" role="group" aria-label="Lingua / Language / Sprache">
+        <button type="button" class="lang-opt" data-lang="it">IT</button>
+        <button type="button" class="lang-opt" data-lang="en">EN</button>
+        <button type="button" class="lang-opt" data-lang="de">DE</button>
+      </div>
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Tema chiaro / scuro">
+        <span class="theme-knob"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar" aria-label="Navigazione principale"></nav>
+
+  <main class="content" id="content">
+
+    <section id="view-home" class="view" hidden>
+      <div class="hero">
+        <p class="hero-kicker" id="heroKicker"></p>
+        <h1 class="hero-title" id="heroTitle"></h1>
+        <p class="hero-quote" id="heroQuote"></p>
+        <p class="hero-author" id="heroAuthor"></p>
+      </div>
+      <div class="card-grid" id="homeCards"></div>
+      <div class="panel">
+        <h2 class="panel-title" id="progressTitle"></h2>
+        <div class="stat-grid" id="progressStats"></div>
+      </div>
+    </section>
+
+    <section id="view-glossary" class="view" hidden>
+      <h1 class="view-title" id="glossaryTitle"></h1>
+      <p class="view-intro" id="glossaryIntro"></p>
+      <p class="view-note" id="glossaryNote"></p>
+      <div class="plate-holder" id="plate-glossary"></div>
+      <div class="list" id="glossaryList"></div>
+    </section>
+
+    <section id="view-terms" class="view" hidden>
+      <h1 class="view-title" id="termsTitle"></h1>
+      <p class="view-intro" id="termsIntro"></p>
+      <div class="plate-holder" id="plate-terms"></div>
+      <div class="list" id="termsList"></div>
+    </section>
+
+    <section id="view-technique" class="view" hidden>
+      <h1 class="view-title" id="techniqueTitle"></h1>
+      <p class="view-intro" id="techniqueIntro"></p>
+      <div class="plate-holder" id="plate-technique"></div>
+      <div class="list" id="techniqueList"></div>
+    </section>
+
+    <section id="view-history" class="view" hidden>
+      <h1 class="view-title" id="historyTitle"></h1>
+      <p class="view-intro" id="historyIntro"></p>
+      <div class="plate-holder" id="plate-history"></div>
+      <div class="timeline" id="timelineList"></div>
+    </section>
+
+    <section id="view-designers" class="view" hidden>
+      <h1 class="view-title" id="designersTitle"></h1>
+      <p class="view-intro" id="designersIntro"></p>
+      <div class="card-grid" id="designersList"></div>
+    </section>
+
+    <section id="view-exercises" class="view" hidden>
+      <h1 class="view-title" id="exercisesTitle"></h1>
+      <div id="exMenu" class="card-grid"></div>
+      <div id="exQuiz" hidden></div>
+    </section>
+
+    <section id="view-profile" class="view" hidden>
+      <h1 class="view-title" id="profileTitle"></h1>
+      <p class="view-intro" id="profileIntro"></p>
+      <div class="panel level-panel">
+        <div class="level-box">
+          <div class="level-num" id="levelNum">1</div>
+          <div class="level-label" id="levelLabel"></div>
+        </div>
+        <div class="level-bar-wrap">
+          <div class="level-track"><div class="level-fill" id="levelFill"></div></div>
+          <div class="level-meta" id="levelMeta"></div>
+        </div>
+      </div>
+      <div class="stat-grid" id="profileStats"></div>
+      <button type="button" class="link-btn" id="resetBtn"></button>
+    </section>
+
+  </main>
+</div>
+
+<nav class="tabbar" id="tabbar" aria-label="Navigazione"></nav>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () {});
+    });
+  }
+</script>
+</body>
+</html>

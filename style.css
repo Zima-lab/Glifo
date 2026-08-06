@@ -1,0 +1,628 @@
+/* Glifo — STILE
+   Palette e token in :root, sovrascritti da [data-theme="dark"].
+   I valori sono gli stessi definiti in data.js (THEMES): qui vivono come
+   variabili CSS così il cambio tema è istantaneo e non ridisegna tutto in JS. */
+
+/* ---------- BLACKER PRO (font del progetto) ----------
+   Licenza per uso non commerciale. Blacker Pro Text per titoli e numeri,
+   Blacker Sans Pro per l'interfaccia.
+   font-display:swap → il testo è leggibile subito col font di sistema. */
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Light.woff2') format('woff2'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Light-Italic.woff2') format('woff2'); font-weight:300; font-style:italic; font-display:swap; }
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Medium.woff2') format('woff2'); font-weight:600; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Medium-Italic.woff2') format('woff2'); font-weight:600; font-style:italic; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Book.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Book-Italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Extrabold.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Extrabold-Italic.woff2') format('woff2'); font-weight:800; font-style:italic; font-display:swap; }
+
+/* ---------- CARATTERI CAMPIONE (glossario e quiz) ----------
+   Le dieci famiglie che illustrano le classificazioni tipografiche.
+   Erano caricate da Google Fonts: ora sono locali, così i campioni
+   restano fedeli anche offline. Sottoinsieme "latin" (U+0000-00FF):
+   copre tutto l'alfabeto usato dall'app in italiano, inglese e tedesco.
+   Licenza SIL Open Font License, vedi fonts/specimen/OFL.txt. */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/archivo-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/archivo-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/cinzel-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/cinzel-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/cormorant-garamond-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/cormorant-garamond-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/dm-sans-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/dm-sans-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Dancing Script';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/dancing-script-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/eb-garamond-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/eb-garamond-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/pt-serif-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/pt-serif-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/playfair-display-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/playfair-display-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/roboto-slab-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/roboto-slab-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'UnifrakturCook';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/unifrakturcook-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/caveat-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/inter-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/inter-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/noto-sans-400-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/noto-sans-400-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/noto-sans-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/source-sans-3-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/source-sans-3-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light;
+  --bg:#FBF7F2; --surface:#FFFFFF; --border:#E8DFD3;
+  --text:#1B1712; --text-soft:#6E6558; --chip:#F3EEE4;
+  --accent1:#D62F55; --accent2:#FFD166; --accent2-dark:#8A6100;
+  --accent3:#0A7D5E; --accent4:#0F6E8C;
+  --toggle-track:#E8DFD3; --toggle-knob:#FFFFFF;
+  --on-accent:#FFFFFF;
+
+  /* elevazione: tre livelli, come nell'app del vocabolario */
+  --e1: 0 1px 2px rgba(27,23,18,.06), 0 1px 1px rgba(27,23,18,.05);
+  --e2: 0 6px 16px rgba(27,23,18,.10), 0 2px 5px rgba(27,23,18,.06);
+  --e3: 0 20px 50px rgba(27,23,18,.18), 0 6px 16px rgba(27,23,18,.10);
+
+  /* scala tipografica in rem: rispetta la dimensione testo scelta dall'utente */
+  --fs-2xs:.6875rem; --fs-xs:.78125rem; --fs-sm:.8125rem; --fs-md:.875rem;
+  --fs-base:.9375rem; --fs-lg:1.0625rem; --fs-xl:1.125rem; --fs-2xl:1.375rem;
+  --fs-3xl:1.625rem; --fs-4xl:2.375rem;
+
+  /* spaziature a passo 4px */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px;
+  --radius:10px; --radius-lg:14px; --radius-xl:18px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:#14181A; --surface:#1C2226; --border:#2C3438;
+  --text:#F2EFE9; --text-soft:#9AA3A6; --chip:#232B2F;
+  --accent1:#FF8FA8; --accent2:#FFD166; --accent2-dark:#FFD166;
+  --accent3:#4FE7B8; --accent4:#6FC9EC;
+  --toggle-track:#2C3438; --toggle-knob:#F2EFE9;
+  --on-accent:#14181A;
+  --e1: 0 1px 2px rgba(0,0,0,.35), 0 1px 1px rgba(0,0,0,.2);
+  --e2: 0 6px 18px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3);
+  --e3: 0 20px 60px rgba(0,0,0,.65), 0 6px 20px rgba(0,0,0,.4);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Blacker Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size:var(--fs-md); line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  padding-top: env(safe-area-inset-top);
+  transition: background-color .2s ease, color .2s ease;
+}
+h1,h2,h3,h4 { font-family:'Blacker Pro Text', Georgia, 'Iowan Old Style', Palatino, serif; font-weight:600; margin:0; letter-spacing:-.01em; }
+button { font-family:inherit; }
+
+/* Focus visibile ovunque per chi naviga da tastiera */
+button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+  outline:2px solid var(--accent1); outline-offset:2px;
+}
+/* Niente ritardo del doppio tap su iOS/Android */
+button, a, [role="button"], [tabindex] { touch-action: manipulation; }
+
+/* ---------- BARRA SUPERIORE ---------- */
+.topbar {
+  position:sticky; top:0; z-index:30;
+  background:var(--surface); border-bottom:1px solid var(--border);
+}
+.topbar-inner {
+  max-width:1180px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3);
+  padding:var(--sp-3) var(--sp-5);
+}
+.brand { display:flex; align-items:baseline; gap:var(--sp-2); min-width:0; }
+.brand-name { font-family:'Blacker Pro Text', Georgia, serif; font-weight:600; font-size:var(--fs-2xl); }
+.brand-tag { font-size:var(--fs-xs); color:var(--text-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.topbar-actions { display:flex; align-items:center; gap:var(--sp-2); flex-shrink:0; }
+
+.xp-chip {
+  font-size:var(--fs-xs); font-weight:800; color:var(--accent1);
+  background:var(--chip); border-radius:999px; padding:6px 11px; white-space:nowrap;
+}
+.lang-toggle { display:flex; gap:3px; padding:3px; border-radius:var(--radius); background:var(--chip); }
+.lang-opt {
+  border:none; background:transparent; color:var(--text-soft);
+  padding:7px 9px; border-radius:7px; font-size:var(--fs-xs); font-weight:800;
+  letter-spacing:.03em; cursor:pointer; transition:background .15s, color .15s;
+}
+.lang-opt:hover { background:var(--border); }
+.lang-opt.active { background:var(--accent1); color:var(--on-accent); }
+
+.theme-toggle {
+  width:46px; height:26px; border-radius:14px; border:1px solid var(--border);
+  background:var(--toggle-track); position:relative; cursor:pointer; padding:0; flex-shrink:0;
+}
+.theme-knob {
+  position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+  background:var(--toggle-knob); box-shadow:var(--e1); transition:left .18s ease;
+}
+[data-theme="dark"] .theme-knob { left:22px; }
+
+/* ---------- IMPIANTO ---------- */
+.shell { max-width:1180px; margin:0 auto; display:flex; min-height:calc(100vh - 58px); }
+.sidebar {
+  width:212px; flex-shrink:0; border-right:1px solid var(--border);
+  padding:var(--sp-5) var(--sp-3); display:flex; flex-direction:column; gap:3px;
+  position:sticky; top:58px; align-self:flex-start; max-height:calc(100vh - 58px); overflow-y:auto;
+}
+.nav-item {
+  display:flex; align-items:center; gap:var(--sp-3);
+  border:none; background:transparent; color:var(--text);
+  text-align:left; padding:10px 12px; border-radius:9px; cursor:pointer;
+  font-size:var(--fs-base); font-weight:600; min-height:44px;
+  transition:background .15s, color .15s;
+}
+.nav-item:hover { background:var(--chip); }
+.nav-item.active { background:var(--chip); color:var(--accent1); }
+.nav-item svg { width:19px; height:19px; flex-shrink:0; }
+
+.content { flex:1; min-width:0; padding:var(--sp-8) var(--sp-5) 80px; }
+.view { max-width:920px; margin:0 auto; animation:fade .3s ease; }
+@keyframes fade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+.view-title { font-size:var(--fs-3xl); margin-bottom:var(--sp-2); }
+.view-intro { font-size:var(--fs-base); color:var(--text-soft); margin:0 0 var(--sp-6); line-height:1.6; }
+
+/* ---------- HOME ---------- */
+.hero { text-align:center; margin-bottom:var(--sp-8); }
+.hero-kicker {
+  font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-sm);
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent1);
+  font-weight:600; margin:0 0 var(--sp-3);
+}
+.hero-title { font-size:var(--fs-4xl); line-height:1.12; margin:0 0 var(--sp-4); }
+.hero-quote { font-size:var(--fs-base); font-style:italic; color:var(--text-soft); max-width:520px; margin:0 auto var(--sp-1); line-height:1.6; }
+.hero-author { font-size:var(--fs-xs); color:var(--accent1); font-weight:800; margin:0; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(215px, 1fr)); gap:var(--sp-3); margin-bottom:var(--sp-6); }
+
+.tile {
+  position:relative; overflow:hidden; text-align:left;
+  border:1px solid var(--border); background:var(--surface); border-radius:var(--radius-lg);
+  padding:var(--sp-5); cursor:pointer; color:var(--text);
+  display:flex; flex-direction:column; gap:var(--sp-2); min-height:130px;
+  box-shadow:var(--e1); transition:border-color .15s, box-shadow .15s, transform .12s;
+}
+.tile:hover { border-color:var(--accent1); box-shadow:var(--e2); }
+.tile:active { transform:translateY(1px); }
+.tile-glyph {
+  position:absolute; right:-12px; bottom:-34px; font-size:110px; line-height:1;
+  font-weight:700; opacity:.12; pointer-events:none; user-select:none;
+}
+.tile-title { font-size:var(--fs-base); font-weight:800; position:relative; }
+.tile-desc { font-size:var(--fs-xs); color:var(--text-soft); line-height:1.45; position:relative; }
+.tile-meta { font-size:var(--fs-2xs); color:var(--accent3); font-weight:800; margin-top:auto; position:relative; }
+
+.panel {
+  border:1px solid var(--border); background:var(--surface);
+  border-radius:var(--radius-lg); padding:var(--sp-6); box-shadow:var(--e1);
+}
+.panel-title {
+  font-family:'Blacker Sans Pro', sans-serif;
+  font-size:var(--fs-xs); font-weight:800; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--text-soft); margin-bottom:var(--sp-4);
+}
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(125px, 1fr)); gap:var(--sp-4); }
+.stat-value { font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-2xl); font-weight:600; }
+.stat-label { font-size:var(--fs-xs); color:var(--text-soft); }
+
+/* ---------- LISTE A FISARMONICA (glossario, anatomia) ---------- */
+.list { display:flex; flex-direction:column; gap:var(--sp-2); }
+.item {
+  border:1px solid var(--border); background:var(--surface);
+  border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--e1);
+  transition:box-shadow .15s;
+}
+.item.open { box-shadow:var(--e2); }
+.item-head {
+  width:100%; display:flex; align-items:center; gap:var(--sp-4);
+  padding:15px 18px; background:transparent; border:none; cursor:pointer;
+  color:var(--text); text-align:left; min-height:44px;
+  transition:background .15s;
+}
+.item-head:hover { background:var(--chip); }
+.item-specimen {
+  font-size:28px; flex-shrink:0; width:56px; text-align:center; color:var(--accent1); line-height:1.2;
+}
+.item-main { flex:1; min-width:0; }
+.lang-tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:var(--sp-1); }
+.lang-tag {
+  font-size:var(--fs-2xs); font-weight:800; padding:2px 6px; border-radius:5px;
+  background:var(--chip); color:var(--text-soft); white-space:nowrap;
+}
+.item-name { display:block; font-size:var(--fs-base); font-weight:800; }
+.item-sub { display:block; font-size:var(--fs-xs); color:var(--text-soft); }
+.item-chev { font-size:var(--fs-xl); color:var(--text-soft); flex-shrink:0; width:18px; text-align:center; }
+.item-body { padding:0 18px var(--sp-5); border-top:1px solid var(--border); }
+.item-desc { font-size:var(--fs-sm); line-height:1.65; color:var(--text-soft); margin:var(--sp-4) 0; }
+.specimen-box { padding:18px; background:var(--chip); border-radius:var(--radius); }
+.specimen-word { font-size:28px; margin-bottom:var(--sp-1); line-height:1.3; }
+.specimen-alphabet { font-size:var(--fs-sm); color:var(--text-soft); letter-spacing:.02em; overflow-wrap:anywhere; }
+
+/* ---------- TIMELINE ---------- */
+.timeline { display:flex; flex-direction:column; }
+.tl-row { display:flex; gap:var(--sp-4); padding-bottom:var(--sp-5); }
+.tl-year {
+  width:58px; flex-shrink:0; text-align:right;
+  font-family:'Blacker Pro Text', Georgia, serif; font-weight:600;
+  font-size:var(--fs-lg); color:var(--accent1); padding-top:2px;
+}
+.tl-line { width:2px; background:var(--border); flex-shrink:0; position:relative; }
+.tl-dot { width:9px; height:9px; border-radius:50%; background:var(--accent1); position:absolute; left:-3.5px; top:6px; }
+.tl-card {
+  flex:1; text-align:left; border:1px solid var(--border); background:var(--surface);
+  border-radius:var(--radius); padding:14px 16px; cursor:pointer; color:var(--text);
+  box-shadow:var(--e1); transition:border-color .15s, box-shadow .15s;
+}
+.tl-card:hover { border-color:var(--accent1); box-shadow:var(--e2); }
+.tl-title { font-weight:800; font-size:var(--fs-base); }
+.tl-desc { font-size:var(--fs-sm); color:var(--text-soft); line-height:1.6; margin-top:var(--sp-2); }
+
+/* ---------- DESIGNER ---------- */
+.designer { align-items:flex-start; min-height:0; }
+.designer-head { display:flex; align-items:center; gap:var(--sp-3); margin-bottom:var(--sp-1); }
+.designer-photo {
+  width:60px; height:60px; border-radius:50%; flex-shrink:0; object-fit:cover;
+  background:var(--chip); border:1px solid var(--border);
+}
+.designer-name { font-family:'Blacker Pro Text', Georgia, serif; font-weight:600; font-size:var(--fs-lg); }
+.designer-years { font-size:var(--fs-xs); color:var(--text-soft); }
+.designer-known { font-size:var(--fs-xs); color:var(--accent1); font-weight:800; }
+.designer-bio { font-size:var(--fs-xs); color:var(--text-soft); line-height:1.6; margin-top:var(--sp-1); }
+
+/* ---------- QUIZ ---------- */
+.back-link {
+  border:none; background:none; color:var(--text-soft); font-size:var(--fs-sm);
+  cursor:pointer; padding:0 0 var(--sp-4); font-weight:600; min-height:32px;
+}
+.back-link:hover { color:var(--text); }
+.quiz-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--sp-4); }
+.quiz-count { font-size:var(--fs-sm); color:var(--text-soft); font-weight:600; }
+.quiz-score { font-size:var(--fs-sm); font-weight:800; color:var(--accent1); }
+.quiz-card {
+  border:1px solid var(--border); background:var(--surface); border-radius:var(--radius-xl);
+  padding:var(--sp-6); margin-bottom:var(--sp-4); box-shadow:var(--e2);
+}
+.quiz-prompt { font-size:var(--fs-sm); color:var(--text-soft); margin-bottom:var(--sp-4); }
+.quiz-specimen { font-size:42px; text-align:center; padding:18px 0; line-height:1.3; overflow-wrap:anywhere; }
+.quiz-text { font-size:var(--fs-xl); text-align:center; padding:10px 8px; line-height:1.5; font-weight:600; }
+.quiz-choices { display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); }
+.choice {
+  padding:14px 12px; border-radius:var(--radius); font-size:var(--fs-md); font-weight:600;
+  cursor:pointer; text-align:center; background:var(--surface);
+  border:1.5px solid var(--border); color:var(--text); min-height:48px;
+  transition:border-color .15s, background .15s;
+}
+.choice:hover:not(:disabled) { border-color:var(--accent1); }
+.choice:disabled { cursor:default; }
+.choice.right { background:var(--chip); border-color:var(--accent3); color:var(--accent3); }
+.choice.wrong { background:var(--chip); border-color:var(--accent1); color:var(--accent1); }
+.quiz-foot { display:flex; justify-content:space-between; align-items:center; margin-top:var(--sp-5); flex-wrap:wrap; gap:var(--sp-3); }
+.quiz-feedback { font-size:var(--fs-sm); font-weight:800; }
+.quiz-feedback.ok { color:var(--accent3); }
+.quiz-feedback.ko { color:var(--accent1); }
+.btn-solid {
+  padding:11px 20px; border-radius:9px; border:none; background:var(--text); color:var(--bg);
+  font-weight:800; font-size:var(--fs-sm); cursor:pointer; min-height:44px;
+}
+.btn-solid:hover { opacity:.85; }
+.btn-outline {
+  padding:11px 20px; border-radius:9px; border:1.5px solid var(--border); background:transparent;
+  color:var(--text); font-weight:800; font-size:var(--fs-sm); cursor:pointer; min-height:44px;
+}
+.btn-outline:hover { background:var(--chip); }
+.btn-accent {
+  padding:12px 24px; border-radius:var(--radius); border:none;
+  background:var(--accent1); color:var(--on-accent);
+  font-weight:800; font-size:var(--fs-md); cursor:pointer; min-height:44px;
+}
+.btn-accent:hover { opacity:.88; }
+.quiz-done { text-align:center; border:1px solid var(--border); background:var(--surface); border-radius:var(--radius-xl); padding:38px 24px; box-shadow:var(--e2); }
+.done-score { font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-4xl); font-weight:600; color:var(--accent1); margin-bottom:var(--sp-2); }
+.done-msg { font-size:var(--fs-base); color:var(--text-soft); margin-bottom:var(--sp-5); }
+.done-actions { display:flex; gap:var(--sp-3); justify-content:center; flex-wrap:wrap; }
+
+/* ---------- PROFILO ---------- */
+.level-panel { display:flex; align-items:center; gap:var(--sp-5); flex-wrap:wrap; margin-bottom:var(--sp-5); }
+.level-num { font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-4xl); font-weight:600; line-height:1; }
+.level-label { font-size:var(--fs-2xs); color:var(--text-soft); font-weight:800; text-transform:uppercase; letter-spacing:.06em; margin-top:var(--sp-1); }
+.level-bar-wrap { flex:1; min-width:170px; }
+.level-track { height:8px; border-radius:5px; background:var(--chip); overflow:hidden; }
+.level-fill { height:100%; background:var(--accent1); border-radius:5px; transition:width .4s ease; }
+.level-meta { font-size:var(--fs-xs); color:var(--text-soft); margin-top:var(--sp-2); }
+.stat-box { border:1px solid var(--border); background:var(--chip); border-radius:var(--radius); padding:var(--sp-4); }
+
+/* ---------- TAB BAR (solo mobile) ---------- */
+.tabbar { display:none; }
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 859px) {
+  .sidebar { display:none; }
+  .content { padding:var(--sp-5) var(--sp-4) calc(84px + env(safe-area-inset-bottom)); }
+  .brand-tag { display:none; }
+  .hero-title { font-size:var(--fs-3xl); }
+  .quiz-choices { grid-template-columns:1fr; }
+  .tabbar {
+    display:flex; position:fixed; bottom:0; left:0; right:0; z-index:50;
+    background:var(--surface); border-top:1px solid var(--border);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+    box-shadow:0 -2px 12px rgba(27,23,18,.08);
+  }
+  .tab {
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;
+    border:none; background:transparent; padding:6px 2px; cursor:pointer;
+    color:var(--text-soft); font-size:var(--fs-2xs); font-weight:600; min-height:48px;
+    border-radius:var(--radius);
+  }
+  .tab svg { width:21px; height:21px; }
+  .tab.active { color:var(--accent1); background:var(--chip); font-weight:800; }
+}
+
+/* Riduzione movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, .view, .level-fill, .theme-knob { animation:none !important; transition:none !important; }
+}
+
+/* ---------- AGGIUNTE: nota, gruppi, monogramma, esempi ---------- */
+
+/* Nota in coda all'introduzione di una vista (es. la de-adozione di Vox-ATypI) */
+.view-note {
+  font-size: var(--fs-sm); color: var(--text-soft); line-height: 1.6;
+  margin: calc(var(--sp-6) * -1 + var(--sp-2)) 0 var(--sp-6);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--chip); border-radius: var(--radius);
+  border-left: 3px solid var(--accent2-dark); border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Intestazione che divide una lista in gruppi (tecnica: stampa / composizione) */
+.group-head {
+  font-family: 'Blacker Sans Pro', sans-serif;
+  font-size: var(--fs-xs); font-weight: 800; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text-soft);
+  margin: var(--sp-5) 0 var(--sp-2); padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--border);
+}
+.group-head:first-child { margin-top: 0; }
+
+/* Designer senza ritratto: monogramma con le iniziali */
+.designer-mono {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Blacker Pro Text', Georgia, serif; font-weight: 600;
+  font-size: var(--fs-lg); color: var(--accent1);
+  background: var(--chip); border-color: var(--border);
+}
+
+/* Esempi di caratteri sotto la descrizione di una classificazione */
+.item-examples {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  margin: var(--sp-3) 0 0; line-height: 1.6;
+}
+.examples-label {
+  font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+  font-size: var(--fs-2xs); color: var(--text);
+}
+
+/* Le definizioni ora sono lunghe: il testo va tenuto leggibile */
+.item-desc, .tl-desc, .designer-bio { max-width: 62ch; }
+
+/* ---------- TAVOLE ILLUSTRATE ----------
+   Le tavole hanno il proprio fondo di carta, quindi non seguono il tema:
+   restano leggibili sia in chiaro sia in scuro, come una figura incollata
+   in un libro. Il bordo e l'ombra le staccano appena dalla pagina. */
+.plate {
+  margin: 0 0 var(--sp-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #F2E8D5;
+  box-shadow: var(--e1);
+}
+.plate img { display: block; width: 100%; height: auto; }
+.plate-cap {
+  font-size: var(--fs-xs); line-height: 1.55; color: var(--text-soft);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--surface); border-top: 1px solid var(--border);
+}
+.plate-n {
+  font-family: 'Blacker Pro Text', Georgia, serif; font-weight: 600;
+  color: var(--accent1); letter-spacing: .04em;
+}
+/* Dentro una voce aperta la tavola è più contenuta e stacca dal testo */
+.plate-compact { margin-top: var(--sp-4); margin-bottom: 0; }
+
+[data-theme="dark"] .plate { border-color: #3A3226; }
