@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v9';
+const APP_VERSION = 'v10';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
@@ -982,16 +982,10 @@ const TYPEFACES = [
   {
     id: 'helvetica', name: 'Helvetica', year: '1957',
     designer: 'Max Miedinger, Eduard Hoffmann',
-    foundry: 'Haas’sche Schriftgiesserei',
+    foundry: "Haas’sche Schriftgiesserei",
     cls: 'neogrottesca',
     glyphA: 'G', glyphB: 'e',
-    font: "'Inter', sans-serif",
-    substitute: {
-      name: 'Inter',
-      it: 'Helvetica è un carattere commerciale e non può essere incluso in questa app. Il campione qui accanto è composto in Inter, una neogrottesca libera con licenza SIL OFL: le proporzioni e lo spirito sono affini, ma alcuni dettagli — lo sperone della « G », il taglio dei terminali — differiscono dall’originale.',
-      en: 'Helvetica is a commercial typeface and cannot be bundled with this app. The specimen alongside is set in Inter, a free neo-grotesque under the SIL OFL: proportions and spirit are close, but some details — the spur of the « G », the cut of the terminals — differ from the original.',
-      de: 'Helvetica ist eine kommerzielle Schrift und kann dieser App nicht beigelegt werden. Das Muster daneben ist in Inter gesetzt, einer freien Neogrotesk unter der SIL OFL: Proportionen und Geist sind verwandt, doch einige Details — der Sporn des « G », der Schnitt der Endungen — weichen vom Original ab.',
-    },
+    font: "'HelveticaLT55', sans-serif",
     quote: {
       text: {
         it: '«L’Helvetica è un font che è stato disegnato con l’intento di avere una migliore leggibilità. È un carattere moderno, molto pulito, che va bene per ogni occasione.»',

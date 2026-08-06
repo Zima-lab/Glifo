@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v9';
+const CACHE_VERSION = 'glifo-v10';
 
 const ASSETS = [
   './',
@@ -46,6 +46,7 @@ const ASSETS = [
   'fonts/specimen/dm-sans-700-latin.woff2',
   'fonts/specimen/eb-garamond-400-latin.woff2',
   'fonts/specimen/eb-garamond-500-latin.woff2',
+  'fonts/specimen/helvetica-lt-55-roman.ttf',
   'fonts/specimen/inter-400-latin.woff2',
   'fonts/specimen/inter-600-latin.woff2',
   'fonts/specimen/noto-sans-400-cyrillic.woff2',
