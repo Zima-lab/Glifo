@@ -1,0 +1,57 @@
+name: Deploy Glifo su GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un solo deploy alla volta. I caricamenti a piu riprese dalla UI web
+# fanno un commit per volta: senza questo blocco le build si annullano
+# a vicenda e il sito resta alla versione precedente.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Controllo sintassi
+        run: |
+          node --check data.js
+          node --check app.js
+          node --check sw.js
+
+      - name: Controllo allineamento versioni
+        run: |
+          APP=$(grep -oP "APP_VERSION\s*=\s*'\K[^']+" data.js)
+          SW=$(grep -oP "CACHE_VERSION\s*=\s*'\Kglifo-[^']+" sw.js | sed 's/^glifo-//')
+          echo "data.js APP_VERSION   = $APP"
+          echo "sw.js   CACHE_VERSION = glifo-$SW"
+          if [ "$APP" != "$SW" ]; then
+            echo "::error::Versioni disallineate: il footer mostrerebbe un numero falso."
+            exit 1
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Carica l'artefatto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
