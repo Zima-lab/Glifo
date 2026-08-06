@@ -791,7 +791,7 @@ button, a, [role="button"], [tabindex] { touch-action: manipulation; }
    rileggere la legenda. Il testo resta sempre scuro sul colore — le
    tinte sono calibrate per reggere il contrasto anche a 10 px. */
 
-.periodic { margin: 0 0 var(--sp-8); }
+.periodic { position: relative; margin: 0 0 var(--sp-8); }
 
 .pt-title {
   font-size: var(--fs-2xl); margin-bottom: var(--sp-2);
@@ -882,69 +882,74 @@ button, a, [role="button"], [tabindex] { touch-action: manipulation; }
   margin: var(--sp-3) 0 0; font-size: var(--fs-2xs); color: var(--text-soft);
 }
 
-/* Il pannello di lettura sta sotto la tavola, non sopra: su telefono un
-   modale coprirebbe proprio la casella appena toccata. */
-.pt-panel {
-  margin-top: var(--sp-4);
+/* Il fumetto: ancorato alla casella, non appeso in fondo alla tavola.
+   Sta dentro .periodic e non dentro lo scroller, altrimenti l'overflow
+   orizzontale lo taglierebbe a metà. */
+.pt-pop {
+  position: absolute; z-index: 20;
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); overflow: hidden;
-  box-shadow: var(--e1);
+  border-radius: var(--radius-lg); box-shadow: var(--e3);
+  overflow: hidden;
 }
-.pt-panel.is-empty { background: transparent; box-shadow: none; border-style: dashed; }
-.pt-empty {
-  margin: 0; padding: var(--sp-5); text-align: center;
-  font-size: var(--fs-sm); color: var(--text-soft);
+.pt-pop:focus { outline: none; }
+.pt-pop:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; }
+
+/* La punta, che insegue la casella tramite --pt-arrow */
+.pt-pop::before {
+  content: ''; position: absolute;
+  left: calc(var(--pt-arrow, 50%) - 7px); top: -7px;
+  border: 7px solid transparent; border-top: 0;
+  border-bottom-color: var(--border);
 }
+.pt-pop.is-above::before { top: auto; bottom: -7px; border: 7px solid transparent; border-bottom: 0; border-top-color: var(--border); }
+
+.pt-p-shut {
+  position: absolute; top: 6px; right: 8px; z-index: 2;
+  border: none; background: transparent; cursor: pointer;
+  font-size: 20px; line-height: 1; padding: 4px 6px;
+  color: #1B1712; opacity: .5; border-radius: 999px;
+}
+.pt-p-shut:hover { opacity: 1; background: rgba(27,23,18,.10); }
 
 .pt-p-head {
-  display: flex; align-items: center; gap: var(--sp-4);
-  padding: var(--sp-4) var(--sp-5); color: #1B1712;
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4); color: #1B1712;
 }
-.pt-p-sym {
-  font-size: 44px; line-height: 1; font-weight: 600; flex-shrink: 0;
-}
+.pt-p-sym { font-size: 34px; line-height: 1; font-weight: 600; flex-shrink: 0; }
 .pt-p-titles { min-width: 0; }
-.pt-p-name { font-size: var(--fs-2xl); color: #1B1712; }
+.pt-p-name { font-size: var(--fs-xl); color: #1B1712; }
 .pt-p-num { margin: 0; font-size: var(--fs-2xs); font-weight: 700; opacity: .6; }
 
 .pt-p-meta {
-  margin: 0; padding: var(--sp-4) var(--sp-5) 0;
+  margin: 0; padding: var(--sp-3) var(--sp-4) 0;
   display: grid; grid-template-columns: auto 1fr;
-  gap: var(--sp-1) var(--sp-4); font-size: var(--fs-sm);
+  gap: 2px var(--sp-3); font-size: var(--fs-xs);
 }
 .pt-p-meta dt { color: var(--text-soft); font-weight: 700; }
 .pt-p-meta dd { margin: 0; }
 
 .pt-p-note {
-  margin: var(--sp-4) 0 0; padding: 0 var(--sp-5);
-  font-size: var(--fs-base); max-width: 68ch;
+  margin: var(--sp-3) 0 0; padding: 0 var(--sp-4);
+  font-size: var(--fs-sm);
 }
 .pt-p-nocard {
-  margin: var(--sp-3) 0 var(--sp-5); padding: 0 var(--sp-5);
-  font-size: var(--fs-xs); color: var(--text-soft); font-style: italic;
+  margin: var(--sp-2) 0 var(--sp-4); padding: 0 var(--sp-4);
+  font-size: var(--fs-2xs); color: var(--text-soft); font-style: italic;
 }
 .pt-p-go {
-  margin: var(--sp-4) var(--sp-5) var(--sp-5);
+  margin: var(--sp-3) var(--sp-4) var(--sp-4);
   border: none; border-radius: 999px; cursor: pointer;
   background: var(--accent1); color: var(--on-accent);
-  font-size: var(--fs-sm); font-weight: 700; padding: 9px 18px;
+  font-size: var(--fs-xs); font-weight: 700; padding: 8px 16px;
 }
 .pt-p-go:hover { filter: brightness(1.06); }
 
 .pt-p-sub {
-  margin: 0; padding: var(--sp-3) var(--sp-5);
+  margin: 0; padding: var(--sp-2) var(--sp-4);
   border-top: 1px solid var(--border); background: var(--chip);
   font-size: var(--fs-2xs); color: var(--text-soft);
 }
 .pt-p-sub-lb { font-weight: 700; }
-
-@media (max-width: 720px) {
-  .pt-p-head { gap: var(--sp-3); padding: var(--sp-4); }
-  .pt-p-sym { font-size: 34px; }
-  .pt-p-meta, .pt-p-note, .pt-p-nocard { padding-left: var(--sp-4); padding-right: var(--sp-4); }
-  .pt-p-go { margin-left: var(--sp-4); margin-right: var(--sp-4); }
-  .pt-p-sub { padding-left: var(--sp-4); padding-right: var(--sp-4); }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .pt-cell { transition: none; }

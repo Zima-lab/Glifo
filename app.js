@@ -534,6 +534,8 @@
 
     scroll.appendChild(table);
     host.appendChild(scroll);
+    // La tavola scorre in orizzontale: il fumetto deve seguire la casella
+    scroll.addEventListener('scroll', placePtPop, { passive: true });
 
     // Chiavi di lettura: senza, il numero e il ° restano enigmi
     const keys = el('p', 'pt-keys');
@@ -541,11 +543,14 @@
     keys.appendChild(el('span', null, t('periodicSubKey')));
     host.appendChild(keys);
 
-    // Il pannello di lettura sta sotto la tavola: su telefono un modale
-    // coprirebbe proprio la casella appena toccata.
-    const panel = el('div', 'pt-panel');
-    host.appendChild(panel);
-    showPtDetail(panel, null);
+    // Il pannello di lettura è un fumetto ancorato alla casella: si apre
+    // col primo clic e si chiude col secondo, come una voce di dizionario
+    // che si consulta e si richiude senza perdere il segno.
+    const pop = el('div', 'pt-pop');
+    pop.hidden = true;
+    pop.setAttribute('role', 'dialog');
+    host.appendChild(pop);
+    ptOpen = null;
 
     function ptCell(x) {
       const b = el('button', 'pt-cell');
@@ -563,25 +568,96 @@
       b.appendChild(el('span', 'pt-name', x.name));
       b.appendChild(el('span', 'pt-year', x.year));
 
-      b.addEventListener('click', function () {
+      b.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        // Secondo clic sulla stessa casella: si richiude
+        if (ptOpen && ptOpen.n === x.n) return closePtPop(true);
         Object.keys(cells).forEach(function (k) { cells[k].classList.remove('is-on'); });
         b.classList.add('is-on');
-        showPtDetail(panel, x);
+        openPtPop(host, scroll, pop, b, x);
         markViewed('viewedTypeface', 'pt-' + x.n);
       });
       return b;
     }
   }
 
-  function showPtDetail(panel, x) {
-    clear(panel);
+  /* Il fumetto della tavola: uno solo alla volta, ancorato alla casella.
+     Lo teniamo in una variabile di modulo perché va chiuso anche da fuori —
+     tasto Esc, clic altrove, cambio di vista. */
+  var ptOpen = null;
 
-    if (!x) {
-      panel.className = 'pt-panel is-empty';
-      panel.appendChild(el('p', 'pt-empty', t('periodicPick')));
-      return;
-    }
-    panel.className = 'pt-panel';
+  function closePtPop(refocus) {
+    if (!ptOpen) return;
+    const cell = ptOpen.cell;
+    ptOpen.pop.hidden = true;
+    cell.classList.remove('is-on');
+    cell.setAttribute('aria-expanded', 'false');
+    ptOpen = null;
+    // Chi naviga da tastiera deve ritrovarsi sulla casella da cui è partito,
+    // non in cima alla pagina.
+    if (refocus === true) cell.focus();
+  }
+
+  function openPtPop(host, scroll, pop, cell, x) {
+    ptDetail(pop, x, closePtPop);
+    pop.hidden = false;
+    cell.setAttribute('aria-expanded', 'true');
+    ptOpen = { n: x.n, pop: pop, cell: cell, host: host, scroll: scroll };
+    placePtPop();
+    pop.focus();
+  }
+
+  // Posiziona il fumetto sotto la casella, o sopra se sotto non ci sta.
+  // Le coordinate sono relative a .periodic, non allo scroller: dentro lo
+  // scroller il fumetto verrebbe tagliato dall'overflow.
+  function placePtPop() {
+    if (!ptOpen) return;
+    const pop = ptOpen.pop, host = ptOpen.host, cell = ptOpen.cell;
+
+    const room = host.clientWidth;
+    const w = Math.min(340, room - 8);
+    pop.style.width = w + 'px';
+
+    const hr = host.getBoundingClientRect();
+    const cr = cell.getBoundingClientRect();
+    const h = pop.offsetHeight;
+
+    // Sotto la casella se c'è spazio nella finestra, altrimenti sopra
+    const below = cr.bottom + 10 + h <= window.innerHeight || cr.top - 10 - h < 0;
+    const top = below ? (cr.bottom - hr.top + 10) : (cr.top - hr.top - h - 10);
+    pop.classList.toggle('is-above', !below);
+
+    // Centrato sulla casella, ma senza uscire dai bordi della sezione
+    const mid = cr.left + cr.width / 2 - hr.left;
+    const left = Math.max(4, Math.min(mid - w / 2, room - w - 4));
+    pop.style.top = top + 'px';
+    pop.style.left = left + 'px';
+
+    // La punta insegue la casella anche quando il fumetto è stato spostato
+    pop.style.setProperty('--pt-arrow', (mid - left) + 'px');
+  }
+
+  // Un solo giro di ascoltatori per tutta la vita della pagina: il fumetto
+  // viene ricreato a ogni render, ma questi restano validi perché guardano
+  // sempre ptOpen.
+  document.addEventListener('click', function () { closePtPop(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePtPop(true);
+  });
+  window.addEventListener('resize', placePtPop);
+  window.addEventListener('scroll', placePtPop, { passive: true });
+
+  function ptDetail(panel, x, onClose) {
+    clear(panel);
+    panel.tabIndex = -1;
+    // Un clic dentro il fumetto non lo deve chiudere
+    panel.onclick = function (ev) { ev.stopPropagation(); };
+
+    const shut = el('button', 'pt-p-shut', '×');
+    shut.type = 'button';
+    shut.setAttribute('aria-label', t('periodicClose'));
+    shut.addEventListener('click', function () { onClose(true); });
+    panel.appendChild(shut);
 
     const head = el('div', 'pt-p-head');
     head.style.background = CLASS_COLORS[x.cls] || CLASS_COLOR_FALLBACK;

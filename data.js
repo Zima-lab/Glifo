@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v14';
+const APP_VERSION = 'v15';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
@@ -108,13 +108,13 @@ const UI = {
   designerLabel: {it:'Disegnato da', en:'Designed by', de:'Entworfen von'},
   periodicTitle: {it:'Tavola periodica dei caratteri', en:'Periodic table of typefaces', de:'Periodensystem der Schriften'},
   periodicIntro: {it:'Cento caratteri disposti come gli elementi: ogni colonna è una classe Vox-ATypI e dentro la colonna si scende in ordine di data. Il numero non è una classifica ma la posizione cronologica assoluta — 1 è la textura di Gutenberg, 100 è Inter. Letta per colonne è una classificazione; letta per numeri, cinque secoli e mezzo di stampa.', en:'A hundred typefaces laid out like the elements: each column is a Vox-ATypI class, and within the column you descend by date. The number is not a ranking but the absolute chronological position — 1 is Gutenberg’s textura, 100 is Inter. Read by columns it is a classification; read by numbers, five and a half centuries of printing.', de:'Hundert Schriften wie die Elemente angeordnet: Jede Spalte ist eine Vox-ATypI-Klasse, innerhalb der Spalte geht es nach Datum abwärts. Die Zahl ist keine Rangliste, sondern die absolute chronologische Position — 1 ist Gutenbergs Textura, 100 ist Inter. Nach Spalten gelesen eine Klassifikation, nach Zahlen fünfeinhalb Jahrhunderte Druck.'},
-  periodicHint: {it:'Tocca una casella per aprirla.', en:'Tap a cell to open it.', de:'Auf ein Feld tippen, um es zu öffnen.'},
+  periodicHint: {it:'Un tocco apre la casella, un secondo tocco la richiude.', en:'One tap opens a cell, a second tap closes it.', de:'Ein Tippen öffnet ein Feld, ein zweites schließt es.'},
   periodicNumKey: {it:'Il numero è la posizione cronologica, da 1 (1455) a 100 (2016).', en:'The number is the chronological position, from 1 (1455) to 100 (2016).', de:'Die Zahl ist die chronologische Position, von 1 (1455) bis 100 (2016).'},
   periodicSubKey: {it:'Il segno ° indica una casella composta in un carattere sostitutivo.', en:'The ° mark indicates a cell set in a substitute typeface.', de:'Das Zeichen ° kennzeichnet ein Feld, das in einer Ersatzschrift gesetzt ist.'},
   periodicOpenCard: {it:'Apri la scheda', en:'Open the card', de:'Karte öffnen'},
   periodicNoCard: {it:'Di questo carattere non c’è ancora una scheda completa.', en:'There is no full card for this typeface yet.', de:'Für diese Schrift gibt es noch keine vollständige Karte.'},
   periodicSubNote: {it:'La casella è composta in un carattere sostitutivo:', en:'The cell is set in a substitute typeface:', de:'Das Feld ist in einer Ersatzschrift gesetzt:'},
-  periodicPick: {it:'Scegli una casella della tavola per leggerne la voce.', en:'Pick a cell in the table to read its entry.', de:'Ein Feld der Tabelle wählen, um den Eintrag zu lesen.'},
+  periodicClose: {it:'Chiudi', en:'Close', de:'Schließen'},
   periodicYear: {it:'Anno', en:'Year', de:'Jahr'},
   periodicBy: {it:'Disegno', en:'Design', de:'Entwurf'},
   periodicHouse: {it:'Fonderia', en:'Foundry', de:'Gießerei'},
