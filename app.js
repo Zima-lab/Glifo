@@ -423,6 +423,20 @@
     '.,;:?!“”$€-&~%*+−×/=)]}#',
   ];
 
+  // Le quattro famiglie Vox, nell'ordine in cui si leggono: dalle classiche
+  // alle calligrafiche. Danno la legenda della griglia e, nella tavola
+  // periodica, l'ordine e i raggruppamenti delle colonne.
+  const FAMILIES = [
+    {ids: ['umanista','garalda','transizionale'],
+     lb: {it:'Classiche', en:'Classicals', de:'Klassische'}},
+    {ids: ['didone','meccana'],
+     lb: {it:'Moderne', en:'Moderns', de:'Moderne'}},
+    {ids: ['grottesca','neogrottesca','geometrica','umanisticalineare'],
+     lb: {it:'Lineari', en:'Lineals', de:'Lineare'}},
+    {ids: ['incisa','scritta','manuale','gotica','nonlatine'],
+     lb: {it:'Calligrafiche', en:'Calligraphics', de:'Kalligrafische'}},
+  ];
+
   function typeCard(tf, onClick) {
     const card = el('button', 'tcard');
     card.type = 'button';
@@ -452,6 +466,171 @@
     return card;
   }
 
+  /* ---------- TAVOLA PERIODICA ----------
+     Cento caselle disposte come gli elementi: le colonne sono le
+     quattordici classi Vox, raggruppate nelle quattro famiglie; dentro
+     ogni colonna si scende in ordine di data. La casella porta il numero
+     cronologico, il simbolo, il nome e l'anno — e si compone nel carattere
+     vero solo quando quel carattere è davvero nella cartella: un campione
+     falso insegnerebbe una forma sbagliata. */
+
+  // L'ordine delle colonne è quello delle famiglie: classiche, moderne,
+  // lineari, calligrafiche. Coincide con la legenda sotto la tavola.
+  const PT_COLS = FAMILIES.reduce(function (acc, f) { return acc.concat(f.ids); }, []);
+
+  function renderPeriodic(host) {
+    clear(host);
+
+    host.appendChild(el('h2', 'pt-title', t('periodicTitle')));
+    host.appendChild(el('p', 'pt-intro', t('periodicIntro')));
+
+    // La tavola scorre in orizzontale sui telefoni: comprimerla a quattordici
+    // colonne su 360 px la renderebbe illeggibile.
+    const scroll = el('div', 'pt-scroll');
+    scroll.setAttribute('role', 'region');
+    scroll.setAttribute('aria-label', t('periodicTitle'));
+    scroll.tabIndex = 0;
+
+    const table = el('div', 'pt-table');
+
+    // Prima riga: la fascia delle quattro famiglie Vox, che nella tavola
+    // vera corrisponde ai blocchi. Dice a colpo d'occhio dove finisce un
+    // gruppo e comincia il successivo.
+    let at = 1;
+    FAMILIES.forEach(function (f) {
+      const band = el('div', 'pt-band', tr(f.lb));
+      band.style.gridColumn = at + ' / span ' + f.ids.length;
+      band.style.gridRow = '1';
+      band.style.background = 'linear-gradient(90deg,' +
+        f.ids.map(function (i) { return CLASS_COLORS[i]; }).join(',') + ')';
+      table.appendChild(band);
+      at += f.ids.length;
+    });
+
+    // Seconda riga: il nome breve della classe, con un filetto del suo colore.
+    PT_COLS.forEach(function (cls, ci) {
+      const h = el('div', 'pt-head', tr(CLASS_SHORT[cls]) || className({cls: cls}));
+      h.title = className({cls: cls});
+      h.style.borderBottomColor = CLASS_COLORS[cls];
+      h.style.gridColumn = String(ci + 1);
+      h.style.gridRow = '2';
+      table.appendChild(h);
+    });
+
+    // Le caselle, colonna per colonna, in ordine di numero cronologico
+    const cells = {};
+    PT_COLS.forEach(function (cls, ci) {
+      PERIODIC
+        .filter(function (x) { return x.cls === cls; })
+        .sort(function (a, b) { return a.n - b.n; })
+        .forEach(function (x, ri) {
+          const c = ptCell(x);
+          c.style.gridColumn = String(ci + 1);
+          c.style.gridRow = String(ri + 3);
+          cells[x.n] = c;
+          table.appendChild(c);
+        });
+    });
+
+    scroll.appendChild(table);
+    host.appendChild(scroll);
+
+    // Chiavi di lettura: senza, il numero e il ° restano enigmi
+    const keys = el('p', 'pt-keys');
+    keys.appendChild(el('span', null, t('periodicNumKey')));
+    keys.appendChild(el('span', null, t('periodicSubKey')));
+    host.appendChild(keys);
+
+    // Il pannello di lettura sta sotto la tavola: su telefono un modale
+    // coprirebbe proprio la casella appena toccata.
+    const panel = el('div', 'pt-panel');
+    host.appendChild(panel);
+    showPtDetail(panel, null);
+
+    function ptCell(x) {
+      const b = el('button', 'pt-cell');
+      b.type = 'button';
+      b.style.background = CLASS_COLORS[x.cls] || CLASS_COLOR_FALLBACK;
+      b.setAttribute('aria-label', x.n + '. ' + x.name + ', ' + x.year);
+
+      b.appendChild(el('span', 'pt-n', String(x.n)));
+      const sym = el('span', 'pt-sym', x.sym);
+      // Il simbolo si compone nel carattere solo se il campione è autentico
+      // o un revival dichiarato; altrimenti resta nel carattere dell'app.
+      if (x.font) sym.style.fontFamily = x.font;
+      if (x.sub) sym.appendChild(el('sup', 'pt-sub-mark', '°'));
+      b.appendChild(sym);
+      b.appendChild(el('span', 'pt-name', x.name));
+      b.appendChild(el('span', 'pt-year', x.year));
+
+      b.addEventListener('click', function () {
+        Object.keys(cells).forEach(function (k) { cells[k].classList.remove('is-on'); });
+        b.classList.add('is-on');
+        showPtDetail(panel, x);
+        markViewed('viewedTypeface', 'pt-' + x.n);
+      });
+      return b;
+    }
+  }
+
+  function showPtDetail(panel, x) {
+    clear(panel);
+
+    if (!x) {
+      panel.className = 'pt-panel is-empty';
+      panel.appendChild(el('p', 'pt-empty', t('periodicPick')));
+      return;
+    }
+    panel.className = 'pt-panel';
+
+    const head = el('div', 'pt-p-head');
+    head.style.background = CLASS_COLORS[x.cls] || CLASS_COLOR_FALLBACK;
+    const badge = el('span', 'pt-p-sym', x.sym);
+    if (x.font) badge.style.fontFamily = x.font;
+    head.appendChild(badge);
+    const ttl = el('div', 'pt-p-titles');
+    ttl.appendChild(el('h3', 'pt-p-name', x.name));
+    ttl.appendChild(el('p', 'pt-p-num', String(x.n) + ' / 100'));
+    head.appendChild(ttl);
+    panel.appendChild(head);
+
+    const dl = el('dl', 'pt-p-meta');
+    [[t('periodicYear'), x.year],
+     [t('periodicBy'), x.by],
+     [t('periodicHouse'), x.house],
+     [t('periodicCls'), className(x)]].forEach(function (row) {
+      if (!row[1] || row[1] === '—') return;
+      dl.appendChild(el('dt', null, row[0]));
+      dl.appendChild(el('dd', null, row[1]));
+    });
+    panel.appendChild(dl);
+
+    panel.appendChild(el('p', 'pt-p-note', tr(x.note)));
+
+    // Se la scheda completa esiste, la tavola diventa un indice
+    if (x.ref && TYPEFACES.some(function (tf) { return tf.id === x.ref; })) {
+      const go = el('button', 'pt-p-go', t('periodicOpenCard') + ' →');
+      go.type = 'button';
+      go.addEventListener('click', function () {
+        state.typeface = x.ref;
+        markViewed('viewedTypeface', x.ref);
+        render();
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      });
+      panel.appendChild(go);
+    } else {
+      panel.appendChild(el('p', 'pt-p-nocard', t('periodicNoCard')));
+    }
+
+    // La nota sul sostituto va in fondo: è un avvertimento, non il contenuto
+    if (x.sub) {
+      const n = el('p', 'pt-p-sub');
+      n.appendChild(el('span', 'pt-p-sub-lb', t('periodicSubNote')));
+      n.appendChild(document.createTextNode(' ' + x.sub));
+      panel.appendChild(n);
+    }
+  }
+
   function renderType() {
     const grid = $('typeGrid'), detail = $('typeDetail');
     const open = state.typeface && TYPEFACES.find(function (x) { return x.id === state.typeface; });
@@ -461,20 +640,13 @@
 
     $('typeTitle').textContent = t('navType');
     $('typeIntro').textContent = t('typeIntro');
+    // La tavola sta in primo piano: è l'indice della sezione, le schede
+    // che seguono ne sono l'approfondimento.
+    renderPeriodic($('typePeriodic'));
     // Legenda: senza, il colore resta un vezzo. Con, diventa una chiave
     // di lettura che si impara guardando la griglia due volte.
     const leg = $('typeLegend');
     clear(leg);
-    const FAMILIES = [
-      {ids: ['umanista','garalda','transizionale'],
-       lb: {it:'Classiche', en:'Classicals', de:'Klassische'}},
-      {ids: ['didone','meccana'],
-       lb: {it:'Moderne', en:'Moderns', de:'Moderne'}},
-      {ids: ['grottesca','neogrottesca','geometrica','umanisticalineare'],
-       lb: {it:'Lineari', en:'Lineals', de:'Lineare'}},
-      {ids: ['incisa','scritta','manuale','gotica','nonlatine'],
-       lb: {it:'Calligrafiche', en:'Calligraphics', de:'Kalligrafische'}},
-    ];
     FAMILIES.forEach(function (f) {
       const item = el('span', 'legend-item');
       const sw = el('span', 'legend-sw');

@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v10';
+const APP_VERSION = 'v14';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
@@ -106,6 +106,19 @@ const UI = {
   whereLabel: {it:'Dove trovarlo?', en:'Where to find it?', de:'Wo findet man sie?'},
   substituteLabel: {it:'Nota sul campione', en:'Note on the specimen', de:'Hinweis zum Muster'},
   designerLabel: {it:'Disegnato da', en:'Designed by', de:'Entworfen von'},
+  periodicTitle: {it:'Tavola periodica dei caratteri', en:'Periodic table of typefaces', de:'Periodensystem der Schriften'},
+  periodicIntro: {it:'Cento caratteri disposti come gli elementi: ogni colonna è una classe Vox-ATypI e dentro la colonna si scende in ordine di data. Il numero non è una classifica ma la posizione cronologica assoluta — 1 è la textura di Gutenberg, 100 è Inter. Letta per colonne è una classificazione; letta per numeri, cinque secoli e mezzo di stampa.', en:'A hundred typefaces laid out like the elements: each column is a Vox-ATypI class, and within the column you descend by date. The number is not a ranking but the absolute chronological position — 1 is Gutenberg’s textura, 100 is Inter. Read by columns it is a classification; read by numbers, five and a half centuries of printing.', de:'Hundert Schriften wie die Elemente angeordnet: Jede Spalte ist eine Vox-ATypI-Klasse, innerhalb der Spalte geht es nach Datum abwärts. Die Zahl ist keine Rangliste, sondern die absolute chronologische Position — 1 ist Gutenbergs Textura, 100 ist Inter. Nach Spalten gelesen eine Klassifikation, nach Zahlen fünfeinhalb Jahrhunderte Druck.'},
+  periodicHint: {it:'Tocca una casella per aprirla.', en:'Tap a cell to open it.', de:'Auf ein Feld tippen, um es zu öffnen.'},
+  periodicNumKey: {it:'Il numero è la posizione cronologica, da 1 (1455) a 100 (2016).', en:'The number is the chronological position, from 1 (1455) to 100 (2016).', de:'Die Zahl ist die chronologische Position, von 1 (1455) bis 100 (2016).'},
+  periodicSubKey: {it:'Il segno ° indica una casella composta in un carattere sostitutivo.', en:'The ° mark indicates a cell set in a substitute typeface.', de:'Das Zeichen ° kennzeichnet ein Feld, das in einer Ersatzschrift gesetzt ist.'},
+  periodicOpenCard: {it:'Apri la scheda', en:'Open the card', de:'Karte öffnen'},
+  periodicNoCard: {it:'Di questo carattere non c’è ancora una scheda completa.', en:'There is no full card for this typeface yet.', de:'Für diese Schrift gibt es noch keine vollständige Karte.'},
+  periodicSubNote: {it:'La casella è composta in un carattere sostitutivo:', en:'The cell is set in a substitute typeface:', de:'Das Feld ist in einer Ersatzschrift gesetzt:'},
+  periodicPick: {it:'Scegli una casella della tavola per leggerne la voce.', en:'Pick a cell in the table to read its entry.', de:'Ein Feld der Tabelle wählen, um den Eintrag zu lesen.'},
+  periodicYear: {it:'Anno', en:'Year', de:'Jahr'},
+  periodicBy: {it:'Disegno', en:'Design', de:'Entwurf'},
+  periodicHouse: {it:'Fonderia', en:'Foundry', de:'Gießerei'},
+  periodicCls: {it:'Classe', en:'Class', de:'Klasse'},
   backToType: {it:'Tutti i caratteri', en:'All typefaces', de:'Alle Schriften'},
   statTypefaces: {it:'Caratteri scoperti', en:'Typefaces discovered', de:'Schriften entdeckt'},
   novareseLabel: {it:'Novarese', en:'Novarese', de:'Novarese'},
@@ -822,7 +835,7 @@ const DESIGNERS = [
       en:'A goldsmith of Mainz, around 1450 he assembled the complete system of movable type printing: punch, matrix, adjustable casting mould, metal alloy, oil-based ink and press. None of those elements was entirely new, but their integration into a repeatable process was. The 42-line Bible, printed around 1455, is set in a blackletter textura of great refinement and remains his masterpiece. To finance the venture he borrowed from Johann Fust, who sued him and took possession of the workshop and the type. Gutenberg died poor, and for a long time the authorship of the invention was disputed. The German word for printing, “Buchdruck”, and the very name of the media galaxy that followed now carry his name.',
       de:'Der Mainzer Goldschmied entwickelte um 1450 das vollständige System des Drucks mit beweglichen Lettern: Stempel, Matrize, verstellbares Gießinstrument, Metalllegierung, ölhaltige Farbe und Presse. Keines dieser Elemente war völlig neu, wohl aber ihre Verbindung zu einem wiederholbaren Verfahren. Die um 1455 gedruckte 42-zeilige Bibel ist in einer Textura von großer Feinheit gesetzt und bleibt sein Meisterwerk. Zur Finanzierung verschuldete er sich bei Johann Fust, der ihn verklagte und Werkstatt und Lettern übernahm. Gutenberg starb arm, und die Urheberschaft der Erfindung blieb lange umstritten. Das deutsche Wort Buchdruck und der Name der daraus folgenden Mediengalaxie tragen heute seinen Namen.'}},
 
-  {id:'jenson', name:'Nicolas Jenson', years:'c.1420–1480', place:{it:'Venezia', en:'Venice', de:'Venedig'},
+  {id:'jenson', name:'Nicolas Jenson', years:'c.1420–1480', img:'img/jenson.png', place:{it:'Venezia', en:'Venice', de:'Venedig'},
     knownFor:{it:'La prima grande romana', en:'The first great roman type', de:'Die erste große Antiqua'},
     bio:{
       it:'Francese di formazione, lavorò alla zecca reale di Tours dove imparò a incidere i punzoni per le monete. Secondo una tradizione difficile da verificare fu mandato a Magonza da Carlo VII per apprendere l’arte della stampa. È certo che dal 1470 lavorava a Venezia, dove incise una romana di equilibrio eccezionale, ancora oggi il riferimento della classe umanista. Le sue lettere sono ampie e serene, con contrasto misurato e grazie robuste; la “e” conserva la traversa obliqua ereditata dal pennino. Fu anche un imprenditore di successo, con una tipografia tra le più grandi d’Europa. Nell’Ottocento William Morris studiò le sue pagine per disegnare il Golden Type, e nel Novecento Bruce Rogers ne trasse il Centaur.',
@@ -850,14 +863,14 @@ const DESIGNERS = [
       en:'A Parisian punchcutter, he was among the first to work as an independent supplier of punches and matrices, selling them to different printers rather than being tied to a single workshop: an important shift that separates the trade of the type designer from that of the printer. His romans, inspired by Griffo\'s model, have refined proportions and rare balance, and became the European standard for two centuries. Commissioned by Francis I, he also cut the Grecs du Roi, a set of Greek types of great complexity. Many faces bearing his name today in fact derive from the punches of his successor Jean Jannon, through a confusion that lasted into the 20th century; Adobe Garamond of 1989 instead returns to the originals preserved at the Plantin-Moretus Museum in Antwerp.',
       de:'Der Pariser Stempelschneider war einer der Ersten, die als unabhängige Lieferanten von Stempeln und Matrizen arbeiteten und diese an verschiedene Drucker verkauften, statt an eine Werkstatt gebunden zu sein — ein wichtiger Wandel, der das Handwerk des Schriftgestalters von dem des Druckers trennt. Seine Antiquaschriften, nach Griffos Vorbild, haben feine Proportionen und seltene Ausgewogenheit und wurden zwei Jahrhunderte lang europäischer Standard. Im Auftrag Franz\' I. schnitt er auch die Grecs du Roi, eine sehr komplexe griechische Schriftserie. Viele heute seinen Namen tragende Schriften stammen tatsächlich von den Stempeln seines Nachfolgers Jean Jannon — eine bis ins 20. Jahrhundert währende Verwechslung; das Adobe Garamond von 1989 greift dagegen auf die im Museum Plantin-Moretus in Antwerpen bewahrten Originale zurück.'}},
 
-  {id:'caslon', name:'William Caslon', years:'1692–1766', place:{it:'Londra', en:'London', de:'London'},
+  {id:'caslon', name:'William Caslon', years:'1692–1766', img:'img/caslon.jpg', place:{it:'Londra', en:'London', de:'London'},
     knownFor:{it:'Lo standard tipografico inglese', en:'The English typographic standard', de:'Der englische Schriftstandard'},
     bio:{
       it:'Cominciò come incisore di decorazioni su canne di fucile e passò ai punzoni quasi per caso, notato da alcuni stampatori londinesi. Il suo foglio di specimen del 1734 presenta una famiglia completa che non brilla per originalità — guarda ai modelli olandesi del Seicento — ma per affidabilità: robusta, leggibile in corpi piccoli, indulgente verso carte e inchiostri mediocri. Fu questa qualità pratica a farne lo standard della stampa britannica per un secolo. In America divenne il carattere dei documenti fondativi: la Dichiarazione d’Indipendenza del 1776 fu stampata in Caslon. Il detto “when in doubt, use Caslon” circolò a lungo tra i tipografi, e ancora oggi il carattere è in uso continuo dopo quasi tre secoli.',
       en:'He began as an engraver of decoration on gun barrels and moved to punchcutting almost by chance, noticed by some London printers. His 1734 specimen sheet presents a complete family that stands out not for originality — it looks to 17th-century Dutch models — but for reliability: sturdy, legible at small sizes, forgiving of mediocre paper and ink. It was this practical quality that made it the standard of British printing for a century. In America it became the type of the founding documents: the 1776 Declaration of Independence was printed in Caslon. The saying “when in doubt, use Caslon” long circulated among printers, and the face is still in continuous use after nearly three centuries.',
       de:'Er begann als Graveur von Verzierungen auf Gewehrläufen und kam fast zufällig zum Stempelschneiden, entdeckt von einigen Londoner Druckern. Sein Schriftmusterblatt von 1734 zeigt eine vollständige Familie, die nicht durch Originalität besticht — sie orientiert sich an niederländischen Vorbildern des 17. Jahrhunderts —, sondern durch Verlässlichkeit: robust, in kleinen Graden lesbar, nachsichtig gegenüber mäßigem Papier und mäßiger Farbe. Diese praktische Qualität machte sie ein Jahrhundert lang zum Standard des britischen Drucks. In Amerika wurde sie zur Schrift der Gründungsdokumente: Die Unabhängigkeitserklärung von 1776 wurde in Caslon gedruckt. Der Spruch „when in doubt, use Caslon“ kursierte lange unter Druckern, und die Schrift ist nach fast drei Jahrhunderten noch in ständigem Gebrauch.'}},
 
-  {id:'baskerville', name:'John Baskerville', years:'1706–1775', place:{it:'Birmingham', en:'Birmingham', de:'Birmingham'},
+  {id:'baskerville', name:'John Baskerville', years:'1706–1775', img:'img/baskerville.jpg', place:{it:'Birmingham', en:'Birmingham', de:'Birmingham'},
     knownFor:{it:'La svolta transizionale', en:'The transitional turn', de:'Die Übergangsantiqua'},
     bio:{
       it:'Maestro calligrafo e scalpellino, si arricchì con la fabbricazione di oggetti laccati e solo a cinquant’anni si dedicò alla stampa, con la libertà di chi non deve guadagnarci. Non si limitò al carattere: sviluppò un inchiostro più nero, fece produrre una carta velina liscia e levigò i fogli stampati tra rulli riscaldati, ottenendo una nitidezza sconosciuta ai contemporanei. Solo su quella superficie i suoi filetti sottilissimi potevano reggere. In Inghilterra fu criticato duramente — si scrisse che il suo contrasto violento «faceva male agli occhi» — mentre Bodoni e Didot lo studiarono e ne spinsero le premesse fino alle didone. Ateo dichiarato in un’epoca poco tollerante, volle essere sepolto in terra sconsacrata, nel proprio giardino.',
@@ -878,14 +891,14 @@ const DESIGNERS = [
       en:'A German graphic designer, typographer and teacher, close to Bauhaus ideas though he never taught there. With Futura, released by the Bauer foundry in 1927, he sought a typeface expressing his own time, built from circle, triangle and square rather than from the movement of the hand. The initial drawings were more radical than those published: some lowercase letters were pure geometric shapes, nearly illegible, and were softened at the foundry\'s request. Renner also wrote important books on modern typography, among them Die Kunst der Typographie. A declared opponent of Nazism, in 1932 he published a pamphlet against the regime and the following year was removed from the direction of the Munich school of graphic arts and briefly arrested.',
       de:'Deutscher Grafiker, Typograf und Lehrer, den Bauhaus-Ideen nahe, ohne dort je unterrichtet zu haben. Mit der 1927 bei der Bauerschen Gießerei erschienenen Futura suchte er eine Schrift, die seine Zeit ausdrückt, gebaut aus Kreis, Dreieck und Quadrat statt aus der Handbewegung. Die ersten Entwürfe waren radikaler als die veröffentlichten: Einige Kleinbuchstaben waren reine geometrische Formen, kaum lesbar, und wurden auf Wunsch der Gießerei gemildert. Renner schrieb auch bedeutende Bücher zur modernen Typografie, darunter Die Kunst der Typographie. Als erklärter Gegner des Nationalsozialismus veröffentlichte er 1932 eine Schrift gegen das Regime und wurde im Jahr darauf von der Leitung der Münchner Meisterschule für Deutschlands Buchdrucker entfernt und kurzzeitig verhaftet.'}},
 
-  {id:'tschichold', name:'Jan Tschichold', years:'1902–1974', place:{it:'Lipsia, Basilea, Londra', en:'Leipzig, Basel, London', de:'Leipzig, Basel, London'},
+  {id:'tschichold', name:'Jan Tschichold', years:'1902–1974', img:'img/tschichold.jpg', place:{it:'Lipsia, Basilea, Londra', en:'Leipzig, Basel, London', de:'Leipzig, Basel, London'},
     knownFor:{it:'Die neue Typographie, i libri Penguin', en:'Die neue Typographie, Penguin books', de:'Die neue Typographie, Penguin-Bücher'},
     bio:{
       it:'Figlio di un pittore di insegne, si formò come calligrafo a Lipsia. Nel 1928, a ventisei anni, pubblicò Die neue Typographie, manifesto radicale che rifiutava simmetria, ornamento e caratteri gotici in favore di composizione asimmetrica, griglia, lineari e uso attivo del bianco. Arrestato dai nazisti nel 1933 come “bolscevico culturale”, fuggì in Svizzera. Negli anni successivi ripudiò le proprie posizioni più rigide, giudicandole autoritarie e vicine nello spirito a ciò che aveva combattuto, e tornò a una tipografia classica e simmetrica: fu un voltafaccia che gli costò aspre polemiche, soprattutto con Max Bill. Tra il 1947 e il 1949 riprogettò l’intera collana Penguin, fissando regole di composizione che l’editore usò per decenni.',
       en:'The son of a sign painter, he trained as a calligrapher in Leipzig. In 1928, at twenty-six, he published Die neue Typographie, a radical manifesto rejecting symmetry, ornament and blackletter in favour of asymmetric composition, the grid, sans serifs and an active use of white. Arrested by the Nazis in 1933 as a “cultural bolshevik”, he fled to Switzerland. In later years he repudiated his own more rigid positions, judging them authoritarian and close in spirit to what he had fought, and returned to classical, symmetrical typography: a reversal that cost him bitter polemics, notably with Max Bill. Between 1947 and 1949 he redesigned the entire Penguin series, setting composition rules the publisher used for decades.',
       de:'Als Sohn eines Schildermalers wurde er in Leipzig zum Kalligrafen ausgebildet. 1928 veröffentlichte er mit sechsundzwanzig Jahren Die neue Typographie, ein radikales Manifest, das Symmetrie, Ornament und gebrochene Schriften zugunsten asymmetrischen Satzes, des Rasters, der Grotesk und eines aktiven Weißraums verwarf. 1933 von den Nationalsozialisten als „Kulturbolschewist“ verhaftet, floh er in die Schweiz. In späteren Jahren widerrief er seine starrsten Positionen als autoritär und im Geist dem verwandt, was er bekämpft hatte, und kehrte zu klassischer, symmetrischer Typografie zurück: eine Kehrtwende, die ihm heftige Polemiken einbrachte, vor allem mit Max Bill. Zwischen 1947 und 1949 gestaltete er die gesamte Penguin-Reihe neu und legte Satzregeln fest, die der Verlag jahrzehntelang anwandte.'}},
 
-  {id:'novarese', name:'Aldo Novarese', years:'1920–1995', place:{it:'Torino', en:'Turin', de:'Turin'},
+  {id:'novarese', name:'Aldo Novarese', years:'1920–1995', img:'img/novarese.jpg', place:{it:'Torino', en:'Turin', de:'Turin'},
     knownFor:{it:'Eurostile, Microgramma, la classificazione italiana', en:'Eurostile, Microgramma, the Italian classification', de:'Eurostile, Microgramma, die italienische Klassifikation'},
     bio:{
       it:'Il più prolifico disegnatore di caratteri italiano del Novecento, formatosi e poi direttore artistico alla Nebiolo di Torino, l’unica grande fonderia italiana. Disegnò oltre duecento caratteri, tra cui Microgramma con Alessandro Butti nel 1952 e il suo sviluppo Eurostile del 1962: lettere costruite su un rettangolo dagli angoli arrotondati, forma che divenne subito sinonimo di futuro e riempì la fantascienza degli anni Sessanta e Settanta. Suoi anche Recta, Stop, Forma. Fu inoltre un teorico: nel volume Alfa-Beta propose una classificazione dei caratteri alternativa a quella di Vox, articolata su dieci categorie e diffusa nell’insegnamento italiano. Il suo lavoro è oggi rivalutato dopo anni di relativa dimenticanza.',
@@ -957,6 +970,26 @@ const DESIGNERS = [
    Dentro ogni famiglia la tinta si scurisce col procedere del secolo.
    Tutte hanno contrasto ≥ 7:1 col testo scuro delle schede: molto sopra
    la soglia AA, perché sulle schede il testo è anche piccolo. */
+/* Nomi brevi delle classi, per le intestazioni della tavola periodica.
+   Quelli di CLASSIFICATIONS sono doppi ('Lineare neogrottesca / Neo-grotesque')
+   e in una colonna larga 62 px si spezzerebbero in cinque righe. */
+const CLASS_SHORT = {
+  umanista:          {it:'Umanista',      en:'Humanist',      de:'Venezianisch'},
+  garalda:           {it:'Garalda',       en:'Garalde',       de:'Garalde'},
+  transizionale:     {it:'Transizionale', en:'Transitional',  de:'Übergang'},
+  didone:            {it:'Didone',        en:'Didone',        de:'Didone'},
+  meccana:           {it:'Meccana',       en:'Slab',          de:'Egyptienne'},
+  grottesca:         {it:'Grottesca',     en:'Grotesque',     de:'Grotesk'},
+  neogrottesca:      {it:'Neogrottesca',  en:'Neo-grotesque', de:'Neo-Grotesk'},
+  geometrica:        {it:'Geometrica',    en:'Geometric',     de:'Geometrisch'},
+  umanisticalineare: {it:'Umanistica',    en:'Humanist sans', de:'Humanistisch'},
+  incisa:            {it:'Incisa',        en:'Glyphic',       de:'Incise'},
+  scritta:           {it:'Scritta',       en:'Script',        de:'Schreibschrift'},
+  manuale:           {it:'Manuale',       en:'Graphic',       de:'Handschriftlich'},
+  gotica:            {it:'Gotica',        en:'Blackletter',   de:'Gebrochene'},
+  nonlatine:         {it:'Non latine',    en:'Non-Latin',     de:'Nichtlateinisch'},
+};
+
 const CLASS_COLORS = {
   umanista: '#AED8E5',
   garalda: '#9FCEDD',
@@ -1050,5 +1083,308 @@ const TYPEFACES = [
     },
     link: {url: 'https://en.wikipedia.org/wiki/Garamond', label: 'Wikipedia — Garamond'},
   },
+
+  {
+    id: 'futura', name: 'Futura', year: '1927',
+    designer: 'Paul Renner',
+    foundry: 'Bauer',
+    cls: 'geometrica',
+    glyphA: 'I', glyphB: 'O',
+    font: "'Futura', sans-serif",
+    quote: {
+      text: {
+        it: "«Chiamiamo un tipo di carattere distintivo, dove ci sia chiarezza in tutti gli elementi superficiali. Giustamente così all'origine di una precisione strutturale geometrica.»",
+        en: '"We call a typeface distinctive where there is clarity in all superficial elements. Rightly so at the origin of a geometric structural precision."',
+        de: '„Wir nennen eine Schrift ausgeprägt, bei der Klarheit in allen oberflächlichen Elementen herrscht. Zu Recht bei der geometrischen Strukturpräzision."',
+      },
+      author: 'Paul Renner',
+    },
+    desc: {
+      it: "Il Futura è un carattere geometrico disegnato da Paul Renner e pubblicato dalla fonderia Bauer nel 1927. Nasce nel clima del Bauhaus e della Nuova Tipografia, due movimenti che ricercavano una lettera universale, completamente spoglia da ogni residuo calligrafico e da ogni riferimento storico. La \"o\" è un cerchio quasi perfetto, la \"a\" è a un piano invece che a due, e le curve si ripetono identiche in lettere diverse. Questa coerenza formale è al contempo un punto di forza e una limitazione: la scarsa differenziazione tra i segni la rende meno leggibile nei testi lunghi, ma conferisce al carattere un aspetto sobrio e moderno. È stato il primo carattere a viaggiare sulla Luna: una versione è incisa sulla targa dell'Apollo 11. Nel design contemporaneo è il carattere d'elezione per loghi di aziende tecnologiche e nel cinema è diventato celebre per i titoli dei film di Wes Anderson.",
+      en: 'Futura is a geometric typeface designed by Paul Renner and published by the Bauer foundry in 1927. It emerged from the climate of the Bauhaus and the New Typography, two movements seeking a universal letter stripped of all calligraphic residue and historical reference. The "o" is an almost perfect circle, the "a" is single-storey rather than double, and identical curves repeat across different letters. This formal coherence is both a strength and a limitation: the low differentiation between characters makes it less legible in long texts, but gives the typeface a sober, modern appearance. It was the first typeface to travel to the Moon — a version is engraved on the Apollo 11 plaque. In contemporary design it is the preferred typeface for technology company logos, and in cinema it has become famous for the titles of Wes Anderson\'s films.',
+      de: 'Futura ist eine geometrische Schrift, entworfen von Paul Renner und 1927 von der Bauerischen Gießerei publiziert. Sie entstand im Klima des Bauhauses und der Neuen Typografie, zwei Bewegungen, die einen universellen Buchstaben ohne kalligrafische Reste und historische Bezüge suchten. Das „o" ist ein nahezu perfekter Kreis, das „a" einstöckig statt zweistöckig, und identische Kurven wiederholen sich in verschiedenen Buchstaben. Diese formale Geschlossenheit ist zugleich Stärke und Schwäche: Die geringe Unterscheidbarkeit der Zeichen macht sie in langen Texten schlechter lesbar, verleiht der Schrift aber ein nüchternes, modernes Aussehen. Sie war die erste Schrift auf dem Mond — eine Version ist auf der Plakette von Apollo 11 eingraviert. Im zeitgenössischen Design ist sie die bevorzugte Schrift für Logos von Technologieunternehmen und im Kino ist sie berühmt für die Titel von Wes-Anderson-Filmen geworden.',
+    },
+    recognize: {
+      it: "I terminali delle lettere hanno sempre un taglio orizzontale o verticale, mai arrotondato. La \"o\" è un cerchio quasi perfetto, un segno della costruzione geometrica. La \"a\" minuscola è a un piano, senza la tipica gancio superiore a due piani. Le curve si ripetono identiche: il cerchio della \"o\" riappare nella pancia della \"b\", della \"d\", della \"p\". L'aspetto complessivo è pulito, spoglio, senza ornamenti.",
+      en: 'The terminals of the letters always have a horizontal or vertical cut, never rounded. The "o" is an almost perfect circle, a sign of geometric construction. The lowercase "a" is single-storey, without the typical two-storey upper bowl. Curves repeat identically: the circle of the "o" reappears in the bowl of the "b", "d", "p". The overall appearance is clean, bare, without ornament.',
+      de: 'Die Endungen der Buchstaben sind stets waagerecht oder senkrecht geschnitten, nie gerundet. Das „o" ist ein nahezu perfekter Kreis, ein Zeichen geometrischer Konstruktion. Das kleine „a" ist einstöckig, ohne die typische zweistöckige Oberschale. Kurven wiederholen sich identisch: Der Kreis des „o" erscheint erneut in der Schale von „b", „d", „p". Das Gesamterscheinungsbild ist sauber, schmucklos, ohne Verzierungen.',
+    },
+    where: {
+      it: 'Nel logo di Volkswagen, Campari, Absolut Vodka e Avery Dennison. Nei titoli dei film di Wes Anderson (The Grand Budapest Hotel, Moonrise Kingdom, The Life Aquatic). Nel design di moda e nelle pubblicità di lusso. Nei loghi di aziende tecnologiche di tutte le epoche.',
+      en: 'In the logos of Volkswagen, Campari, Absolut Vodka and Avery Dennison. In the titles of Wes Anderson films (The Grand Budapest Hotel, Moonrise Kingdom, The Life Aquatic). In fashion design and luxury advertising. In the logos of technology companies from every era.',
+      de: 'In den Logos von Volkswagen, Campari, Absolut Wodka und Avery Dennison. In den Titeln von Wes-Anderson-Filmen (The Grand Budapest Hotel, Moonrise Kingdom, The Life Aquatic). Im Modedesign und in der Luxuswerbung. In den Logos von Technologieunternehmen aus allen Epochen.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Futura_(typeface)', label: 'Wikipedia — Futura'},
+  },
+
+];
+
+/* ============================================================
+   TAVOLA PERIODICA DEI CARATTERI
+
+   Cento caratteri disposti come gli elementi di Mendeleev: le
+   quattordici colonne sono le classi Vox-ATypI — quindi i colonne
+   e tinte vengono da CLASS_COLORS, esattamente come le schede — e
+   dentro ogni colonna si scende in ordine di data.
+
+   Il « numero atomico » non è un capriccio: è la posizione
+   cronologica assoluta della voce fra tutte e cento. Textura è 1
+   perché è del 1455; Inter è 100 perché è del 2016. Letta per
+   numeri, la tavola è una linea del tempo; letta per colonne, è
+   una classificazione.
+
+   Non ricalca la « Periodic Table of Typefaces » di Camden Wilde,
+   che ordina i caratteri per popolarità — un dato non verificabile
+   e, per giunta, opera protetta. Qui il criterio è la classe, che
+   è verificabile e che l'app già usa altrove.
+
+   Schema di una voce:
+     n      numero cronologico, 1-100
+     sym    simbolo di una o due lettere, unico in tutta la tavola
+     name   nome del carattere
+     year   anno di pubblicazione ('ca.' se la fonte è incerta)
+     by     chi l'ha disegnato
+     house  fonderia, editore o città
+     cls    chiave di CLASS_COLORS: dà colonna e colore
+     font   famiglia dichiarata in style.css — SOLO se il campione
+            è autentico o un revival riconosciuto dello stesso
+            disegno. Se manca, la cella si compone nel carattere
+            dell'interfaccia: meglio nessun campione che uno falso.
+     sub    nome del carattere effettivamente usato, quando `font`
+            non è il disegno originale ma un sostituto dichiarato
+     ref    id di una voce di TYPEFACES, se la scheda esiste già
+     note   una frase, nelle tre lingue: perché questo carattere
+            merita una casella
+   ============================================================ */
+
+const PERIODIC = [
+
+  /* --- GOTICHE ------------------------------------------------ */
+  {n:1, sym:'Tx', name:'Textura', year:'1455 ca.', by:'Johannes Gutenberg, Peter Schöffer', house:'Magonza', cls:'gotica', font:"'UnifrakturCook', serif", sub:'UnifrakturCook',
+   note:{it:'Il carattere della Bibbia a 42 linee: la scrittura dei manoscritti tradotta in metallo, riga per riga.', en:'The type of the 42-line Bible: manuscript hand translated into metal, line for line.', de:'Die Schrift der 42-zeiligen Bibel: Handschrift Zeile für Zeile in Metall übersetzt.'}},
+  {n:4, sym:'Fk', name:'Fraktur', year:'1517 ca.', by:'Johann Neudörffer, Hieronymus Andreae', house:'Norimberga', cls:'gotica', font:"'UnifrakturCook', serif", sub:'UnifrakturCook',
+   note:{it:'Nata per il libro di preghiere di Massimiliano I, restò la lettera tedesca corrente fino al 1941.', en:'Created for Maximilian I’s prayer book, it remained the everyday German letter until 1941.', de:'Für das Gebetbuch Maximilians I. geschnitten, blieb sie bis 1941 die deutsche Alltagsschrift.'}},
+  {n:18, sym:'Ff', name:'Fette Fraktur', year:'1850', by:'Johann Christian Bauer', house:'Francoforte', cls:'gotica', font:"'UnifrakturCook', serif", sub:'UnifrakturCook',
+   note:{it:'La gotica grassa dei manifesti ottocenteschi; le fonti oscillano fra 1850 e 1855.', en:'The fat blackletter of nineteenth-century posters; sources waver between 1850 and 1855.', de:'Die fette Gebrochene der Plakate des 19. Jahrhunderts; die Quellen schwanken zwischen 1850 und 1855.'}},
+  {n:35, sym:'Wk', name:'Wilhelm Klingspor Schrift', year:'1925', by:'Rudolf Koch', house:'Klingspor', cls:'gotica',
+   note:{it:'L’ultima grande textura disegnata da un calligrafo, sviluppata fra il 1919 e il 1926.', en:'The last great textura drawn by a calligrapher, developed between 1919 and 1926.', de:'Die letzte große Textura eines Kalligrafen, zwischen 1919 und 1926 entwickelt.'}},
+
+  /* --- UMANISTE ----------------------------------------------- */
+  {n:2, sym:'Je', name:'Jenson', year:'1470', by:'Nicolas Jenson', house:'Venezia', cls:'umanista',
+   note:{it:'Il primo romano compiuto: un francese a Venezia fissa la forma che ancora oggi chiamiamo « tondo ».', en:'The first fully realised roman: a Frenchman in Venice fixes the shape we still call roman.', de:'Die erste vollendete Antiqua: Ein Franzose in Venedig prägt die Form, die wir bis heute Antiqua nennen.'}},
+  {n:19, sym:'Gd', name:'Golden Type', year:'1890', by:'William Morris', house:'Kelmscott Press', cls:'umanista',
+   note:{it:'Morris ridisegna Jenson per protesta contro la stampa industriale: nasce il revival come atto politico.', en:'Morris redraws Jenson in protest against industrial printing: the revival becomes a political act.', de:'Morris zeichnet Jenson neu, aus Protest gegen den Industriedruck: Das Revival wird zur politischen Geste.'}},
+  {n:27, sym:'Co', name:'Cloister Old Style', year:'1913', by:'Morris Fuller Benton', house:'ATF', cls:'umanista',
+   note:{it:'Il primo Jenson pensato per la composizione meccanica americana, non per il torchio d’artista.', en:'The first Jenson conceived for American machine composition, not for the private press.', de:'Der erste Jenson für den amerikanischen Maschinensatz, nicht für die Handpresse.'}},
+  {n:28, sym:'Ce', name:'Centaur', year:'1914', by:'Bruce Rogers', house:'Monotype (1929)', cls:'umanista',
+   note:{it:'Disegnato per il Metropolitan Museum e considerato il revival di Jenson più fedele mai inciso.', en:'Drawn for the Metropolitan Museum and held to be the most faithful Jenson revival ever cut.', de:'Für das Metropolitan Museum gezeichnet und als treuestes Jenson-Revival überhaupt geltend.'}},
+  {n:51, sym:'Sd', name:'Schneidler Mediaeval', year:'1936', by:'F. H. Ernst Schneidler', house:'Bauer', cls:'umanista',
+   note:{it:'Un calligrafo tedesco riporta la penna larga dentro una romana da testo; negli Stati Uniti si chiamò Bauer Text.', en:'A German calligrapher brings the broad nib back into a text roman; in the USA it was sold as Bauer Text.', de:'Ein deutscher Kalligraf holt die Breitfeder in eine Textantiqua zurück; in den USA hieß sie Bauer Text.'}},
+  {n:88, sym:'Aj', name:'Adobe Jenson', year:'1996', by:'Robert Slimbach', house:'Adobe', cls:'umanista',
+   note:{it:'Il tondo di Jenson e il corsivo di Arrighi riuniti in una famiglia digitale con assi ottici.', en:'Jenson’s roman and Arrighi’s italic reunited in a digital family with optical sizes.', de:'Jensons Antiqua und Arrighis Kursive, vereint in einer digitalen Familie mit optischen Graden.'}},
+
+  /* --- GARALDE ------------------------------------------------ */
+  {n:3, sym:'Bm', name:'Bembo', year:'1495', by:'Francesco Griffo', house:'Aldo Manuzio, Venezia (Monotype 1929)', cls:'garalda', font:"'Cormorant Garamond', serif", sub:'Cormorant Garamond',
+   note:{it:'Inciso per il De Aetna di Pietro Bembo: è il modello da cui discendono tutte le garalde europee.', en:'Cut for Pietro Bembo’s De Aetna: the model from which every European garalde descends.', de:'Für Pietro Bembos De Aetna geschnitten: das Vorbild aller europäischen Garalde.'}},
+  {n:6, sym:'Ga', name:'Garamond', year:'1530 ca.', by:'Claude Garamond', house:'Parigi', cls:'garalda', font:"'EB Garamond', serif", ref:'garamond',
+   note:{it:'Il tondo francese che soppiantò il gotico nel libro europeo e che si stampa ancora oggi.', en:'The French roman that displaced blackletter in the European book and is still set today.', de:'Die französische Antiqua, die im europäischen Buch die Gebrochene ablöste — bis heute im Satz.'}},
+  {n:8, sym:'Cs', name:'Caslon', year:'1722 ca.', by:'William Caslon', house:'Londra', cls:'garalda',
+   note:{it:'« When in doubt, use Caslon »: con questo carattere fu composta la Dichiarazione d’indipendenza americana.', en:'“When in doubt, use Caslon”: the American Declaration of Independence was set in it.', de:'„When in doubt, use Caslon“: In ihr wurde die amerikanische Unabhängigkeitserklärung gesetzt.'}},
+  {n:26, sym:'Pl', name:'Plantin', year:'1913', by:'Frank Hinman Pierpont', house:'Monotype', cls:'garalda',
+   note:{it:'Disegnato sui punzoni del museo Plantin-Moretus di Anversa; sarà la base del Times New Roman.', en:'Drawn from punches in the Plantin-Moretus museum in Antwerp; it became the basis of Times New Roman.', de:'Nach Stempeln des Plantin-Moretus-Museums in Antwerpen; Grundlage der Times New Roman.'}},
+  {n:29, sym:'Go', name:'Goudy Old Style', year:'1915', by:'Frederic W. Goudy', house:'ATF', cls:'garalda',
+   note:{it:'Goudy disegnò più di cento caratteri: questo, con i suoi terminali a goccia, è il più imitato.', en:'Goudy drew over a hundred typefaces: this one, with its teardrop terminals, is the most imitated.', de:'Goudy zeichnete über hundert Schriften: diese, mit ihren Tropfenendungen, ist die meistkopierte.'}},
+  {n:42, sym:'Gj', name:'Granjon', year:'1928', by:'George W. Jones', house:'Linotype', cls:'garalda',
+   note:{it:'Un Garamond onesto: Jones lo battezzò col nome di Robert Granjon perché la corsiva è sua, non di Garamond.', en:'An honest Garamond: Jones named it after Robert Granjon because the italic is his, not Garamond’s.', de:'Ein ehrlicher Garamond: Jones benannte ihn nach Robert Granjon, denn die Kursive stammt von ihm.'}},
+  {n:57, sym:'Pa', name:'Palatino', year:'1949', by:'Hermann Zapf', house:'Stempel', cls:'garalda',
+   note:{it:'Zapf lo chiamò come un calligrafo del Cinquecento: è una garalda vista con l’occhio di chi scrive a mano.', en:'Zapf named it after a sixteenth-century calligrapher: a garalde seen through the eye of a writing hand.', de:'Zapf benannte sie nach einem Kalligrafen des 16. Jahrhunderts: eine Garalde aus der Sicht der Hand.'}},
+  {n:71, sym:'Sb', name:'Sabon', year:'1967', by:'Jan Tschichold', house:'Stempel · Linotype · Monotype', cls:'garalda', font:"'Cormorant Garamond', serif", sub:'Cormorant Garamond',
+   note:{it:'Doveva stampare identico a mano, in Linotype e in Monotype: il vincolo tecnico più severo mai imposto a un carattere.', en:'It had to print identically by hand, on Linotype and on Monotype: the harshest technical constraint ever set for a type.', de:'Sie musste im Hand-, Linotype- und Monotype-Satz identisch drucken: die härteste technische Vorgabe überhaupt.'}},
+  {n:83, sym:'Mn', name:'Minion', year:'1990', by:'Robert Slimbach', house:'Adobe', cls:'garalda',
+   note:{it:'La garalda di default dell’editoria digitale: nessuno la nota, e per un carattere da testo è un complimento.', en:'The default garalde of digital publishing: nobody notices it, which for a text face is praise.', de:'Die Standard-Garalde des digitalen Publizierens: Niemand bemerkt sie — für eine Textschrift ein Lob.'}},
+
+  /* --- TRANSIZIONALI ------------------------------------------ */
+  {n:7, sym:'Rr', name:'Romain du Roi', year:'1702', by:'Philippe Grandjean', house:'Imprimerie royale, Parigi', cls:'transizionale',
+   note:{it:'Il primo carattere progettato su una griglia matematica, per ordine di Luigi XIV e uso esclusivo del re.', en:'The first typeface designed on a mathematical grid, by order of Louis XIV and for the king’s use alone.', de:'Die erste auf mathematischem Raster entworfene Schrift, auf Geheiß Ludwigs XIV. und nur für den König.'}},
+  {n:9, sym:'Fo', name:'Fournier', year:'1742', by:'Pierre-Simon Fournier', house:'Parigi (Monotype 1924)', cls:'transizionale',
+   note:{it:'Fournier non disegnò solo un carattere: inventò anche il punto tipografico con cui lo si misura.', en:'Fournier did not merely draw a typeface: he also invented the typographic point that measures it.', de:'Fournier zeichnete nicht nur eine Schrift: Er erfand auch den typografischen Punkt, der sie misst.'}},
+  {n:10, sym:'Bk', name:'Baskerville', year:'1757', by:'John Baskerville', house:'Birmingham', cls:'transizionale', font:"'PT Serif', serif", sub:'PT Serif',
+   note:{it:'Contrasto più netto, carta liscia, inchiostro più nero: i contemporanei lo trovarono abbagliante e sgradevole.', en:'Sharper contrast, smoother paper, blacker ink: contemporaries found it dazzling and unpleasant.', de:'Stärkerer Kontrast, glatteres Papier, schwärzere Farbe: Zeitgenossen fanden sie grell und unangenehm.'}},
+  {n:31, sym:'Cy', name:'Century Schoolbook', year:'1919', by:'Morris Fuller Benton', house:'ATF', cls:'transizionale',
+   note:{it:'Progettato per i libri di scuola americani: generazioni intere hanno imparato a leggere su queste forme.', en:'Designed for American schoolbooks: whole generations learned to read on these shapes.', de:'Für amerikanische Schulbücher entworfen: Ganze Generationen lernten an diesen Formen lesen.'}},
+  {n:45, sym:'Pp', name:'Perpetua', year:'1929', by:'Eric Gill', house:'Monotype', cls:'transizionale',
+   note:{it:'Gill traduce in metallo la lettera incisa nella pietra: le grazie restano appuntite come colpi di scalpello.', en:'Gill translates the stone-cut letter into metal: the serifs stay as sharp as chisel strokes.', de:'Gill überträgt den Steinbuchstaben in Metall: Die Serifen bleiben scharf wie Meißelschläge.'}},
+  {n:49, sym:'Ti', name:'Times New Roman', year:'1932', by:'Stanley Morison, Victor Lardent', house:'Monotype · The Times', cls:'transizionale', font:"'PT Serif', serif", sub:'PT Serif',
+   note:{it:'Nato per stringere le colonne di un quotidiano, è diventato il carattere di default del mondo.', en:'Born to tighten newspaper columns, it became the world’s default typeface.', de:'Geboren, um Zeitungsspalten zu verengen, wurde sie zur Standardschrift der Welt.'}},
+  {n:54, sym:'Cd', name:'Caledonia', year:'1938', by:'W. A. Dwiggins', house:'Linotype', cls:'transizionale',
+   note:{it:'Dwiggins lo costruì col « metodo dei ritagli »: forme viste da lontano, non curve accarezzate da vicino.', en:'Dwiggins built it by his “cut-out method”: shapes judged from afar, not curves stroked up close.', de:'Dwiggins baute sie mit seiner „Ausschnitt-Methode“: Formen aus der Ferne beurteilt, nicht aus der Nähe.'}},
+  {n:81, sym:'Ct', name:'Charter', year:'1987', by:'Matthew Carter', house:'Bitstream', cls:'transizionale',
+   note:{it:'Disegnato per le stampanti laser a bassa risoluzione: poche curve, molte rette, nessuno spreco di pixel.', en:'Drawn for low-resolution laser printers: few curves, many straights, no pixels wasted.', de:'Für Laserdrucker geringer Auflösung gezeichnet: wenige Kurven, viele Geraden, kein Pixel verschwendet.'}},
+
+  /* --- DIDONE ------------------------------------------------- */
+  {n:11, sym:'Dd', name:'Didot', year:'1784 ca.', by:'Firmin Didot', house:'Parigi', cls:'didone', font:"'Playfair Display', serif", sub:'Playfair Display',
+   note:{it:'Grazie sottili come fili e asse perfettamente verticale: la lettera dell’Illuminismo francese.', en:'Hairline serifs and a perfectly vertical axis: the letter of the French Enlightenment.', de:'Haarfeine Serifen und senkrechte Achse: der Buchstabe der französischen Aufklärung.'}},
+  {n:12, sym:'Bo', name:'Bodoni', year:'1798', by:'Giambattista Bodoni', house:'Stamperia Reale, Parma', cls:'didone', font:"'Playfair Display', serif", sub:'Playfair Display',
+   note:{it:'Bodoni ne incise centinaia di varianti e le raccolse nel Manuale tipografico, pubblicato postumo nel 1818.', en:'Bodoni cut hundreds of variants and gathered them in the Manuale tipografico, published posthumously in 1818.', de:'Bodoni schnitt Hunderte Varianten und sammelte sie im Manuale tipografico, postum 1818 erschienen.'}},
+  {n:13, sym:'Wb', name:'Walbaum', year:'1800 ca.', by:'Justus Erich Walbaum', house:'Goslar · Weimar', cls:'didone',
+   note:{it:'La didone tedesca: stesso contrasto estremo dei francesi, ma forme più larghe e meno algide.', en:'The German didone: the same extreme contrast as the French, but wider and less icy shapes.', de:'Die deutsche Didone: derselbe extreme Kontrast wie bei den Franzosen, doch breiter und wärmer.'}},
+  {n:14, sym:'Sr', name:'Scotch Roman', year:'1810 ca.', by:'Richard Austin', house:'Miller & Richard, Edimburgo', cls:'didone',
+   note:{it:'La didone britannica, addolcita per reggere la stampa su carta ruvida e i tirature lunghe.', en:'The British didone, softened to survive rough paper and long print runs.', de:'Die britische Didone, abgemildert für raues Papier und hohe Auflagen.'}},
+  {n:25, sym:'To', name:'Torino', year:'1908', by:'Fonderia Nebiolo', house:'Torino', cls:'didone',
+   note:{it:'Detto anche Romano Moderno: la risposta italiana a Bodoni, uscita da una fonderia torinese.', en:'Also called Romano Moderno: Italy’s answer to Bodoni, from a Turin foundry.', de:'Auch Romano Moderno genannt: Italiens Antwort auf Bodoni, aus einer Turiner Gießerei.'}},
+  {n:37, sym:'Bb', name:'Bauer Bodoni', year:'1926', by:'Heinrich Jost', house:'Bauer', cls:'didone',
+   note:{it:'Fra le decine di Bodoni del Novecento è quello che spinge più in là il contrasto: quasi illeggibile in piccolo, magnifico in grande.', en:'Of the many twentieth-century Bodonis this pushes contrast furthest: near-illegible small, magnificent large.', de:'Unter den vielen Bodonis des 20. Jahrhunderts treibt dieser den Kontrast am weitesten: klein kaum lesbar, groß großartig.'}},
+  {n:93, sym:'Pf', name:'Playfair Display', year:'2011', by:'Claus Eggers Sørensen', house:'—', cls:'didone', font:"'Playfair Display', serif",
+   note:{it:'Una didone disegnata per lo schermo e distribuita libera: la transizione dal metallo al web, in un solo carattere.', en:'A didone drawn for the screen and released free: the move from metal to web in a single face.', de:'Eine Didone für den Bildschirm, frei veröffentlicht: der Weg vom Blei ins Web in einer Schrift.'}},
+
+  /* --- MECCANE ------------------------------------------------ */
+  {n:15, sym:'An', name:'Antique', year:'1815', by:'Vincent Figgins', house:'Londra', cls:'meccana',
+   note:{it:'Chiamata « egiziana » per la moda napoleonica dell’Egitto: grazie rettangolari, spesse quanto le aste.', en:'Called “Egyptian” after the Napoleonic craze for Egypt: rectangular serifs as thick as the stems.', de:'„Egyptienne“ genannt nach der napoleonischen Ägypten-Mode: rechteckige Serifen, so dick wie die Schäfte.'}},
+  {n:17, sym:'Cl', name:'Clarendon', year:'1845', by:'Robert Besley', house:'Fann Street Foundry, Londra', cls:'meccana', font:"'Roboto Slab', serif", sub:'Roboto Slab',
+   note:{it:'Primo carattere della storia a essere registrato per legge — e primo a essere copiato appena scaduta la registrazione.', en:'The first typeface ever legally registered — and the first copied the moment the registration lapsed.', de:'Die erste je gesetzlich geschützte Schrift — und die erste, die nach Ablauf des Schutzes kopiert wurde.'}},
+  {n:44, sym:'Mp', name:'Memphis', year:'1929', by:'Rudolf Wolf', house:'Stempel', cls:'meccana', font:"'Roboto Slab', serif", sub:'Roboto Slab',
+   note:{it:'La egiziana rifatta con criteri geometrici: le grazie dell’Ottocento montate sullo scheletro del Futura.', en:'The Egyptian redone on geometric principles: nineteenth-century serifs on a Futura skeleton.', de:'Die Egyptienne geometrisch neu gedacht: Serifen des 19. Jahrhunderts auf Futura-Skelett.'}},
+  {n:46, sym:'Ci', name:'City', year:'1930', by:'Georg Trump', house:'Berthold', cls:'meccana',
+   note:{it:'Curve sostituite da angoli retti: la meccana portata al suo estremo logico, quasi una macchina.', en:'Curves replaced by right angles: the slab taken to its logical extreme, almost a machine.', de:'Kurven durch rechte Winkel ersetzt: die Egyptienne bis zum logischen Extrem, fast eine Maschine.'}},
+  {n:47, sym:'Bt', name:'Beton', year:'1931', by:'Heinrich Jost', house:'Bauer', cls:'meccana',
+   note:{it:'Il nome dice tutto: cemento armato. La stessa fonderia del Futura, lo stesso spirito costruttivo.', en:'The name says it: reinforced concrete. Same foundry as Futura, same constructive spirit.', de:'Der Name sagt alles: Stahlbeton. Dieselbe Gießerei wie Futura, derselbe konstruktive Geist.'}},
+  {n:50, sym:'Rk', name:'Rockwell', year:'1934', by:'Monotype', house:'Monotype', cls:'meccana', font:"'Roboto Slab', serif", sub:'Roboto Slab',
+   note:{it:'La meccana geometrica britannica, con la « a » a un piano e le grazie senza raccordo.', en:'The British geometric slab, with single-storey “a” and unbracketed serifs.', de:'Die britische geometrische Egyptienne, mit einstöckigem „a“ und ungekehlten Serifen.'}},
+  {n:62, sym:'Cu', name:'Courier', year:'1955', by:'Howard Kettler', house:'IBM', cls:'meccana',
+   note:{it:'Nato per la macchina da scrivere, quindi a larghezza fissa: ogni lettera occupa lo stesso spazio, la « i » come la « m ».', en:'Made for the typewriter, hence monospaced: every letter takes the same width, “i” like “m”.', de:'Für die Schreibmaschine gemacht, also dicktengleich: Jeder Buchstabe gleich breit, „i“ wie „m“.'}},
+  {n:72, sym:'Sf', name:'Serifa', year:'1967', by:'Adrian Frutiger', house:'Bauer', cls:'meccana',
+   note:{it:'Frutiger prese lo scheletro dell’Univers e vi aggiunse le grazie: stessa struttura, classe diversa.', en:'Frutiger took the Univers skeleton and added serifs: same structure, different class.', de:'Frutiger nahm das Univers-Skelett und setzte Serifen an: gleiche Struktur, andere Klasse.'}},
+
+  /* --- GROTTESCHE --------------------------------------------- */
+  {n:16, sym:'Eg', name:'Two Lines English Egyptian', year:'1816', by:'William Caslon IV', house:'Londra', cls:'grottesca',
+   note:{it:'Il primo carattere senza grazie della storia: due sole righe in un catalogo, e nessuno se ne accorse per decenni.', en:'The first sans serif in history: two lines in a specimen book, unnoticed for decades.', de:'Die erste Groteske der Geschichte: zwei Zeilen in einem Musterbuch, jahrzehntelang übersehen.'}},
+  {n:20, sym:'Ak', name:'Akzidenz-Grotesk', year:'1898', by:'Fonderia Berthold', house:'Berlino', cls:'grottesca', font:"'Archivo', sans-serif", sub:'Archivo',
+   note:{it:'La grottesca da lavoro dei tipografi tedeschi, riscoperta dalla Scuola svizzera mezzo secolo dopo.', en:'The German printers’ workhorse grotesque, rediscovered by the Swiss School half a century later.', de:'Die Brotschrift der deutschen Setzer, ein halbes Jahrhundert später von der Schweizer Schule entdeckt.'}},
+  {n:22, sym:'Fg', name:'Franklin Gothic', year:'1902', by:'Morris Fuller Benton', house:'ATF', cls:'grottesca', font:"'Archivo', sans-serif", sub:'Archivo',
+   note:{it:'La grottesca americana per eccellenza: ancora oggi la voce dei titoli di giornale negli Stati Uniti.', en:'The American grotesque par excellence: still the voice of US newspaper headlines.', de:'Die amerikanische Groteske schlechthin: bis heute die Stimme der US-Zeitungsschlagzeile.'}},
+  {n:24, sym:'Ng', name:'News Gothic', year:'1908', by:'Morris Fuller Benton', house:'ATF', cls:'grottesca', font:"'Archivo', sans-serif", sub:'Archivo',
+   note:{it:'La sorella magra del Franklin Gothic, disegnata per stare stretta nelle colonne di cronaca.', en:'Franklin Gothic’s lean sister, drawn to fit tight news columns.', de:'Die schmale Schwester der Franklin Gothic, für enge Nachrichtenspalten gezeichnet.'}},
+  {n:38, sym:'Mg', name:'Monotype Grotesque', year:'1926', by:'Monotype', house:'Monotype', cls:'grottesca',
+   note:{it:'Le sue irregolarità — la « R » con la gamba storta, la « G » con lo sperone — sono diventate un vezzo di stile.', en:'Its irregularities — the crooked-legged “R”, the spurred “G” — turned into a stylistic virtue.', de:'Ihre Eigenheiten — das „R“ mit schiefem Bein, das „G“ mit Sporn — wurden zum Stilmerkmal.'}},
+  {n:53, sym:'Bg', name:'Bell Gothic', year:'1938', by:'Chauncey H. Griffith', house:'Linotype', cls:'grottesca',
+   note:{it:'Disegnato per gli elenchi telefonici: carta pessima, corpo minuscolo, milioni di nomi da distinguere.', en:'Drawn for telephone directories: awful paper, tiny sizes, millions of names to tell apart.', de:'Für Telefonbücher gezeichnet: schlechtes Papier, winzige Grade, Millionen Namen zu unterscheiden.'}},
+  {n:56, sym:'Tg', name:'Trade Gothic', year:'1948', by:'Jackson Burke', house:'Linotype', cls:'grottesca', font:"'Archivo', sans-serif", sub:'Archivo',
+   note:{it:'Meno levigata dell’Helvetica e per questo più viva: la grottesca preferita da chi trova l’Helvetica troppo educata.', en:'Less polished than Helvetica and livelier for it: the grotesque of choice for those who find Helvetica too polite.', de:'Weniger geglättet als Helvetica und darum lebendiger: die Groteske für alle, denen Helvetica zu brav ist.'}},
+
+  /* --- NEOGROTTESCHE ------------------------------------------ */
+  {n:63, sym:'H', name:'Helvetica', year:'1957', by:'Max Miedinger, Eduard Hoffmann', house:'Haas’sche Schriftgiesserei', cls:'neogrottesca', font:"'HelveticaLT55', sans-serif", ref:'helvetica',
+   note:{it:'Uscita come Neue Haas Grotesk e ribattezzata nel 1960: la neutralità fatta alfabeto.', en:'Released as Neue Haas Grotesk and renamed in 1960: neutrality made alphabet.', de:'Als Neue Haas Grotesk erschienen, 1960 umbenannt: Neutralität als Alphabet.'}},
+  {n:64, sym:'U', name:'Univers', year:'1957', by:'Adrian Frutiger', house:'Deberny & Peignot', cls:'neogrottesca',
+   note:{it:'Ventuno tagli progettati insieme e numerati su due cifre: la prima famiglia pensata come sistema.', en:'Twenty-one weights designed together and numbered with two digits: the first family conceived as a system.', de:'Einundzwanzig gemeinsam entworfene Schnitte, zweistellig nummeriert: die erste Familie als System.'}},
+  {n:65, sym:'Fl', name:'Folio', year:'1957', by:'Konrad F. Bauer, Walter Baum', house:'Bauer', cls:'neogrottesca',
+   note:{it:'La terza neogrottesca del 1957, uscita nello stesso anno di Helvetica e Univers e sconfitta da entrambe.', en:'The third neo-grotesque of 1957, released the same year as Helvetica and Univers and beaten by both.', de:'Die dritte Neo-Grotesk von 1957, im selben Jahr wie Helvetica und Univers erschienen — und von beiden verdrängt.'}},
+  {n:67, sym:'Re', name:'Recta', year:'1958', by:'Aldo Novarese, su disegni di Alessandro Butti', house:'Nebiolo, Torino', cls:'neogrottesca',
+   note:{it:'La risposta italiana all’Helvetica, tirata fuori dai cassetti di Butti e finita da Novarese.', en:'Italy’s answer to Helvetica, pulled from Butti’s drawers and finished by Novarese.', de:'Italiens Antwort auf Helvetica, aus Buttis Schubladen geholt und von Novarese vollendet.'}},
+  {n:73, sym:'Fm', name:'Forma', year:'1968', by:'Aldo Novarese e un gruppo di grafici milanesi', house:'Nebiolo, Torino', cls:'neogrottesca',
+   note:{it:'Commissionata dalla Olivetti e disegnata in gruppo: l’ultimo grande tentativo italiano di carattere « universale ».', en:'Commissioned by Olivetti and designed by committee: Italy’s last great attempt at a “universal” type.', de:'Von Olivetti beauftragt und im Team entworfen: Italiens letzter großer Versuch einer „universellen“ Schrift.'}},
+  {n:77, sym:'Hu', name:'Haas Unica', year:'1980', by:'Team ’77 — Gürtler, Mengelt, Gschwind', house:'Haas', cls:'neogrottesca',
+   note:{it:'Un incrocio fra Helvetica e Univers per la fotocomposizione, sparito per trent’anni dentro una causa legale.', en:'A cross between Helvetica and Univers for phototypesetting, lost for thirty years inside a lawsuit.', de:'Eine Kreuzung aus Helvetica und Univers für den Fotosatz, dreißig Jahre in einem Rechtsstreit verschollen.'}},
+  {n:78, sym:'Ar', name:'Arial', year:'1982', by:'Robin Nicholas, Patricia Saunders', house:'Monotype', cls:'neogrottesca',
+   note:{it:'Stesse larghezze dell’Helvetica ma terminali obliqui: nata per non pagarne la licenza, finita su ogni computer.', en:'Helvetica’s widths with slanted terminals: born to avoid its licence, ended up on every computer.', de:'Helveticas Dickten mit schrägen Endungen: entstanden, um die Lizenz zu sparen, gelandet auf jedem Rechner.'}},
+  {n:79, sym:'Hn', name:'Helvetica Neue', year:'1983', by:'D. Stempel AG', house:'Linotype', cls:'neogrottesca', font:"'HelveticaLT55', sans-serif", sub:'Helvetica LT',
+   note:{it:'La revisione che rimise ordine nei pesi e nelle larghezze accumulati in venticinque anni di successo.', en:'The revision that tidied up the weights and widths accumulated in twenty-five years of success.', de:'Die Überarbeitung, die die in 25 Erfolgsjahren gewachsenen Schnitte und Breiten ordnete.'}},
+  {n:94, sym:'Rb', name:'Roboto', year:'2011', by:'Christian Robertson', house:'Google', cls:'neogrottesca',
+   note:{it:'Il carattere di Android: neogrottesca nelle proporzioni, umanistica nelle curve — « frankenstein », dissero i critici.', en:'Android’s typeface: neo-grotesque in proportion, humanist in its curves — “frankenfont”, said the critics.', de:'Die Schrift von Android: neo-grotesk in den Proportionen, humanistisch in den Kurven — „Frankenfont“, hieß es.'}},
+  {n:100, sym:'In', name:'Inter', year:'2016', by:'Rasmus Andersson', house:'—', cls:'neogrottesca', font:"'Inter', sans-serif",
+   note:{it:'Disegnata per le interfacce e distribuita libera: altezza dell’occhio alta e cifre tabulari, per leggere numeri a colpo d’occhio.', en:'Drawn for interfaces and released free: tall x-height and tabular figures, for reading numbers at a glance.', de:'Für Benutzeroberflächen gezeichnet und frei veröffentlicht: große x-Höhe und Tabellenziffern.'}},
+
+  /* --- GEOMETRICHE -------------------------------------------- */
+  {n:34, sym:'Uv', name:'Universal', year:'1925', by:'Herbert Bayer', house:'Bauhaus, Dessau', cls:'geometrica',
+   note:{it:'Solo minuscole, compasso e riga: un alfabeto-manifesto, mai fuso in metallo mentre Bayer era vivo.', en:'Lowercase only, compass and ruler: a manifesto alphabet, never cast in metal in Bayer’s lifetime.', de:'Nur Kleinbuchstaben, Zirkel und Lineal: ein Manifest-Alphabet, zu Bayers Lebzeiten nie in Blei gegossen.'}},
+  {n:36, sym:'Er', name:'Erbar', year:'1926', by:'Jakob Erbar', house:'Ludwig & Mayer', cls:'geometrica',
+   note:{it:'Precede il Futura di un anno: la prima geometrica effettivamente fusa e messa in vendita.', en:'A year ahead of Futura: the first geometric sans actually cast and sold.', de:'Ein Jahr vor Futura: die erste tatsächlich gegossene und verkaufte geometrische Groteske.'}},
+  {n:39, sym:'Fu', name:'Futura', year:'1927', by:'Paul Renner', house:'Bauer', cls:'geometrica', font:"'Futura', sans-serif", ref:'futura',
+   note:{it:'Cerchio, triangolo, quadrato: la Nuova Tipografia ridotta a tre figure. È incisa sulla targa dell’Apollo 11.', en:'Circle, triangle, square: the New Typography reduced to three figures. It is engraved on the Apollo 11 plaque.', de:'Kreis, Dreieck, Quadrat: die Neue Typografie auf drei Figuren gebracht. Sie steht auf der Apollo-11-Plakette.'}},
+  {n:40, sym:'Kb', name:'Kabel', year:'1927', by:'Rudolf Koch', house:'Klingspor', cls:'geometrica',
+   note:{it:'Geometrica solo in apparenza: Koch era calligrafo, e la « e » con la barra obliqua lo tradisce.', en:'Geometric only on the surface: Koch was a calligrapher, and the slanted-bar “e” gives him away.', de:'Nur scheinbar geometrisch: Koch war Kalligraf, und das „e“ mit schrägem Balken verrät ihn.'}},
+  {n:43, sym:'Nz', name:'Neuzeit-Grotesk', year:'1928', by:'Wilhelm Pischner', house:'Stempel', cls:'geometrica',
+   note:{it:'La risposta della Stempel al Futura; dal 1970 il comitato normativo tedesco la raccomanda per la segnaletica.', en:'Stempel’s answer to Futura; from 1970 the German standards committee recommended it for signage.', de:'Stempels Antwort auf Futura; ab 1970 vom DIN-Ausschuss für Beschilderung empfohlen.'}},
+  {n:68, sym:'Eu', name:'Eurostile', year:'1962', by:'Aldo Novarese', house:'Nebiolo, Torino', cls:'geometrica',
+   note:{it:'Il quadrato con gli angoli smussati, derivato dal Microgramma del 1952: da sessant’anni è la lettera del futuro al cinema.', en:'The square with rounded corners, derived from Microgramma (1952): cinema’s letter of the future for sixty years.', de:'Das Quadrat mit gerundeten Ecken, aus Microgramma (1952): seit sechzig Jahren die Schrift der Zukunft im Kino.'}},
+  {n:75, sym:'Av', name:'Avant Garde Gothic', year:'1970', by:'Herb Lubalin, Tom Carnase', house:'ITC', cls:'geometrica',
+   note:{it:'Nato dalla testata di una rivista: le sue legature intrecciate sono state usate male più di ogni altro carattere.', en:'Born as a magazine masthead: its interlocking ligatures have been misused more than any other type’s.', de:'Als Zeitschriftenkopf entstanden: Seine verschränkten Ligaturen wurden mehr missbraucht als alle anderen.'}},
+  {n:84, sym:'Cg', name:'Century Gothic', year:'1991', by:'Monotype', house:'Monotype', cls:'geometrica',
+   note:{it:'Un Futura per la stampante laser, largo e chiaro; il suo tratto sottile consuma meno inchiostro di quasi ogni altro carattere.', en:'A Futura for the laser printer, wide and light; its thin stroke uses less ink than almost any other face.', de:'Ein Futura für den Laserdrucker, breit und licht; sein dünner Strich spart Toner wie kaum eine andere.'}},
+  {n:98, sym:'Dm', name:'DM Sans', year:'2014', by:'Colophon Foundry', house:'—', cls:'geometrica', font:"'DM Sans', sans-serif",
+   note:{it:'Geometrica a occhio alto, disegnata per i corpi piccoli dello schermo: il Futura reso leggibile a 12 px.', en:'A large-eyed geometric drawn for small screen sizes: Futura made legible at 12 px.', de:'Eine geometrische mit großer x-Höhe für kleine Bildschirmgrade: Futura, lesbar bei 12 px.'}},
+
+  /* --- LINEARI UMANISTICHE ------------------------------------ */
+  {n:30, sym:'Jo', name:'Johnston', year:'1916', by:'Edward Johnston', house:'Underground Electric Railway, Londra', cls:'umanisticalineare',
+   note:{it:'La prima lineare costruita sulle proporzioni della capitale romana: da un secolo è la voce della metropolitana di Londra.', en:'The first sans built on Roman capital proportions: for a century the voice of the London Underground.', de:'Die erste Groteske nach den Proportionen der römischen Capitalis: seit hundert Jahren die Stimme der Londoner U-Bahn.'}},
+  {n:41, sym:'Gs', name:'Gill Sans', year:'1928', by:'Eric Gill', house:'Monotype', cls:'umanisticalineare', font:"'Source Sans 3', sans-serif", sub:'Source Sans 3',
+   note:{it:'Gill era stato allievo di Johnston: prese la lettera della metropolitana e ne fece un carattere da testo.', en:'Gill had been Johnston’s pupil: he took the Underground letter and made it a text face.', de:'Gill war Johnstons Schüler: Er machte aus dem U-Bahn-Buchstaben eine Textschrift.'}},
+  {n:66, sym:'O', name:'Optima', year:'1958', by:'Hermann Zapf', house:'Stempel', cls:'umanisticalineare',
+   note:{it:'Zapf ne schizzò le prime lettere su due banconote da mille lire, nel Camposanto di Firenze.', en:'Zapf sketched its first letters on two thousand-lira notes, in the Camposanto of Florence.', de:'Zapf skizzierte die ersten Buchstaben auf zwei Tausend-Lire-Scheinen im Camposanto von Florenz.'}},
+  {n:74, sym:'Sx', name:'Syntax', year:'1968', by:'Hans Eduard Meier', house:'Stempel', cls:'umanisticalineare',
+   note:{it:'L’ultimo carattere fuso in metallo dalla Stempel: una lineare con l’asse inclinato della penna larga.', en:'The last type Stempel cast in metal: a sans with the slanted axis of the broad nib.', de:'Die letzte in Blei gegossene Stempel-Schrift: eine Groteske mit der schrägen Achse der Breitfeder.'}},
+  {n:76, sym:'Ft', name:'Frutiger', year:'1976', by:'Adrian Frutiger', house:'Stempel · Linotype', cls:'umanisticalineare',
+   note:{it:'Disegnato per l’aeroporto Charles-de-Gaulle: aperture larghe, per essere letto in corsa e da lontano.', en:'Drawn for Charles-de-Gaulle airport: wide apertures, to be read at a run and from afar.', de:'Für den Flughafen Charles-de-Gaulle gezeichnet: weite Öffnungen, lesbar im Vorbeigehen und aus der Ferne.'}},
+  {n:80, sym:'Lu', name:'Lucida Sans', year:'1985', by:'Charles Bigelow, Kris Holmes', house:'—', cls:'umanisticalineare',
+   note:{it:'Il primo carattere progettato tenendo conto insieme di stampante laser e schermo a bassa risoluzione.', en:'The first type designed for laser printer and low-resolution screen at the same time.', de:'Die erste Schrift, die Laserdrucker und niedrig auflösenden Bildschirm zugleich berücksichtigte.'}},
+  {n:85, sym:'Me', name:'Meta', year:'1991', by:'Erik Spiekermann', house:'FontFont', cls:'umanisticalineare',
+   note:{it:'Nato per le Poste tedesche, che poi lo rifiutarono; è stato chiamato « l’Helvetica degli anni Novanta ».', en:'Made for the German post office, which then rejected it; later dubbed “the Helvetica of the nineties”.', de:'Für die Bundespost entworfen, die sie ablehnte; später „die Helvetica der neunziger Jahre“ genannt.'}},
+  {n:86, sym:'My', name:'Myriad', year:'1992', by:'Robert Slimbach, Carol Twombly', house:'Adobe', cls:'umanisticalineare',
+   note:{it:'Uno dei primi caratteri a assi multipli: peso e larghezza variabili in continuo, vent’anni prima dei font variabili.', en:'One of the first multiple-master faces: weight and width varying continuously, twenty years before variable fonts.', de:'Eine der ersten Multiple-Master-Schriften: Gewicht und Breite stufenlos, zwanzig Jahre vor Variable Fonts.'}},
+  {n:89, sym:'Vd', name:'Verdana', year:'1996', by:'Matthew Carter', house:'Microsoft', cls:'umanisticalineare',
+   note:{it:'Disegnata partendo dai pixel e non dalla carta: spaziature larghissime perché lo schermo del 1996 non perdonava.', en:'Drawn from the pixel up, not from paper: very wide spacing, because the 1996 screen forgave nothing.', de:'Vom Pixel her gezeichnet, nicht vom Papier: sehr weite Laufweite, denn der Bildschirm von 1996 verzieh nichts.'}},
+  {n:96, sym:'Ss', name:'Source Sans', year:'2012', by:'Paul D. Hunt', house:'Adobe', cls:'umanisticalineare', font:"'Source Sans 3', sans-serif",
+   note:{it:'Il primo carattere libero pubblicato da Adobe, disegnato sulle grottesche americane di Benton.', en:'Adobe’s first open-source typeface, drawn after Benton’s American gothics.', de:'Adobes erste Open-Source-Schrift, nach Bentons amerikanischen Gothics gezeichnet.'}},
+
+  /* --- INCISE -------------------------------------------------- */
+  {n:21, sym:'Cp', name:'Copperplate Gothic', year:'1901', by:'Frederic W. Goudy', house:'ATF', cls:'incisa',
+   note:{it:'Grazie ridotte a una scheggia, per imitare l’incisione su rame dei biglietti da visita.', en:'Serifs reduced to a splinter, imitating the copperplate engraving of visiting cards.', de:'Serifen auf einen Splitter reduziert, nach dem Kupferstich der Visitenkarte.'}},
+  {n:48, sym:'Ab', name:'Albertus', year:'1932', by:'Berthold Wolpe', house:'Monotype', cls:'incisa',
+   note:{it:'Disegnato pensando al bronzo inciso, non alla penna: le grazie sono appena un allargamento dell’asta.', en:'Conceived for engraved bronze, not the pen: the serifs are barely a flare of the stem.', de:'Für graviertes Bronze gedacht, nicht für die Feder: Die Serifen sind kaum mehr als eine Aufweitung.'}},
+  {n:58, sym:'Ag', name:'Augustea', year:'1951', by:'Alessandro Butti, Aldo Novarese', house:'Nebiolo, Torino', cls:'incisa', font:"'Cinzel', serif", sub:'Cinzel',
+   note:{it:'Ricavato dalle iscrizioni romane, con le proporzioni della capitale della colonna Traiana.', en:'Derived from Roman inscriptions, with the proportions of the Trajan column capital.', de:'Nach römischen Inschriften, mit den Proportionen der Capitalis der Trajanssäule.'}},
+  {n:69, sym:'Fq', name:'Friz Quadrata', year:'1965', by:'Ernst Friz', house:'VGC (ITC 1974)', cls:'incisa',
+   note:{it:'Grazie triangolari e appuntite: la lettera scolpita ridisegnata per la fotocomposizione.', en:'Sharp triangular serifs: the carved letter redrawn for phototypesetting.', de:'Spitze dreieckige Serifen: der gemeißelte Buchstabe, neu für den Fotosatz gezeichnet.'}},
+  {n:82, sym:'Tj', name:'Trajan', year:'1989', by:'Carol Twombly', house:'Adobe', cls:'incisa', font:"'Cinzel', serif", sub:'Cinzel',
+   note:{it:'Copiato dalla base della colonna Traiana, 113 d.C.: solo maiuscole, perché nel 113 le minuscole non esistevano.', en:'Copied from the base of Trajan’s Column, ad 113: capitals only, because in 113 lowercase did not exist.', de:'Vom Sockel der Trajanssäule, 113 n. Chr.: nur Versalien, denn 113 gab es keine Gemeinen.'}},
+  {n:95, sym:'Cz', name:'Cinzel', year:'2012', by:'Natanael Gama', house:'—', cls:'incisa', font:"'Cinzel', serif",
+   note:{it:'Un’incisa libera basata sulle stesse capitali romane, questa volta con anche le minuscole.', en:'A free glyphic based on the same Roman capitals, this time with a lowercase too.', de:'Eine freie Incise nach denselben römischen Versalien, diesmal auch mit Gemeinen.'}},
+
+  /* --- SCRITTE ------------------------------------------------- */
+  {n:5, sym:'Cn', name:'Cancelleresca', year:'1522', by:'Ludovico degli Arrighi', house:'Roma', cls:'scritta',
+   note:{it:'Il manuale La Operina insegna la corsiva cancelleresca: la scrittura dei segretari pontifici, tradotta in stampa.', en:'The manual La Operina teaches the chancery italic: the hand of papal secretaries, translated into print.', de:'Das Lehrbuch La Operina lehrt die Kanzleikursive: die Hand der päpstlichen Sekretäre, in Druck übersetzt.'}},
+  {n:55, sym:'Br', name:'Brush Script', year:'1942', by:'Robert E. Smith', house:'ATF', cls:'scritta',
+   note:{it:'Il pennello imitato in metallo: dagli anni Cinquanta è la calligrafia dell’insegna di provincia.', en:'The brush imitated in metal: since the fifties, the lettering of the small-town shop sign.', de:'Der Pinsel in Blei nachgeahmt: seit den Fünfzigern die Schrift des Ladenschilds.'}},
+  {n:60, sym:'Mi', name:'Mistral', year:'1953', by:'Roger Excoffon', house:'Fonderie Olive, Marsiglia', cls:'scritta',
+   note:{it:'Excoffon disegnò le lettere in modo che si toccassero fra loro: in metallo, un problema tecnico enorme.', en:'Excoffon drew the letters so they would touch: in metal, an enormous technical problem.', de:'Excoffon zeichnete die Buchstaben so, dass sie sich berühren: in Blei ein enormes technisches Problem.'}},
+  {n:70, sym:'Sn', name:'Snell Roundhand', year:'1966', by:'Matthew Carter', house:'Linotype', cls:'scritta', font:"'Dancing Script', cursive", sub:'Dancing Script',
+   note:{it:'Ricavato dai modelli di scrittura di Charles Snell, maestro calligrafo londinese del 1694.', en:'Derived from the writing models of Charles Snell, a London writing master of 1694.', de:'Nach den Schreibvorlagen von Charles Snell, einem Londoner Schreibmeister von 1694.'}},
+  {n:90, sym:'Bi', name:'Bickham Script', year:'1997', by:'Richard Lipton', house:'Adobe', cls:'scritta', font:"'Dancing Script', cursive", sub:'Dancing Script',
+   note:{it:'Oltre mille glifi alternativi: il digitale restituisce alla scrittura la varietà che il metallo le aveva tolto.', en:'Over a thousand alternate glyphs: digital gives back to script the variety metal had taken away.', de:'Über tausend alternative Glyphen: Das Digitale gibt der Schreibschrift zurück, was das Blei ihr nahm.'}},
+  {n:91, sym:'Zp', name:'Zapfino', year:'1998', by:'Hermann Zapf', house:'Linotype', cls:'scritta',
+   note:{it:'Costruito su un foglio di prove calligrafiche del 1944: quattro alfabeti alternativi che si scambiano da soli.', en:'Built from a 1944 sheet of calligraphic trials: four alternate alphabets that swap themselves in.', de:'Nach einem kalligrafischen Probeblatt von 1944: vier Alternativalphabete, die sich selbst austauschen.'}},
+  {n:92, sym:'Ds', name:'Dancing Script', year:'2010', by:'Pablo Impallari', house:'—', cls:'scritta', font:"'Dancing Script', cursive",
+   note:{it:'Una corsiva libera con la linea di base ondulata, disegnata per i titoli sul web.', en:'A free script with a bouncing baseline, drawn for headlines on the web.', de:'Eine freie Schreibschrift mit schwingender Grundlinie, für Web-Überschriften gezeichnet.'}},
+
+  /* --- MANUALI ------------------------------------------------- */
+  {n:32, sym:'Cb', name:'Cooper Black', year:'1922', by:'Oswald Bruce Cooper', house:'Barnhart Brothers & Spindler', cls:'manuale',
+   note:{it:'« Per miopi che leggono da lontano », scherzava il suo autore: nessun angolo retto, tutto arrotondato.', en:'“For far-sighted printers who read from a distance”, joked its author: no right angles, everything rounded.', de:'„Für Weitsichtige“, scherzte sein Schöpfer: kein rechter Winkel, alles gerundet.'}},
+  {n:33, sym:'Nl', name:'Neuland', year:'1923', by:'Rudolf Koch', house:'Klingspor', cls:'manuale',
+   note:{it:'Koch la incise direttamente nel punzone, senza disegno preparatorio: unica al mondo, e si vede.', en:'Koch cut it straight into the punch, with no preparatory drawing: unique, and it shows.', de:'Koch schnitt sie direkt in den Stempel, ohne Vorzeichnung: einzigartig — und man sieht es.'}},
+  {n:52, sym:'Pg', name:'Peignot', year:'1937', by:'A. M. Cassandre', house:'Deberny & Peignot', cls:'manuale',
+   note:{it:'Minuscole con le forme delle maiuscole: un esperimento di riforma dell’alfabeto, bellissimo e illeggibile.', en:'Lowercase with uppercase shapes: an alphabet-reform experiment, beautiful and unreadable.', de:'Gemeine in Versalformen: ein Alphabet-Reformversuch, wunderschön und unlesbar.'}},
+  {n:59, sym:'Bn', name:'Banco', year:'1951', by:'Roger Excoffon', house:'Fonderie Olive, Marsiglia', cls:'manuale',
+   note:{it:'Solo maiuscole, tagliate come col pennello piatto: per mezzo secolo l’insegna di ogni bar francese.', en:'Capitals only, cut as with a flat brush: for half a century the sign of every French café.', de:'Nur Versalien, wie mit Flachpinsel geschnitten: ein halbes Jahrhundert lang das Schild jedes französischen Cafés.'}},
+  {n:61, sym:'Ch', name:'Choc', year:'1955', by:'Roger Excoffon', house:'Fonderie Olive, Marsiglia', cls:'manuale',
+   note:{it:'Pennello cinese e gesto rapido: Excoffon voleva un carattere che sembrasse scritto in un secondo.', en:'Chinese brush and quick gesture: Excoffon wanted a type that looked written in a second.', de:'Chinesischer Pinsel und schnelle Geste: Excoffon wollte eine Schrift, die in einer Sekunde geschrieben scheint.'}},
+  {n:87, sym:'Cm', name:'Comic Sans', year:'1994', by:'Vincent Connare', house:'Microsoft', cls:'manuale',
+   note:{it:'Disegnato per i fumetti di un assistente virtuale, finito ovunque: il carattere più odiato e più utile ai dislessici.', en:'Drawn for a virtual assistant’s speech bubbles, ended up everywhere: the most hated face, and the most useful to dyslexic readers.', de:'Für die Sprechblasen eines Assistenten gezeichnet, überall gelandet: die meistgehasste Schrift — und die hilfreichste für Legastheniker.'}},
+  {n:99, sym:'Cv', name:'Caveat', year:'2015', by:'Pablo Impallari', house:'—', cls:'manuale', font:"'Caveat', cursive",
+   note:{it:'La grafia a penna biro, digitalizzata: serve a far sembrare un appunto quello che è un file.', en:'Ballpoint handwriting, digitised: it makes a file look like a jotted note.', de:'Kugelschreiberhandschrift, digitalisiert: Sie lässt eine Datei wie eine Notiz aussehen.'}},
+
+  /* --- NON LATINE ---------------------------------------------- */
+  {n:23, sym:'Fr', name:'Frank-Rühl', year:'1908', by:'Rafael Frank', house:'C. F. Rühl, Lipsia', cls:'nonlatine',
+   note:{it:'Disegnato fra il 1908 e il 1910: è tuttora il carattere ebraico più stampato al mondo.', en:'Drawn between 1908 and 1910: still the most printed Hebrew typeface in the world.', de:'Zwischen 1908 und 1910 gezeichnet: bis heute die meistgedruckte hebräische Schrift der Welt.'}},
+  {n:97, sym:'No', name:'Noto', year:'2013', by:'Steve Matteson e altri', house:'Google · Monotype', cls:'nonlatine', font:"'Noto Sans', sans-serif",
+   note:{it:'« No more tofu »: il progetto che vuole coprire tutte le scritture codificate in Unicode, senza caselle vuote.', en:'“No more tofu”: the project aiming to cover every script encoded in Unicode, with no empty boxes left.', de:'„No more tofu“: das Projekt, jede in Unicode kodierte Schrift abzudecken, ohne leere Kästchen.'}},
 
 ];

@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v10';
+const CACHE_VERSION = 'glifo-v14';
 
 const ASSETS = [
   './',
@@ -34,6 +34,8 @@ const ASSETS = [
   'fonts/Blacker-Sans-Pro-Extrabold.woff2',
 
   // caratteri campione del glossario
+  'fonts/Futura/Futura-Medium.woff2',
+  'fonts/Futura/Futura-Bold.woff2',
   'fonts/specimen/archivo-500-latin.woff2',
   'fonts/specimen/archivo-700-latin.woff2',
   'fonts/specimen/caveat-600-latin.woff2',
@@ -46,7 +48,7 @@ const ASSETS = [
   'fonts/specimen/dm-sans-700-latin.woff2',
   'fonts/specimen/eb-garamond-400-latin.woff2',
   'fonts/specimen/eb-garamond-500-latin.woff2',
-  'fonts/specimen/helvetica-lt-55-roman.ttf',
+  'fonts/specimen/helvetica-lt-55-roman.woff2',
   'fonts/specimen/inter-400-latin.woff2',
   'fonts/specimen/inter-600-latin.woff2',
   'fonts/specimen/noto-sans-400-cyrillic.woff2',
@@ -79,6 +81,11 @@ const ASSETS = [
   'img/frutiger.jpg',
   'img/miedinger.jpg',
   'img/licko.jpg',
+  'img/jenson.png',
+  'img/caslon.jpg',
+  'img/baskerville.jpg',
+  'img/tschichold.jpg',
+  'img/novarese.jpg',
 ];
 
 self.addEventListener('install', function (event) {
