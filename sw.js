@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v23';
+const CACHE_VERSION = 'glifo-v24';
 
 const ASSETS = [
   './',
@@ -22,6 +22,11 @@ const ASSETS = [
   'icons/icon-192.png',
   'icons/icon-512.png',
   'icons/icon-maskable-512.png',
+
+  // Copie a nome fisso nella radice: Safari le cerca lì quando l'icona
+  // dichiarata nella pagina non basta. Stessa immagine di icon-180.png.
+  'apple-touch-icon.png',
+  'apple-touch-icon-precomposed.png',
 
   // caratteri dell'interfaccia
   'fonts/Blacker-Pro-Text-Light-Italic.woff2',

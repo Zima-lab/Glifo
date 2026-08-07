@@ -12,11 +12,21 @@
 <meta name="description" content="Glossario, storia e designer della tipografia in italiano, inglese e tedesco. Classificazioni Vox-ATypI, anatomia della lettera, quiz.">
 
 <!-- Icone. Il .ico serve ai browser più vecchi e alla barra dei preferiti;
-     i PNG a schede, segnalibri e schermata home di iOS. -->
+     i PNG a schede, segnalibri e schermata home di iOS.
+
+     Safari non legge il manifest per le icone grandi: vuole l'apple-touch-icon,
+     con la misura dichiarata. Se non la trova la cerca a nome fisso nella
+     radice del sito, e in mancanza mette un segnaposto generico — è il motivo
+     per cui la tessera dei Preferiti restava vuota mentre il favicon della
+     barra si vedeva. Perciò la stessa immagine sta in tre posti: dichiarata
+     qui con sizes, e a nome fisso in apple-touch-icon.png e nella variante
+     -precomposed, che le versioni più vecchie cercano per prima. -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
-<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
 <link rel="manifest" href="manifest.webmanifest">
 
 <!-- I caratteri sono tutti locali: l'app si vede identica anche offline.
