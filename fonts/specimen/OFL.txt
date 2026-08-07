@@ -4,11 +4,13 @@ CARATTERI CAMPIONE — LICENZE
 I file .woff2 in questa cartella sono i caratteri usati per illustrare le
 classificazioni tipografiche nel glossario e nel quiz di riconoscimento.
 
-Sono tutti distribuiti con SIL Open Font License 1.1, che ne consente
-liberamente l'uso, l'incorporamento e la ridistribuzione, anche in progetti
-commerciali, purché i font non siano venduti da soli.
+Salvo dove indicato, sono distribuiti con SIL Open Font License 1.1, che ne
+consente liberamente l'uso, l'incorporamento e la ridistribuzione, anche in
+progetti commerciali, purché i font non siano venduti da soli.
 
 Testo completo della licenza: https://openfontlicense.org
+
+CLASSIFICAZIONI (glossario e quiz)
 
   Archivo             Omnibus-Type
   Cinzel              Natanael Gama
@@ -20,6 +22,21 @@ Testo completo della licenza: https://openfontlicense.org
   PT Serif            ParaType
   Roboto Slab         Christian Robertson
   UnifrakturCook      j. 'mach' wust
+
+SCHEDE DELLA SEZIONE TYPE
+
+Campioni dei caratteri raccontati nelle schede. Nessuno di questi è il
+carattere originale: sono revival o equivalenti liberi, e ogni scheda lo
+dichiara nel campo `substitute`.
+
+  Libre Baskerville   Impallari Type            → Baskerville
+  GFS Didot           Greek Font Society        → Didot
+  Bodoni Moda         Indestructible Type       → Bodoni
+  Josefin Sans        Santiago Orozco           → Kabel
+  Anton               Vernon Adams              → Impact
+  Comic Neue          Craig Rozynski            → Comic Sans
+  Tinos               Steve Matteson            → Times New Roman
+                      (Apache License 2.0, non OFL)
 
 I file sono stati scaricati da Google Fonts e limitati al sottoinsieme
 "latin" (U+0000-00FF e segni correlati), sufficiente per l'italiano,

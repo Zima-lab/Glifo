@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v15';
+const CACHE_VERSION = 'glifo-v21';
 
 const ASSETS = [
   './',
@@ -64,6 +64,20 @@ const ASSETS = [
   'fonts/specimen/source-sans-3-600-latin.woff2',
   'fonts/specimen/unifrakturcook-700-latin.woff2',
 
+  // caratteri campione delle schede della sezione Type
+  'fonts/specimen/libre-baskerville-400-latin.woff2',
+  'fonts/specimen/libre-baskerville-700-latin.woff2',
+  'fonts/specimen/gfs-didot-400-latin.woff2',
+  'fonts/specimen/bodoni-moda-400-latin.woff2',
+  'fonts/specimen/bodoni-moda-600-latin.woff2',
+  'fonts/specimen/tinos-400-latin.woff2',
+  'fonts/specimen/tinos-700-latin.woff2',
+  'fonts/specimen/anton-400-latin.woff2',
+  'fonts/specimen/josefin-sans-400-latin.woff2',
+  'fonts/specimen/josefin-sans-600-latin.woff2',
+  'fonts/specimen/comic-neue-400-latin.woff2',
+  'fonts/specimen/comic-neue-700-latin.woff2',
+
   // tavole illustrate
   'plates/anatomia.svg',
   'plates/gotiche.svg',
@@ -91,10 +105,20 @@ const ASSETS = [
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_VERSION).then(function (cache) {
-      // addAll fallisce in blocco se un solo file manca: qui aggiungiamo uno
-      // per uno così un asset assente non impedisce l'installazione.
+      // Due accortezze, entrambe imparate a spese di una pubblicazione.
+      //
+      // 1. addAll fallisce in blocco se un solo file manca: qui aggiungiamo
+      //    uno per uno, così un asset assente non impedisce l'installazione.
+      //
+      // 2. `cache: 'reload'` NON è un dettaglio. Senza, cache.add() prende
+      //    i file dalla cache HTTP del browser, e GitHub Pages li serve con
+      //    max-age=600: per dieci minuti dopo la pubblicazione il browser ha
+      //    ancora la copia vecchia. Il risultato è una cache che si chiama
+      //    glifo-v17 ma contiene i file della v15 — versione nuova di nome,
+      //    contenuto vecchio, e il footer che mente. Con 'reload' ogni file
+      //    viene ripreso dalla rete, saltando la cache HTTP.
       return Promise.all(ASSETS.map(function (url) {
-        return cache.add(url).catch(function () {});
+        return cache.add(new Request(url, { cache: 'reload' })).catch(function () {});
       }));
     }).then(function () { return self.skipWaiting(); })
   );

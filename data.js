@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v15';
+const APP_VERSION = 'v21';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
@@ -78,6 +78,8 @@ const UI = {
   backToTabs: {it:'Fine', en:'Done', de:'Fertig'},
   correctFeedback: {it:'Occhio allenato ✓', en:'Good eye ✓', de:'Gutes Auge ✓'},
   wrongFeedback: {it:'Era', en:'It was', de:'Es war'},
+  specimenName: {it:'Campione composto in', en:'Specimen set in', de:'Probe gesetzt in'},
+  classExamples: {it:'Esempi', en:'Examples', de:'Beispiele'},
   nextLabel: {it:'Avanti', en:'Next', de:'Weiter'},
   finishLabel: {it:'Concludi', en:'Finish', de:'Abschließen'},
 
@@ -125,6 +127,26 @@ const UI = {
   plateLabel: {it:'Tavola', en:'Plate', de:'Tafel'},
   exampleLabel: {it:'Esempi', en:'Examples', de:'Beispiele'},
   eraLabel: {it:'Epoca', en:'Period', de:'Epoche'},
+  /* --- ricerca ---
+     Il segnaposto porta tre esempi presi da tre sezioni diverse: dice al
+     primo sguardo che la barra cerca in tutta l'app, non solo nella pagina
+     che si sta guardando. */
+  searchPlaceholder: {
+    it:'Cerca in tutta l’app… (es. «Bodoni», «grazie», «1450»)',
+    en:'Search everywhere… (e.g. “Bodoni”, “serif”, “1450”)',
+    de:'Alles durchsuchen… (z. B. „Bodoni“, „Serife“, „1450“)'},
+  searchAria: {it:'Cerca in Glifo', en:'Search Glifo', de:'Glifo durchsuchen'},
+  searchClearAria: {it:'Cancella la ricerca', en:'Clear search', de:'Suche löschen'},
+  searchEmpty: {
+    it:'Nessuna voce per',
+    en:'No entry for',
+    de:'Kein Eintrag für'},
+  searchEmptyHint: {
+    it:'Prova con il nome di un carattere, di un designer o di una parte della lettera.',
+    en:'Try the name of a typeface, a designer or a part of the letter.',
+    de:'Versuche den Namen einer Schrift, eines Gestalters oder eines Buchstabenteils.'},
+  searchResults: {it:'risultati', en:'results', de:'Treffer'},
+
   sourcesTitle: {it:'Fonti', en:'Sources', de:'Quellen'},
   sourcesIntro: {it:'Date, definizioni e attribuzioni di questa app sono verificate sulle fonti seguenti.', en:'Dates, definitions and attributions in this app are verified against the following sources.', de:'Daten, Definitionen und Zuschreibungen dieser App sind anhand der folgenden Quellen geprüft.'},
 };
@@ -1115,6 +1137,263 @@ const TYPEFACES = [
       de: 'In den Logos von Volkswagen, Campari, Absolut Wodka und Avery Dennison. In den Titeln von Wes-Anderson-Filmen (The Grand Budapest Hotel, Moonrise Kingdom, The Life Aquatic). Im Modedesign und in der Luxuswerbung. In den Logos von Technologieunternehmen aus allen Epochen.',
     },
     link: {url: 'https://en.wikipedia.org/wiki/Futura_(typeface)', label: 'Wikipedia — Futura'},
+  },
+
+  {
+    id: 'baskerville', name: 'Baskerville', year: '1757',
+    designer: 'John Baskerville',
+    foundry: 'Baskerville, Birmingham',
+    cls: 'transizionale',
+    glyphA: 'Q', glyphB: 'g',
+    font: "'Libre Baskerville', serif",
+    substitute: {
+      name: 'Libre Baskerville',
+      it: 'Il campione è composto in Libre Baskerville di Impallari Type, revival libero basato sull’American Type Founders Baskerville del 1941. È fedele nel disegno ma ha l’altezza-x aumentata e il contrasto ridotto per reggere lo schermo: le grazie originali di Baskerville sono più sottili di così.',
+      en: 'The specimen is set in Libre Baskerville by Impallari Type, a free revival based on the 1941 American Type Founders Baskerville. It is faithful in drawing but has a taller x-height and reduced contrast to survive the screen: Baskerville’s original serifs are finer than these.',
+      de: 'Das Muster ist in Libre Baskerville von Impallari Type gesetzt, einer freien Neuinterpretation nach dem American Type Founders Baskerville von 1941. Die Zeichnung ist getreu, doch x-Höhe und Kontrast wurden für den Bildschirm angepasst: Baskervilles Originalserifen sind feiner.',
+    },
+    quote: {
+      text: {
+        it: '«Essendo stato fin da giovane un ammiratore della bellezza delle lettere, mi venne insensibilmente il desiderio di contribuire alla loro perfezione.»',
+        en: '“Having been an early admirer of the beauty of letters, I became insensibly desirous of contributing to the perfection of them.”',
+        de: '„Da ich früh ein Bewunderer der Schönheit der Buchstaben war, erwachte in mir unmerklich der Wunsch, zu ihrer Vollkommenheit beizutragen.“',
+      },
+      author: 'John Baskerville, prefazione al Milton, 1758',
+    },
+    desc: {
+      it: 'John Baskerville fabbricava vernici a Birmingham ed era maestro di scrittura: arrivò alla stampa a quarantacinque anni suonati, con il patrimonio già fatto. Il suo Virgilio del 1757 è il primo libro composto con i caratteri che portano il suo nome, ma il carattere è solo una parte del progetto: rifece l’inchiostro, più nero e a presa rapida, sostituì con l’ottone la platina di legno del torchio e fece satinare la carta a caldo, perché le sue grazie sottili non si sfaldassero sulla fibra. È un caso raro di disegnatore che riprogetta insieme la lettera e le condizioni materiali che la rendono possibile. Rispetto al Caslon che ammirava aumentò il contrasto fra pieni e filetti, raddrizzò l’asse verso la verticale e rese le grazie più nitide e affusolate: da qui la definizione di transizionale, un ponte fra il vecchio stile di matrice calligrafica e le didone che verranno. In patria fu accolto male, e c’era perfino chi accusava quei bianchi abbaglianti di rovinare la vista. Alla sua morte, nel 1775, i punzoni finirono a Parigi, comprati da Beaumarchais per l’edizione di Voltaire, e vi rimasero dimenticati per un secolo e mezzo: solo nel 1917 Bruce Rogers li riconobbe in un catalogo della fonderia Bertrand, dove erano offerti sotto un altro nome.',
+      en: 'John Baskerville made japanned ware in Birmingham and taught writing: he came to printing well past forty-five, his fortune already made. His 1757 Virgil is the first book set in the types that bear his name, but the type is only part of the project: he remade the ink, blacker and quicker to dry, replaced the wooden platen of the press with brass, and had the paper hot-pressed so his fine serifs would not break up on the fibre. It is a rare case of a designer redesigning both the letter and the material conditions that make it possible. Against the Caslon he admired he raised the contrast between thick and thin, straightened the axis towards the vertical and made the serifs crisper and more tapered: hence the label transitional, a bridge between the calligraphic old style and the Didones to come. At home he was badly received, and some even accused those dazzling whites of ruining the eyes. On his death in 1775 the punches went to Paris, bought by Beaumarchais for his Voltaire edition, and there they lay forgotten for a century and a half: only in 1917 did Bruce Rogers recognise them in a catalogue of the Bertrand foundry, where they were offered under another name.',
+      de: 'John Baskerville stellte in Birmingham Lackwaren her und war Schreibmeister: Zum Druck kam er weit jenseits der fünfundvierzig, als sein Vermögen bereits gemacht war. Sein Vergil von 1757 ist das erste Buch, das in den Schriften seines Namens gesetzt wurde, doch die Schrift ist nur ein Teil des Vorhabens: Er erfand die Druckfarbe neu, schwärzer und schneller trocknend, ersetzte den hölzernen Tiegel der Presse durch Messing und ließ das Papier heiß satinieren, damit seine feinen Serifen auf der Faser nicht ausbrachen. Es ist ein seltener Fall, in dem ein Gestalter den Buchstaben und zugleich die materiellen Bedingungen neu entwirft, die ihn möglich machen. Gegenüber der von ihm bewunderten Caslon erhöhte er den Kontrast, richtete die Achse zur Senkrechten auf und machte die Serifen schärfer und spitzer: daher die Bezeichnung Übergangsantiqua, eine Brücke zwischen der kalligrafischen Renaissance-Antiqua und den kommenden Didonen. In der Heimat wurde er schlecht aufgenommen; manche warfen dem blendenden Weiß gar vor, die Augen zu verderben. Bei seinem Tod 1775 gelangten die Stempel nach Paris, von Beaumarchais für dessen Voltaire-Ausgabe gekauft, und lagen dort anderthalb Jahrhunderte vergessen: Erst 1917 erkannte Bruce Rogers sie in einem Katalog der Gießerei Bertrand, wo sie unter anderem Namen angeboten wurden.',
+    },
+    recognize: {
+      it: 'Il braccio inferiore della « E » è lungo e la grazia terminale è pronunciata, come lo sono le braccia della « T ». La coda della « Q » è il segno più riconoscibile: parte verso sinistra e all’ultimo cambia direzione, come una sciabolata. Il gancio della « g » minuscola sembra voler chiudere un anello, ma resta aperto di poco. L’asse di contrasto è quasi verticale e le grazie sono sottili, ancora raccordate all’asta con una curva. Il salto di peso fra maiuscole e minuscole è marcato.',
+      en: 'The lower arm of the « E » is long and its terminal serif pronounced, as are the arms of the « T ». The tail of the « Q » is the most recognisable sign: it sets off to the left and changes direction at the last moment, like a sabre stroke. The hook of the lowercase « g » seems to want to close into a ring but stays slightly open. The stress axis is nearly vertical and the serifs are fine, still bracketed to the stem with a curve. The jump in weight between capitals and lowercase is marked.',
+      de: 'Der untere Arm des « E » ist lang und seine Endserife ausgeprägt, ebenso die Arme des « T ». Der Schwanz des « Q » ist das erkennbarste Zeichen: Er setzt nach links an und wechselt im letzten Moment die Richtung, wie ein Säbelhieb. Die Schlaufe des kleinen « g » will sich zum Ring schließen, bleibt aber leicht offen. Die Kontrastachse steht fast senkrecht, die Serifen sind fein und noch mit einer Kehlung an den Schaft gebunden. Der Gewichtsunterschied zwischen Versalien und Kleinbuchstaben ist deutlich.',
+    },
+    where: {
+      it: 'Nelle edizioni Adelphi e in molta editoria accademica. Nelle pubblicazioni della Harvard University Press, che lo adottò nel primo dopoguerra. Nei libri dove serve un’aria settecentesca senza durezza.',
+      en: 'In Adelphi editions and in much academic publishing. In the books of Harvard University Press, which adopted it after the First World War. In books that want an eighteenth-century air without hardness.',
+      de: 'In den Ausgaben von Adelphi und in weiten Teilen des akademischen Verlagswesens. In den Büchern der Harvard University Press, die sie nach dem Ersten Weltkrieg übernahm. In Büchern, die ein Achtzehntes Jahrhundert ohne Härte suchen.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Baskerville', label: 'Wikipedia — Baskerville'},
+  },
+
+  {
+    id: 'didot', name: 'Didot', year: '1784–1811',
+    designer: 'Firmin Didot',
+    foundry: 'Didot, Parigi',
+    cls: 'didone',
+    glyphA: 'G', glyphB: 'a',
+    font: "'GFS Didot', serif",
+    substitute: {
+      name: 'GFS Didot',
+      it: 'Il campione è composto in GFS Didot della Greek Font Society, revival libero dei caratteri incisi dai Didot e usati ad Atene nell’Ottocento. È un Didot autentico nella derivazione, ma la sua ragione d’essere è il greco: il latino ne è la parte minore.',
+      en: 'The specimen is set in GFS Didot by the Greek Font Society, a free revival of the types cut by the Didots and used in nineteenth-century Athens. Its descent is authentically Didot, but its purpose is Greek: the Latin is the lesser part of it.',
+      de: 'Das Muster ist in GFS Didot der Greek Font Society gesetzt, einer freien Neuinterpretation der von den Didots geschnittenen und im Athen des 19. Jahrhunderts verwendeten Schriften. Die Abstammung ist echt Didot, doch ihr Zweck ist das Griechische: Das Lateinische ist der geringere Teil.',
+    },
+    desc: {
+      it: 'I Didot furono una dinastia di stampatori parigini attiva per cinque generazioni, e il carattere che porta il loro nome è opera soprattutto di Firmin, che incideva, mentre il fratello maggiore Pierre stampava. Firmin ripartì da dove Baskerville si era fermato e portò il contrasto all’estremo: filetti ridotti a un capello, grazie dritte innestate ad angolo retto senza alcun raccordo, asse rigorosamente verticale. È la nascita del carattere moderno, o didone, e insieme un cambio di paradigma: la lettera smette di ricordare il gesto della penna e diventa una costruzione, disegnata prima e incisa poi. La famiglia si sviluppa fra il 1784 e il 1811, e negli stessi anni Firmin mette a punto la stereotipia, che ricava una lastra unica da una pagina composta a caratteri mobili: le ristampe diventano economiche e il libro si diffonde. È una coincidenza che dice molto — lo stesso uomo firma il carattere del lusso neoclassico e il procedimento che abbassa il prezzo dei libri. Ai Didot si deve anche il punto tipografico che porta il loro nome, la misura su cui l’Europa continentale ha composto fino all’arrivo del PostScript.',
+      en: 'The Didots were a dynasty of Parisian printers active over five generations, and the typeface bearing their name is above all the work of Firmin, who cut the punches while his elder brother Pierre printed. Firmin set off from where Baskerville had stopped and took contrast to the extreme: hairline strokes, straight serifs meeting the stem at a right angle with no bracketing, a strictly vertical axis. This is the birth of the modern face, or Didone, and at once a change of paradigm: the letter stops recalling the movement of the pen and becomes a construction, drawn first and cut afterwards. The family develops between 1784 and 1811, and in those same years Firmin perfects stereotyping, which takes a single plate from a page set in movable type: reprints become cheap and the book spreads. It is a telling coincidence — the same man signs the typeface of neoclassical luxury and the process that lowers the price of books. The Didots also gave their name to the typographic point, the measure on which continental Europe composed until the arrival of PostScript.',
+      de: 'Die Didots waren eine über fünf Generationen tätige Pariser Druckerdynastie, und die Schrift ihres Namens ist vor allem das Werk Firmins, der schnitt, während sein älterer Bruder Pierre druckte. Firmin setzte dort an, wo Baskerville aufgehört hatte, und trieb den Kontrast ins Äußerste: haarfeine Striche, gerade Serifen, die im rechten Winkel ohne jede Kehlung ansetzen, eine streng senkrechte Achse. Das ist die Geburt der modernen Antiqua, der Didone, und zugleich ein Paradigmenwechsel: Der Buchstabe erinnert nicht mehr an die Bewegung der Feder, sondern wird zur Konstruktion, erst gezeichnet, dann geschnitten. Die Familie entsteht zwischen 1784 und 1811, und in denselben Jahren vervollkommnet Firmin die Stereotypie, die aus einer im Bleisatz gesetzten Seite eine einzige Platte gewinnt: Nachdrucke werden billig, das Buch verbreitet sich. Ein vielsagender Zufall — derselbe Mann zeichnet die Schrift des klassizistischen Luxus und das Verfahren, das Bücher verbilligt. Von den Didots stammt auch der typografische Punkt ihres Namens, das Maß, mit dem Kontinentaleuropa bis zum PostScript gesetzt hat.',
+    },
+    recognize: {
+      it: 'Le grazie sono dritte, sottilissime e innestate ad angolo retto, senza curva di raccordo. Lo sperone della « G » è rivolto verso il basso. La « J » maiuscola non scende sotto la linea di base. Nella « W », sia maiuscola sia minuscola, la grazia è presente anche sul vertice centrale. Il contrasto è così alto che ai corpi piccoli i filetti tendono a sparire.',
+      en: 'The serifs are straight, extremely fine and set at a right angle, with no bracketing curve. The spur of the « G » points downwards. The capital « J » does not descend below the baseline. In the « W », both capital and lowercase, a serif appears on the central vertex too. Contrast is so high that at small sizes the hairlines tend to disappear.',
+      de: 'Die Serifen sind gerade, äußerst fein und im rechten Winkel angesetzt, ohne Kehlung. Der Sporn des « G » weist nach unten. Das Versal-« J » reicht nicht unter die Grundlinie. Beim « W », versal wie gemein, trägt auch die mittlere Spitze eine Serife. Der Kontrast ist so hoch, dass die Haarstriche in kleinen Graden zu verschwinden drohen.',
+    },
+    where: {
+      it: 'Nei loghi di Zara e Giorgio Armani. Nelle testate di Harper’s Bazaar, Vogue ed Elle. Nel titolo del film Interstellar. Nella moda in generale, dove la sua eleganza fredda è ormai un codice.',
+      en: 'In the logos of Zara and Giorgio Armani. In the mastheads of Harper’s Bazaar, Vogue and Elle. In the title of the film Interstellar. In fashion generally, where its cold elegance has become a code.',
+      de: 'In den Logos von Zara und Giorgio Armani. In den Titelköpfen von Harper’s Bazaar, Vogue und Elle. Im Titel des Films Interstellar. In der Mode überhaupt, wo ihre kühle Eleganz längst ein Code ist.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Didot_(typeface)', label: 'Wikipedia — Didot'},
+  },
+
+  {
+    id: 'bodoni', name: 'Bodoni', year: '1790 ca.',
+    designer: 'Giambattista Bodoni',
+    foundry: 'Stamperia Reale, Parma',
+    cls: 'didone',
+    glyphA: 'U', glyphB: 'e',
+    font: "'Bodoni Moda', serif",
+    substitute: {
+      name: 'Bodoni Moda',
+      it: 'Il campione è composto in Bodoni Moda di Indestructible Type, revival libero condotto sui campionari originali. È pensato per i titoli: ai corpi da testo i filetti sono più robusti di quelli che Bodoni riusciva a fondere.',
+      en: 'The specimen is set in Bodoni Moda by Indestructible Type, a free revival worked from the original specimens. It is made for display: at text sizes its hairlines are sturdier than those Bodoni managed to cast.',
+      de: 'Das Muster ist in Bodoni Moda von Indestructible Type gesetzt, einer freien Neuinterpretation nach den Originalproben. Sie ist für Titel gedacht: In Lesegrößen sind ihre Haarstriche kräftiger als die, die Bodoni gießen konnte.',
+    },
+    quote: {
+      text: {
+        it: '«Quattro sono le qualità che rendono belli i caratteri: regolarità, nettezza e finitezza, buon gusto e grazia.»',
+        en: '“Four are the qualities that make types beautiful: regularity, cleanness and finish, good taste and charm.”',
+        de: '„Vier Eigenschaften machen Schriften schön: Regelmäßigkeit, Sauberkeit und Vollendung, guter Geschmack und Anmut.“',
+      },
+      author: 'Giambattista Bodoni, Manuale tipografico, 1818',
+    },
+    desc: {
+      it: 'Giambattista Bodoni nasce a Saluzzo nel 1740 in una famiglia di tipografi e si forma alla stamperia della Propaganda Fide a Roma; nel 1768 il duca di Parma lo chiama a dirigere la Stamperia Reale. Nel 1790 ottiene di aprire anche una fonderia privata, ed è lì che incide i caratteri che oggi chiamiamo Bodoni: contrasto estremo, grazie dritte e non raccordate, terminali a goccia, occhielli ovali. La ricerca del filetto sottilissimo gli è possibile solo perché controlla l’intera catena — la fusione, l’inchiostro, la carta di altissima qualità prodotta a Parma, su cui l’inchiostro resta in superficie invece di allargarsi nelle fibre. Il rovescio dell’ammirazione è una critica ricorrente: quel contrasto abbaglia, e nei testi lunghi la lettura si fa faticosa. Del resto Bodoni non progettava per la lettura corrente ma per il libro da guardare, dove l’oggetto del lavoro è la pagina intera, non il solo carattere. Il Manuale tipografico, uscito postumo nel 1818 per cura della vedova Margherita Dall’Aglio, raccoglie centinaia di serie e resta il campionario più ambizioso mai stampato.',
+      en: 'Giambattista Bodoni was born in Saluzzo in 1740 into a family of printers and trained at the press of the Propaganda Fide in Rome; in 1768 the Duke of Parma called him to run the Royal Press. In 1790 he obtained leave to open a private foundry as well, and it is there that he cut the types we now call Bodoni: extreme contrast, straight unbracketed serifs, ball terminals, oval counters. His pursuit of the hairline is possible only because he controls the whole chain — the casting, the ink, the very fine paper made in Parma, on which the ink sits on the surface instead of spreading into the fibre. The reverse of the admiration is a recurring criticism: that contrast dazzles, and in long texts reading becomes tiring. But Bodoni was not designing for continuous reading; he designed the book to be looked at, where the object of the work is the whole page, not the type alone. The Manuale tipografico, published posthumously in 1818 by his widow Margherita Dall’Aglio, gathers hundreds of series and remains the most ambitious specimen book ever printed.',
+      de: 'Giambattista Bodoni wurde 1740 in Saluzzo in eine Druckerfamilie geboren und lernte in der Druckerei der Propaganda Fide in Rom; 1768 berief ihn der Herzog von Parma an die Leitung der Stamperia Reale. 1790 erhielt er die Erlaubnis, zusätzlich eine private Gießerei zu eröffnen, und dort schnitt er die Schriften, die wir heute Bodoni nennen: extremer Kontrast, gerade, ungekehlte Serifen, Tropfenendungen, ovale Punzen. Die Jagd nach dem Haarstrich gelingt ihm nur, weil er die ganze Kette beherrscht — den Guss, die Farbe, das in Parma hergestellte Feinpapier, auf dem die Farbe an der Oberfläche bleibt, statt in die Faser zu laufen. Die Kehrseite der Bewunderung ist ein wiederkehrender Vorwurf: Dieser Kontrast blendet, und in langen Texten wird das Lesen mühsam. Doch Bodoni entwarf nicht für das fortlaufende Lesen, sondern das Buch zum Anschauen, dessen Gegenstand die ganze Seite ist und nicht die Schrift allein. Das 1818 postum von seiner Witwe Margherita Dall’Aglio herausgegebene Manuale tipografico versammelt Hunderte von Serien und bleibt das ehrgeizigste je gedruckte Schriftmusterbuch.',
+    },
+    recognize: {
+      it: 'I terminali delle lettere sono a goccia, tondi e nettamente staccati dal tratto. Le grazie sono orizzontali, sottilissime e prive di raccordo con l’asta. Il contrasto fra pieni e filetti è il più alto fra i caratteri da testo. La « U » maiuscola mostra il salto di spessore nel modo più evidente. Gli occhielli sono ovali, non circolari, e l’asse è perfettamente verticale.',
+      en: 'The terminals are ball-shaped, round and clearly detached from the stroke. The serifs are horizontal, extremely fine and unbracketed. The contrast between thick and thin is the highest among text faces. The capital « U » shows the leap in weight most plainly. The counters are oval, not circular, and the axis is perfectly vertical.',
+      de: 'Die Endungen sind Tropfen, rund und deutlich vom Strich abgesetzt. Die Serifen sind waagerecht, äußerst fein und ungekehlt. Der Kontrast ist der höchste unter den Textschriften. Das Versal-« U » zeigt den Gewichtssprung am deutlichsten. Die Punzen sind oval, nicht kreisrund, die Achse ist exakt senkrecht.',
+    },
+    where: {
+      it: 'Nel vecchio logo di Calvin Klein e in quello di Elizabeth Arden. Nella scritta Nirvana su dischi e magliette. Nel nome di Lady Gaga su dischi e merchandising. In Italia, in molta editoria d’arte e nelle iscrizioni celebrative.',
+      en: 'In the old Calvin Klein logo and in Elizabeth Arden’s. In the Nirvana wordmark on records and shirts. In Lady Gaga’s name on records and merchandising. In Italy, in much art publishing and in commemorative inscriptions.',
+      de: 'Im alten Logo von Calvin Klein und in dem von Elizabeth Arden. Im Nirvana-Schriftzug auf Platten und Shirts. In Lady Gagas Namen auf Tonträgern und Merchandising. In Italien in weiten Teilen der Kunstbuchproduktion und auf Gedenkinschriften.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Bodoni', label: 'Wikipedia — Bodoni'},
+  },
+
+  {
+    id: 'kabel', name: 'Kabel', year: '1927',
+    designer: 'Rudolf Koch',
+    foundry: 'Klingspor',
+    cls: 'geometrica',
+    glyphA: 'M', glyphB: 'g',
+    font: "'Josefin Sans', sans-serif",
+    substitute: {
+      name: 'Josefin Sans',
+      it: 'Il campione è composto in Josefin Sans di Santiago Orozco, che si ispira alle geometriche degli anni Venti e ne condivide l’altezza-x bassa. Non è un revival del Kabel e non ne ha i tratti più caratteristici: mancano i tagli obliqui dei terminali e la traversa inclinata della « e ». Serve a dare l’aria del periodo, non il disegno di Koch.',
+      en: 'The specimen is set in Josefin Sans by Santiago Orozco, which draws on the geometrics of the 1920s and shares their low x-height. It is not a Kabel revival and lacks its most characteristic traits: the obliquely cut terminals and the slanted crossbar of the « e » are missing. It conveys the period, not Koch’s drawing.',
+      de: 'Das Muster ist in Josefin Sans von Santiago Orozco gesetzt, die sich an den Geometrischen der zwanziger Jahre orientiert und deren niedrige x-Höhe teilt. Sie ist keine Kabel-Neuinterpretation und besitzt deren kennzeichnende Merkmale nicht: Die schräg geschnittenen Endungen und der geneigte Querbalken des « e » fehlen. Sie vermittelt die Epoche, nicht Kochs Zeichnung.',
+    },
+    quote: {
+      text: {
+        it: '«L’idea di creare un carattere tipografico con il compasso e il righello era, in quel momento, molto allettante.»',
+        en: '“The task of creating a typeface with compass and ruler was, at that moment, very tempting.”',
+        de: '„Der Gedanke, eine Schrift mit Zirkel und Lineal zu schaffen, war in jenem Augenblick sehr verlockend.“',
+      },
+      author: 'Rudolf Koch',
+    },
+    desc: {
+      it: 'Rudolf Koch era figlio di uno scultore, aveva imparato il mestiere in una fonderia di metalli a Hanau ed era arrivato ai caratteri dalla calligrafia, non dal disegno geometrico. Fino al 1927 non aveva mai fatto un lineare: aveva firmato la graziata Koch-Antiqua e la pesantissima Neuland, entrambe segnate dalla mano. Il Kabel, pubblicato dalla Klingspor nel 1927 — lo stesso anno del Futura — prende il nome dal cavo telefonico transatlantico che in quegli anni si stava posando, e sulla carta appartiene alla stessa famiglia geometrica del suo coetaneo. Ma basta guardarlo per vedere la differenza: i terminali sono tagliati obliqui invece che a squadra, la traversa della « e » è inclinata, la « g » conserva un’aria manoscritta. Sono irregolarità volute, che vengono dallo Jugendstil e dall’ammirazione di Koch per William Morris, e che rendono il Kabel meno statico e più parlante del Futura. È il caso curioso di un carattere costruito con compasso e righello da qualcuno che al compasso e al righello non credeva fino in fondo.',
+      en: 'Rudolf Koch was the son of a sculptor, learned his trade in a metal foundry at Hanau and came to type from calligraphy, not from geometric drawing. Until 1927 he had never made a sans: he had signed the seriffed Koch-Antiqua and the very heavy Neuland, both marked by the hand. Kabel, released by Klingspor in 1927 — the same year as Futura — takes its name from the transatlantic telephone cable then being laid, and on paper belongs to the same geometric family as its contemporary. But one look shows the difference: the terminals are cut obliquely rather than square, the crossbar of the « e » is slanted, the « g » keeps a handwritten air. These are deliberate irregularities, coming from the Jugendstil and from Koch’s admiration for William Morris, and they make Kabel less static and more talkative than Futura. It is the curious case of a typeface built with compass and ruler by someone who did not entirely believe in compass and ruler.',
+      de: 'Rudolf Koch war der Sohn eines Bildhauers, lernte sein Handwerk in einer Metallgießerei in Hanau und kam von der Kalligrafie zur Schrift, nicht von der geometrischen Konstruktion. Bis 1927 hatte er nie eine Grotesk gezeichnet: Von ihm stammten die serifenbetonte Koch-Antiqua und die sehr fette Neuland, beide von der Hand geprägt. Kabel, 1927 von Klingspor herausgebracht — im selben Jahr wie Futura — trägt den Namen des damals verlegten transatlantischen Telefonkabels und gehört auf dem Papier zur selben geometrischen Familie wie ihre Zeitgenossin. Doch ein Blick genügt: Die Endungen sind schräg statt rechtwinklig geschnitten, der Querbalken des « e » ist geneigt, das « g » bewahrt einen handschriftlichen Zug. Es sind gewollte Unregelmäßigkeiten aus dem Jugendstil und aus Kochs Bewunderung für William Morris, und sie machen Kabel weniger statisch und gesprächiger als Futura. Der merkwürdige Fall einer mit Zirkel und Lineal gebauten Schrift von jemandem, der an Zirkel und Lineal nicht ganz glaubte.',
+    },
+    recognize: {
+      it: 'I tagli dei terminali non sono perpendicolari alla linea di base ma obliqui. Le aste verticali della « M » maiuscola sono inclinate. Il braccio della « f » minuscola sporge solo a destra. Il puntino della « i » e della « j » è un rombo, non un cerchio. La « e » minuscola ha la traversa ruotata in senso antiorario e la « u » porta una piccola grazia sulla destra.',
+      en: 'The terminals are not cut perpendicular to the baseline but at an angle. The vertical stems of the capital « M » are splayed. The arm of the lowercase « f » projects only to the right. The dot on the « i » and « j » is a diamond, not a circle. The lowercase « e » has its crossbar rotated anticlockwise, and the « u » carries a small serif on the right.',
+      de: 'Die Endungen sind nicht senkrecht zur Grundlinie, sondern schräg geschnitten. Die senkrechten Schäfte des Versal-« M » stehen geneigt. Der Arm des kleinen « f » ragt nur nach rechts. Der Punkt auf « i » und « j » ist eine Raute, kein Kreis. Das kleine « e » hat einen gegen den Uhrzeigersinn gedrehten Querbalken, das « u » trägt rechts eine kleine Serife.',
+    },
+    where: {
+      it: 'Nel titolo del film Lost in Translation. Al centro del tabellone del Monopoly, in tutte le lingue del mondo. Nelle vecchie pubblicità di McDonald’s.',
+      en: 'In the title of the film Lost in Translation. At the centre of the Monopoly board, in every language. In old McDonald’s advertising.',
+      de: 'Im Titel des Films Lost in Translation. In der Mitte des Monopoly-Spielbretts, in allen Sprachen. In alter McDonald’s-Werbung.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Kabel_(typeface)', label: 'Wikipedia — Kabel'},
+  },
+
+  {
+    id: 'timesnewroman', name: 'Times New Roman', year: '1932',
+    designer: 'Stanley Morison, Victor Lardent',
+    foundry: 'Monotype / The Times',
+    cls: 'transizionale',
+    glyphA: 'R', glyphB: 'g',
+    font: "'Tinos', serif",
+    substitute: {
+      name: 'Tinos',
+      it: 'Il campione è composto in Tinos di Steve Matteson, disegnato per essere metricamente compatibile con Times New Roman: stessa larghezza di ogni carattere, così un documento impaginato con l’uno non si scompone con l’altro. Il disegno è vicino ma non identico — è una sostituzione, non un revival.',
+      en: 'The specimen is set in Tinos by Steve Matteson, designed to be metrically compatible with Times New Roman: every character has the same width, so a document laid out in one does not reflow in the other. The drawing is close but not identical — a substitution, not a revival.',
+      de: 'Das Muster ist in Tinos von Steve Matteson gesetzt, metrisch kompatibel zu Times New Roman entworfen: gleiche Zeichenbreiten, sodass ein Dokument beim Wechsel nicht umbricht. Die Zeichnung ist nah, aber nicht identisch — ein Ersatz, keine Neuinterpretation.',
+    },
+    quote: {
+      text: {
+        it: '«Il disegno dei caratteri si muove al passo del lettore più conservatore.»',
+        en: '“Type design moves at the pace of the most conservative reader.”',
+        de: '„Schriftgestaltung bewegt sich im Tempo des konservativsten Lesers.“',
+      },
+      author: 'Stanley Morison, First Principles of Typography, 1929',
+    },
+    desc: {
+      it: 'Nel 1929 Stanley Morison, consulente tipografico della Monotype, scrisse che il Times era tipograficamente antiquato e mal stampato. Il giornale rispose affidandogli il compito di fare meglio, e Morison lavorò con Victor Lardent, disegnatore dell’ufficio pubblicità della testata: il carattere nuovo uscì con l’edizione del 3 ottobre 1932 e servì il giornale per quarant’anni. Il punto di partenza fu il Plantin della Monotype, di cui il Times New Roman conserva le proporzioni, ma con grazie più nitide e un contrasto maggiore. Gli obiettivi erano due, e in tensione fra loro: far entrare più caratteri nella riga e insieme rendere la lettura più facile — da qui l’altezza-x cresciuta e la spaziatura ridotta. Prima dell’approvazione le prove furono sottoposte anche a un oculista, cosa che permise al giornale di annunciare un carattere con l’avallo della più eminente autorità medica. Passato ai programmi di scrittura, è diventato il carattere di ciò che non vuole farsi notare: il compito scolastico, la circolare, l’informativa sulla privacy.',
+      en: 'In 1929 Stanley Morison, typographic adviser to Monotype, wrote that The Times was typographically antiquated and badly printed. The paper answered by asking him to do better, and Morison worked with Victor Lardent, a lettering artist in its advertising department: the new type appeared with the edition of 3 October 1932 and served the paper for forty years. The starting point was Monotype’s Plantin, whose proportions Times New Roman keeps, but with crisper serifs and greater contrast. There were two aims, in tension with each other: to fit more characters on the line and at the same time make reading easier — hence the increased x-height and the tightened spacing. Before final approval the proofs were also submitted to an ophthalmologist, which allowed the paper to announce a typeface with the endorsement of the most eminent medical authority. Once it moved into word processors it became the typeface of everything that does not wish to be noticed: the school essay, the circular, the privacy notice.',
+      de: '1929 schrieb Stanley Morison, typografischer Berater von Monotype, die Times sei typografisch veraltet und schlecht gedruckt. Die Zeitung antwortete, indem sie ihn beauftragte, es besser zu machen, und Morison arbeitete mit Victor Lardent, einem Schriftzeichner der Anzeigenabteilung: Die neue Schrift erschien mit der Ausgabe vom 3. Oktober 1932 und diente dem Blatt vierzig Jahre. Ausgangspunkt war Monotypes Plantin, dessen Proportionen Times New Roman bewahrt, mit schärferen Serifen und höherem Kontrast. Zwei Ziele standen gegeneinander: mehr Zeichen in die Zeile zu bringen und zugleich das Lesen zu erleichtern — daher die vergrößerte x-Höhe und die enge Laufweite. Vor der Freigabe wurden die Andrucke auch einem Augenarzt vorgelegt, was der Zeitung erlaubte, eine Schrift mit dem Segen der höchsten medizinischen Autorität anzukündigen. In den Textprogrammen wurde sie zur Schrift all dessen, was nicht auffallen will: Hausarbeit, Rundschreiben, Datenschutzerklärung.',
+    },
+    recognize: {
+      it: 'L’orecchio della « g » minuscola è una lineetta dritta, non un ricciolo decorativo come nella maggior parte dei graziati. Le grazie sono corte e affilate, con terminali quasi « bombati » su « a », « f », « j », « r », « y ». L’altezza-x è alta rispetto ai caratteri da libro coevi e la spaziatura è stretta. Il contrasto è medio e l’asse solo leggermente inclinato. Nessun tratto è estremo: è proprio questo il suo tratto.',
+      en: 'The ear of the lowercase « g » is a straight little bar, not the decorative curl of most seriffed faces. The serifs are short and sharp, with almost bulbous terminals on « a », « f », « j », « r », « y ». The x-height is tall for a book face of its time and the spacing is tight. Contrast is moderate and the axis only slightly inclined. Nothing about it is extreme: that is precisely its character.',
+      de: 'Das Ohr des kleinen « g » ist ein gerades Strichlein, keine dekorative Locke wie bei den meisten Antiquas. Die Serifen sind kurz und scharf, mit fast knollenartigen Endungen an « a », « f », « j », « r », « y ». Die x-Höhe ist für eine Buchschrift ihrer Zeit groß, die Laufweite eng. Der Kontrast ist mittel, die Achse nur leicht geneigt. Nichts an ihr ist extrem: genau das ist ihr Merkmal.',
+    },
+    where: {
+      it: 'Nel Times fino al 1972. Nelle tesi, nei documenti d’ufficio e in quasi tutto ciò per cui nessuno ha scelto un carattere. In gran parte della modulistica pubblica.',
+      en: 'In The Times until 1972. In dissertations, office documents and almost everything for which nobody chose a typeface. In much public paperwork.',
+      de: 'In der Times bis 1972. In Abschlussarbeiten, Bürodokumenten und fast allem, wofür niemand eine Schrift ausgewählt hat. In weiten Teilen amtlicher Formulare.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Times_New_Roman', label: 'Wikipedia — Times New Roman'},
+  },
+
+  {
+    id: 'impact', name: 'Impact', year: '1965',
+    designer: 'Geoffrey Lee',
+    foundry: 'Stephenson Blake',
+    cls: 'grottesca',
+    glyphA: 'E', glyphB: 'g',
+    font: "'Anton', sans-serif",
+    substitute: {
+      name: 'Anton',
+      it: 'Il campione è composto in Anton di Vernon Adams, grottesca condensata pesantissima nata dalla tradizione dei manifesti inglesi. Non è un revival dell’Impact: le proporzioni sono simili, il disegno no. Serve a mostrare il principio — massimo nero nel minimo spazio — non la lettera di Lee.',
+      en: 'The specimen is set in Anton by Vernon Adams, a very heavy condensed grotesque out of the British poster tradition. It is not an Impact revival: the proportions are close, the drawing is not. It shows the principle — maximum black in minimum space — not Lee’s letter.',
+      de: 'Das Muster ist in Anton von Vernon Adams gesetzt, einer sehr fetten schmalen Grotesk aus der britischen Plakattradition. Sie ist keine Impact-Neuinterpretation: Die Proportionen ähneln sich, die Zeichnung nicht. Sie zeigt das Prinzip — größtmögliches Schwarz auf kleinstem Raum — nicht Lees Buchstaben.',
+    },
+    desc: {
+      it: 'Geoffrey Lee era direttore creativo in un’agenzia pubblicitaria londinese e disegnò l’Impact nel 1965 pensando ai manifesti: il nome dichiara il programma. L’idea è tanto semplice quanto radicale — mettere più inchiostro possibile in un dato spazio: aste spessissime, contrografie ridotte a fessure, altezza-x massima, discendenti cortissime, spaziatura al minimo. Lo pubblicò la Stephenson Blake di Sheffield, una delle ultime fonderie inglesi di caratteri in metallo, proprio mentre il piombo cedeva il passo alla fotocomposizione: nasceva come carattere metallico in un mondo che stava smettendo di fonderne. La seconda vita arriva nel 1996, quando Microsoft lo inserisce nel pacchetto di font per il web, e da Windows 98 se lo ritrova installato chiunque. Da lì all’immagine con la scritta bianca contornata di nero il passo è breve: l’Impact è il carattere del meme, e in trent’anni nessuno gli ha tolto il posto. Non è un carattere adatto al testo: al corpo 9 le contrografie si chiudono e la parola diventa una macchia.',
+      en: 'Geoffrey Lee was a creative director at a London advertising agency and drew Impact in 1965 with posters in mind: the name states the programme. The idea is as simple as it is radical — to put as much ink as possible in a given space: very thick stems, counters reduced to slits, maximum x-height, very short descenders, minimal spacing. It was released by Stephenson Blake of Sheffield, one of the last English metal type foundries, just as lead was giving way to phototypesetting: it was born as a metal type in a world that was ceasing to cast them. Its second life comes in 1996, when Microsoft puts it in the core fonts for the Web package, and from Windows 98 onwards everyone has it installed. From there to the image with white outlined lettering is a short step: Impact is the typeface of the meme, and in thirty years nobody has taken its place. It is no typeface for text: at 9 point the counters close up and the word turns into a smudge.',
+      de: 'Geoffrey Lee war Kreativdirektor in einer Londoner Werbeagentur und zeichnete Impact 1965 mit Blick auf Plakate: Der Name nennt das Programm. Die Idee ist ebenso einfach wie radikal — so viel Farbe wie möglich auf gegebenen Raum zu bringen: sehr fette Schäfte, zu Schlitzen verengte Punzen, größtmögliche x-Höhe, sehr kurze Unterlängen, minimale Laufweite. Herausgebracht wurde sie von Stephenson Blake in Sheffield, einer der letzten englischen Bleischriftgießereien, gerade als das Blei dem Fotosatz wich: eine Metallschrift in einer Welt, die aufhörte, Metall zu gießen. Das zweite Leben beginnt 1996, als Microsoft sie in die Core fonts for the Web aufnimmt; seit Windows 98 hat sie jeder installiert. Von dort zum Bild mit weißer, schwarz konturierter Schrift ist es nicht weit: Impact ist die Schrift des Memes, und in dreißig Jahren hat ihr niemand den Platz genommen. Für Text taugt sie nicht: In 9 Punkt schließen sich die Punzen, und das Wort wird zum Fleck.',
+    },
+    recognize: {
+      it: 'Impossibile non vederlo: è nerissimo e toglie aria a tutto ciò che gli sta intorno. Le minuscole hanno discendenti cortissime e altezza-x altissima. Le aste delle maiuscole sono spessissime e le contrografie ridotte a fessure. La spaziatura fra le lettere è al minimo sindacale, quasi si toccano. È una grottesca condensata portata al limite del leggibile.',
+      en: 'Impossible to miss: it is very black and takes the air out of everything around it. The lowercase has very short descenders and a very tall x-height. The stems of the capitals are extremely thick and the counters reduced to slits. Letterspacing is the bare minimum; the letters almost touch. It is a condensed grotesque pushed to the edge of legibility.',
+      de: 'Nicht zu übersehen: Sie ist sehr schwarz und nimmt allem um sie herum die Luft. Die Kleinbuchstaben haben sehr kurze Unterlängen und eine sehr große x-Höhe. Die Versalschäfte sind äußerst fett, die Punzen auf Schlitze reduziert. Die Laufweite ist auf das Nötigste reduziert, die Buchstaben berühren sich fast. Eine schmale Grotesk, bis an die Grenze der Lesbarkeit getrieben.',
+    },
+    where: {
+      it: 'Nei loghi di GameStop e Oakley. Nel titolo del film Kill Bill. In qualunque meme con la scritta bianca bordata di nero.',
+      en: 'In the logos of GameStop and Oakley. In the title of the film Kill Bill. In any meme with white outlined lettering.',
+      de: 'In den Logos von GameStop und Oakley. Im Titel des Films Kill Bill. In jedem Meme mit weißer, schwarz konturierter Schrift.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Impact_(typeface)', label: 'Wikipedia — Impact'},
+  },
+
+  {
+    id: 'comicsans', name: 'Comic Sans', year: '1994',
+    designer: 'Vincent Connare',
+    foundry: 'Microsoft',
+    cls: 'manuale',
+    glyphA: 'A', glyphB: 'a',
+    font: "'Comic Neue', cursive",
+    substitute: {
+      name: 'Comic Neue',
+      it: 'Il campione è composto in Comic Neue di Craig Rozynski, dichiaratamente una riscrittura « sobria » del Comic Sans: stesso spirito informale, ma tratti regolarizzati e proporzioni ripulite. Proprio le irregolarità che il Comic Neue corregge sono ciò che rende riconoscibile l’originale.',
+      en: 'The specimen is set in Comic Neue by Craig Rozynski, openly a “sober” rewriting of Comic Sans: the same informal spirit, but regularised strokes and tidied proportions. The very irregularities Comic Neue corrects are what make the original recognisable.',
+      de: 'Das Muster ist in Comic Neue von Craig Rozynski gesetzt, erklärtermaßen eine „nüchterne“ Umschrift von Comic Sans: gleicher informeller Geist, aber geglättete Striche und aufgeräumte Proportionen. Gerade die Unregelmäßigkeiten, die Comic Neue korrigiert, machen das Original erkennbar.',
+    },
+    quote: {
+      text: {
+        it: '«Se lo ami, non sai molto di tipografia; ma se lo odi, non ne sai poi molto neanche tu, e forse dovresti trovarti un altro hobby.»',
+        en: '“If you love it, you don’t know much about typography. If you hate it, you really don’t know much about typography either, and you should get another hobby.”',
+        de: '„Wenn du sie liebst, verstehst du wenig von Typografie. Wenn du sie hasst, verstehst du auch nicht viel davon und solltest dir ein anderes Hobby suchen.“',
+      },
+      author: 'Vincent Connare',
+    },
+    desc: {
+      it: 'Vincent Connare lavorava in Microsoft quando, nel 1994, vide una versione di prova di Microsoft Bob: un cane a fumetti di nome Rover parlava dentro balloon composti in Times New Roman. La stonatura era evidente, e Connare disegnò un carattere che imitasse il lettering dei fumetti, guardando fra gli altri quello di Watchmen. Il Comic Sans non arrivò in tempo per Bob e uscì nell’agosto 1995 nel Plus! Pack di Windows 95, poi in ogni versione del sistema. Il problema non è mai stato il carattere ma la sua destinazione: nato per far parlare un cane, è finito su lapidi, cartelli di pericolo e comunicazioni istituzionali, contesti per cui esistono centinaia di alternative. Ne è nata una crociata — il movimento Ban Comic Sans è del 2002 — e per reazione una giornata mondiale, che si celebra il primo venerdì di luglio. Vale la pena ricordare che le associazioni per la dislessia lo includono spesso fra i caratteri consigliati, per via delle forme irregolari e poco speculari, anche se le ricerche sull’argomento non sono concordi.',
+      en: 'Vincent Connare was working at Microsoft when, in 1994, he saw a beta of Microsoft Bob: a cartoon dog named Rover spoke in balloons set in Times New Roman. The mismatch was obvious, and Connare drew a typeface imitating comic-book lettering, looking among others at Watchmen. Comic Sans did not make it in time for Bob and was released in August 1995 in the Windows 95 Plus! Pack, then in every version of the system. The problem was never the typeface but its destination: born to give a dog a voice, it ended up on gravestones, hazard signs and official notices, contexts for which hundreds of alternatives exist. A crusade followed — the Ban Comic Sans movement dates from 2002 — and by reaction a world day, celebrated on the first Friday of July. It is worth noting that dyslexia associations often list it among recommended typefaces, for its irregular and less mirror-like shapes, though the research on this is not unanimous.',
+      de: 'Vincent Connare arbeitete bei Microsoft, als er 1994 eine Vorabversion von Microsoft Bob sah: Ein Comic-Hund namens Rover sprach in Sprechblasen, gesetzt in Times New Roman. Der Bruch war offensichtlich, und Connare zeichnete eine Schrift nach dem Vorbild des Comic-Letterings, unter anderem mit Blick auf Watchmen. Comic Sans kam für Bob zu spät und erschien im August 1995 im Plus!-Pack von Windows 95, danach in jeder Systemversion. Das Problem war nie die Schrift, sondern ihr Einsatzort: Geschaffen, um einem Hund eine Stimme zu geben, landete sie auf Grabsteinen, Warnschildern und Behördenmitteilungen — Zusammenhängen, für die es Hunderte Alternativen gibt. Es folgte ein Feldzug — die Bewegung Ban Comic Sans stammt von 2002 — und als Reaktion ein Welttag am ersten Freitag im Juli. Erwähnenswert: Legasthenie-Verbände führen sie häufig unter den empfohlenen Schriften, wegen der unregelmäßigen, wenig spiegelbildlichen Formen — auch wenn die Forschung dazu uneins ist.',
+    },
+    recognize: {
+      it: 'Riconoscerlo è facilissimo: le lettere sembrano tracciate a mano, con spessori irregolari e assi che non si allineano. La « A » maiuscola ha l’aria di essere stata scritta con un pastello a cera spuntato. Nessuna curva si ripete identica: ogni lettera è disegnata per sé. Le terminazioni sono arrotondate e leggermente ingrossate. Non ha grazie né un vero corsivo: è un lettering, non un carattere da testo.',
+      en: 'It could hardly be easier: the letters look drawn by hand, with uneven weights and axes that do not line up. The capital « A » looks as if it had been written with a blunt wax crayon. No curve repeats identically: every letter is drawn for itself. Terminals are rounded and slightly thickened. It has no serifs and no true italic: it is lettering, not a text face.',
+      de: 'Leichter geht es kaum: Die Buchstaben wirken von Hand gezogen, mit ungleichen Strichstärken und Achsen, die nicht fluchten. Das Versal-« A » sieht aus, als sei es mit einem stumpfen Wachsstift geschrieben. Keine Kurve wiederholt sich identisch: Jeder Buchstabe ist für sich gezeichnet. Die Endungen sind gerundet und leicht verdickt. Sie hat weder Serifen noch eine echte Kursive: Sie ist Lettering, keine Textschrift.',
+    },
+    where: {
+      it: 'Nelle insegne degli asili e nelle comunicazioni di servizio dei bagni dei ristoranti. Nelle firme delle email che vogliono sembrare cordiali. In molto materiale didattico per bambini.',
+      en: 'On nursery school signs and on the service notices in restaurant toilets. In email signatures that want to look friendly. In a great deal of teaching material for children.',
+      de: 'Auf Kindergartenschildern und den Hinweisen in Restauranttoiletten. In E-Mail-Signaturen, die freundlich wirken wollen. In sehr viel Lehrmaterial für Kinder.',
+    },
+    link: {url: 'https://en.wikipedia.org/wiki/Comic_Sans', label: 'Wikipedia — Comic Sans'},
   },
 
 ];

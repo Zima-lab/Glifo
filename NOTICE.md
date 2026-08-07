@@ -17,9 +17,14 @@ Latinotype.
 
 ## Caratteri campione — `fonts/specimen/`
 
-Le quattordici famiglie che illustrano le classificazioni hanno licenza
-**SIL Open Font License 1.1** e possono essere ridistribuite liberamente.
-Elenco e attribuzioni in `fonts/specimen/OFL.txt`.
+Le famiglie che illustrano le classificazioni e i campioni delle schede
+hanno licenza **SIL Open Font License 1.1** e possono essere ridistribuite
+liberamente. Unica eccezione: **Tinos** (Steve Matteson), che è sotto
+**Apache License 2.0** — anch'essa libera, ma con obblighi di attribuzione
+diversi. Elenco e attribuzioni in `fonts/specimen/OFL.txt`.
+
+Nessuno dei campioni delle schede è il carattere originale di cui la scheda
+parla: sono revival o equivalenti liberi, e ogni scheda lo dichiara.
 
 ## Ritratti — `img/`
 
