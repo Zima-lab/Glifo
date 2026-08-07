@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v21';
+const CACHE_VERSION = 'glifo-v22';
 
 const ASSETS = [
   './',
@@ -105,20 +105,30 @@ const ASSETS = [
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_VERSION).then(function (cache) {
-      // Due accortezze, entrambe imparate a spese di una pubblicazione.
+      // Tre accortezze, tutte imparate a spese di una pubblicazione.
       //
       // 1. addAll fallisce in blocco se un solo file manca: qui aggiungiamo
       //    uno per uno, così un asset assente non impedisce l'installazione.
       //
-      // 2. `cache: 'reload'` NON è un dettaglio. Senza, cache.add() prende
-      //    i file dalla cache HTTP del browser, e GitHub Pages li serve con
-      //    max-age=600: per dieci minuti dopo la pubblicazione il browser ha
-      //    ancora la copia vecchia. Il risultato è una cache che si chiama
-      //    glifo-v17 ma contiene i file della v15 — versione nuova di nome,
-      //    contenuto vecchio, e il footer che mente. Con 'reload' ogni file
-      //    viene ripreso dalla rete, saltando la cache HTTP.
+      // 2. `cache: 'reload'` salta la cache HTTP del browser, che su GitHub
+      //    Pages tiene i file per dieci minuti (max-age=600).
+      //
+      // 3. Ma 'reload' salta la cache del browser, NON quella della CDN che
+      //    sta davanti a GitHub Pages: per quei dieci minuti Fastly continua
+      //    a servire i file della pubblicazione precedente. È così che è
+      //    nata la cache glifo-v21 piena dei file della v20 — nome nuovo,
+      //    contenuto vecchio, e nessun modo di accorgersene perché il nome
+      //    non cambierà più. Chiedendo l'URL con un parametro che porta la
+      //    versione, la CDN non ha nulla in memoria per quell'indirizzo e
+      //    deve andare all'origine. Il parametro serve solo a scaricare:
+      //    in cache la voce viene salvata sotto l'URL pulito, altrimenti
+      //    nessuna richiesta la ritroverebbe.
       return Promise.all(ASSETS.map(function (url) {
-        return cache.add(new Request(url, { cache: 'reload' })).catch(function () {});
+        const fresh = url + (url.indexOf('?') > -1 ? '&' : '?') + 'sw=' + CACHE_VERSION;
+        return fetch(new Request(fresh, { cache: 'reload' })).then(function (res) {
+          if (!res || res.status !== 200) return;
+          return cache.put(new Request(url), res);
+        }).catch(function () {});
       }));
     }).then(function () { return self.skipWaiting(); })
   );

@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v21';
+const APP_VERSION = 'v22';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
