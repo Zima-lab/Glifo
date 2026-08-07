@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v24';
+const CACHE_VERSION = 'glifo-v25';
 
 const ASSETS = [
   './',
@@ -72,14 +72,13 @@ const ASSETS = [
   // caratteri campione delle schede della sezione Type
   'fonts/specimen/libre-baskerville-400-latin.woff2',
   'fonts/specimen/libre-baskerville-700-latin.woff2',
-  'fonts/specimen/gfs-didot-400-latin.woff2',
+  'fonts/specimen/didot-lt-regular.woff2',
   'fonts/specimen/bodoni-moda-400-latin.woff2',
   'fonts/specimen/bodoni-moda-600-latin.woff2',
   'fonts/specimen/tinos-400-latin.woff2',
   'fonts/specimen/tinos-700-latin.woff2',
   'fonts/specimen/anton-400-latin.woff2',
-  'fonts/specimen/josefin-sans-400-latin.woff2',
-  'fonts/specimen/josefin-sans-600-latin.woff2',
+  'fonts/specimen/kabel-book.woff2',
   'fonts/specimen/comic-neue-400-latin.woff2',
   'fonts/specimen/comic-neue-700-latin.woff2',
 

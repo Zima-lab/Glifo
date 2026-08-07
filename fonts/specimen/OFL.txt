@@ -30,13 +30,21 @@ carattere originale: sono revival o equivalenti liberi, e ogni scheda lo
 dichiara nel campo `substitute`.
 
   Libre Baskerville   Impallari Type            → Baskerville
-  GFS Didot           Greek Font Society        → Didot
   Bodoni Moda         Indestructible Type       → Bodoni
-  Josefin Sans        Santiago Orozco           → Kabel
   Anton               Vernon Adams              → Impact
   Comic Neue          Craig Rozynski            → Comic Sans
   Tinos               Steve Matteson            → Times New Roman
                       (Apache License 2.0, non OFL)
+
+NON LIBERI — didot-lt-regular.woff2, kabel-book.woff2
+
+  Linotype Didot   Adrian Frutiger, 1991    Linotype/Monotype
+  Kabel            digitalizzazione 1992    Image Club Graphics
+
+Sono caratteri commerciali e NON rientrano in questa licenza: non possono
+essere estratti né ridistribuiti. Stanno qui alle stesse condizioni di
+Blacker, Helvetica LT e Futura — uso personale, repository privato.
+Vedi ../../NOTICE.md.
 
 I file sono stati scaricati da Google Fonts e limitati al sottoinsieme
 "latin" (U+0000-00FF e segni correlati), sufficiente per l'italiano,

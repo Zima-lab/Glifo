@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v24';
+const APP_VERSION = 'v25';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
@@ -1297,12 +1297,12 @@ const TYPEFACES = [
     foundry: 'Didot, Parigi',
     cls: 'didone',
     glyphA: 'G', glyphB: 'a',
-    font: "'GFS Didot', serif",
+    font: "'Didot LT', serif",
     substitute: {
-      name: 'GFS Didot',
-      it: 'Il campione è composto in GFS Didot della Greek Font Society, revival libero dei caratteri incisi dai Didot e usati ad Atene nell’Ottocento. È un Didot autentico nella derivazione, ma la sua ragione d’essere è il greco: il latino ne è la parte minore.',
-      en: 'The specimen is set in GFS Didot by the Greek Font Society, a free revival of the types cut by the Didots and used in nineteenth-century Athens. Its descent is authentically Didot, but its purpose is Greek: the Latin is the lesser part of it.',
-      de: 'Das Muster ist in GFS Didot der Greek Font Society gesetzt, einer freien Neuinterpretation der von den Didots geschnittenen und im Athen des 19. Jahrhunderts verwendeten Schriften. Die Abstammung ist echt Didot, doch ihr Zweck ist das Griechische: Das Lateinische ist der geringere Teil.',
+      name: 'Linotype Didot',
+      it: 'Il campione è composto in Linotype Didot, il digitale disegnato da Adrian Frutiger nel 1991 sui caratteri di Firmin Didot: è la versione canonica, quella che macOS distribuisce come font di sistema. Del Didot non esiste un originale digitale — i punzoni sono del Settecento — quindi ogni versione è un’interpretazione: questa è la più autorevole.',
+      en: 'The specimen is set in Linotype Didot, the digital version drawn by Adrian Frutiger in 1991 from Firmin Didot’s types: it is the canonical one, the version macOS ships as a system font. There is no digital original of the Didot — the punches are of the eighteenth century — so every version is an interpretation: this is the most authoritative.',
+      de: 'Das Muster ist in Linotype Didot gesetzt, der 1991 von Adrian Frutiger nach Firmin Didots Schriften gezeichneten Digitalfassung: die kanonische Version, die macOS als Systemschrift mitliefert. Ein digitales Original des Didot gibt es nicht — die Stempel stammen aus dem 18. Jahrhundert — jede Fassung ist also eine Deutung: diese ist die maßgeblichste.',
     },
     desc: {
       it: 'I Didot furono una dinastia di stampatori parigini attiva per cinque generazioni, e il carattere che porta il loro nome è opera soprattutto di Firmin, che incideva, mentre il fratello maggiore Pierre stampava. Firmin ripartì da dove Baskerville si era fermato e portò il contrasto all’estremo: filetti ridotti a un capello, grazie dritte innestate ad angolo retto senza alcun raccordo, asse rigorosamente verticale. È la nascita del carattere moderno, o didone, e insieme un cambio di paradigma: la lettera smette di ricordare il gesto della penna e diventa una costruzione, disegnata prima e incisa poi. La famiglia si sviluppa fra il 1784 e il 1811, e negli stessi anni Firmin mette a punto la stereotipia, che ricava una lastra unica da una pagina composta a caratteri mobili: le ristampe diventano economiche e il libro si diffonde. È una coincidenza che dice molto — lo stesso uomo firma il carattere del lusso neoclassico e il procedimento che abbassa il prezzo dei libri. Ai Didot si deve anche il punto tipografico che porta il loro nome, la misura su cui l’Europa continentale ha composto fino all’arrivo del PostScript.',
@@ -1367,12 +1367,12 @@ const TYPEFACES = [
     foundry: 'Klingspor',
     cls: 'geometrica',
     glyphA: 'M', glyphB: 'g',
-    font: "'Josefin Sans', sans-serif",
+    font: "'Kabel', sans-serif",
     substitute: {
-      name: 'Josefin Sans',
-      it: 'Il campione è composto in Josefin Sans di Santiago Orozco, che si ispira alle geometriche degli anni Venti e ne condivide l’altezza-x bassa. Non è un revival del Kabel e non ne ha i tratti più caratteristici: mancano i tagli obliqui dei terminali e la traversa inclinata della « e ». Serve a dare l’aria del periodo, non il disegno di Koch.',
-      en: 'The specimen is set in Josefin Sans by Santiago Orozco, which draws on the geometrics of the 1920s and shares their low x-height. It is not a Kabel revival and lacks its most characteristic traits: the obliquely cut terminals and the slanted crossbar of the « e » are missing. It conveys the period, not Koch’s drawing.',
-      de: 'Das Muster ist in Josefin Sans von Santiago Orozco gesetzt, die sich an den Geometrischen der zwanziger Jahre orientiert und deren niedrige x-Höhe teilt. Sie ist keine Kabel-Neuinterpretation und besitzt deren kennzeichnende Merkmale nicht: Die schräg geschnittenen Endungen und der geneigte Querbalken des « e » fehlen. Sie vermittelt die Epoche, nicht Kochs Zeichnung.',
+      name: 'Kabel (Image Club Graphics)',
+      it: 'Il campione è Kabel, nella digitalizzazione fatta da Image Club Graphics nel 1992: è il disegno di Koch, non un’imitazione, e ci sono tutti i tratti descritti qui accanto — i terminali obliqui, la « M » con le aste inclinate, il puntino a rombo, la traversa ruotata della « e ». Essendo del 1992 non contiene l’euro né il segno meno, che nella riga dei segni passano al carattere dell’interfaccia.',
+      en: 'The specimen is Kabel in the 1992 Image Club Graphics digitisation: it is Koch’s drawing, not an imitation, and every trait described alongside is there — the oblique terminals, the splayed « M », the diamond dot, the rotated crossbar of the « e ». Being from 1992 it has neither the euro sign nor the minus sign, which in the row of symbols fall back to the interface typeface.',
+      de: 'Das Muster ist Kabel in der Digitalisierung von Image Club Graphics aus dem Jahr 1992: Es ist Kochs Zeichnung, keine Nachahmung, und alle nebenstehend beschriebenen Merkmale sind vorhanden — die schrägen Endungen, das « M » mit geneigten Schäften, der rautenförmige Punkt, der gedrehte Querbalken des « e ». Da sie von 1992 stammt, fehlen Euro- und Minuszeichen, die in der Zeichenzeile auf die Interface-Schrift zurückfallen.',
     },
     quote: {
       text: {

@@ -23,8 +23,18 @@ liberamente. Unica eccezione: **Tinos** (Steve Matteson), che è sotto
 **Apache License 2.0** — anch'essa libera, ma con obblighi di attribuzione
 diversi. Elenco e attribuzioni in `fonts/specimen/OFL.txt`.
 
-Nessuno dei campioni delle schede è il carattere originale di cui la scheda
-parla: sono revival o equivalenti liberi, e ogni scheda lo dichiara.
+Fanno eccezione anche due **caratteri commerciali**, inclusi alle stesse
+condizioni di Blacker, Helvetica LT e Futura — uso personale, repository
+privato — e che non possono essere estratti né ridistribuiti:
+
+- **Linotype Didot** (`didot-lt-regular.woff2`), Adrian Frutiger, 1991,
+  distribuito da Apple come font di sistema di macOS;
+- **Kabel** (`kabel-book.woff2`), digitalizzazione di Image Club Graphics
+  del 1992 del carattere di Rudolf Koch.
+
+Salvo questi due, nessuno dei campioni delle schede è il carattere originale
+di cui la scheda parla: sono revival o equivalenti liberi, e ogni scheda lo
+dichiara.
 
 ## Ritratti — `img/`
 

@@ -279,12 +279,15 @@
   src: url('fonts/specimen/libre-baskerville-700-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/* Linotype Didot (Adrian Frutiger, 1991): carattere commerciale, presente
+   su macOS come font di sistema. Come Blacker, Helvetica LT e Futura non
+   rientra nella licenza libera del progetto — vedi NOTICE.md. */
 @font-face {
-  font-family: 'GFS Didot';
+  font-family: 'Didot LT';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('fonts/specimen/gfs-didot-400-latin.woff2') format('woff2');
+  src: url('fonts/specimen/didot-lt-regular.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
@@ -327,21 +330,17 @@
   src: url('fonts/specimen/anton-400-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/* Kabel (Image Club Graphics, 1992): digitalizzazione commerciale del
+   carattere di Rudolf Koch. Come Didot LT, Blacker, Helvetica LT e Futura
+   non rientra nella licenza libera del progetto — vedi NOTICE.md.
+   Nessun unicode-range: il font è del 1992 e non ha l’euro né il segno meno
+   U+2212, che quindi passano al carattere dell’interfaccia. */
 @font-face {
-  font-family: 'Josefin Sans';
+  font-family: 'Kabel';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('fonts/specimen/josefin-sans-400-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('fonts/specimen/josefin-sans-600-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('fonts/specimen/kabel-book.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Comic Neue';
