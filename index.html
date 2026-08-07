@@ -47,6 +47,21 @@
       </button>
     </div>
   </div>
+
+  <!-- La ricerca sta dentro la barra superiore, e quindi resta appiccicata
+       in alto insieme al marchio: da qualsiasi sezione la si raggiunge senza
+       tornare in cima. Cerca in tutte e sette le viste e nelle tre lingue. -->
+  <div class="searchbar">
+    <div class="search-wrap">
+      <span class="search-ic" id="searchIcon" aria-hidden="true"></span>
+      <input type="text" id="searchInput" class="search-input"
+             role="combobox" aria-autocomplete="list" aria-expanded="false"
+             aria-controls="searchList" aria-haspopup="listbox"
+             autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button type="button" id="searchClear" class="search-clear" hidden></button>
+      <div id="searchList" class="search-list" role="listbox" hidden></div>
+    </div>
+  </div>
 </header>
 
 <div class="shell">
