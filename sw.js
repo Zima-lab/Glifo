@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v25';
+const CACHE_VERSION = 'glifo-v26';
 
 const ASSETS = [
   './',
@@ -84,6 +84,7 @@ const ASSETS = [
 
   // tavole illustrate
   'plates/anatomia.svg',
+  'plates/anatomia2.svg',
   'plates/gotiche.svg',
   'plates/punzone.svg',
   'plates/asse.svg',

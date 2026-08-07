@@ -1735,12 +1735,14 @@
       v.hidden = v.id !== 'view-' + state.section;
     });
 
-    // La tavola d'apertura della sezione, se prevista
+    // Le tavole d'apertura della sezione, se previste: una o più d'una
     const holder = $('plate-' + state.section);
     if (holder) {
       clear(holder);
-      const f = plateFig(SECTION_PLATE[state.section]);
-      if (f) holder.appendChild(f);
+      [].concat(SECTION_PLATE[state.section] || []).forEach(function (key) {
+        const f = plateFig(key);
+        if (f) holder.appendChild(f);
+      });
     }
 
     switch (state.section) {
