@@ -11,7 +11,7 @@
    Deve corrispondere a CACHE_VERSION in sw.js: sono la stessa cosa vista da
    due punti diversi, e se divergono il numero in fondo alla pagina mente.
    Un controllo automatico verifica che coincidano. */
-const APP_VERSION = 'v22';
+const APP_VERSION = 'v23';
 
 /* ---------- TEMI ----------
    Palette calda: crema e rosa corallo nel tema chiaro, grigio-verde nel tema scuro.
@@ -111,6 +111,21 @@ const UI = {
   periodicTitle: {it:'Tavola periodica dei caratteri', en:'Periodic table of typefaces', de:'Periodensystem der Schriften'},
   periodicIntro: {it:'Cento caratteri disposti come gli elementi: ogni colonna è una classe Vox-ATypI e dentro la colonna si scende in ordine di data. Il numero non è una classifica ma la posizione cronologica assoluta — 1 è la textura di Gutenberg, 100 è Inter. Letta per colonne è una classificazione; letta per numeri, cinque secoli e mezzo di stampa.', en:'A hundred typefaces laid out like the elements: each column is a Vox-ATypI class, and within the column you descend by date. The number is not a ranking but the absolute chronological position — 1 is Gutenberg’s textura, 100 is Inter. Read by columns it is a classification; read by numbers, five and a half centuries of printing.', de:'Hundert Schriften wie die Elemente angeordnet: Jede Spalte ist eine Vox-ATypI-Klasse, innerhalb der Spalte geht es nach Datum abwärts. Die Zahl ist keine Rangliste, sondern die absolute chronologische Position — 1 ist Gutenbergs Textura, 100 ist Inter. Nach Spalten gelesen eine Klassifikation, nach Zahlen fünfeinhalb Jahrhunderte Druck.'},
   periodicHint: {it:'Un tocco apre la casella, un secondo tocco la richiude.', en:'One tap opens a cell, a second tap closes it.', de:'Ein Tippen öffnet ein Feld, ein zweites schließt es.'},
+
+  /* Concordanza delle classificazioni: la tabella che segue la tavola */
+  systemsTitle: {it:'Concordanza delle classificazioni', en:'Concordance of classification systems', de:'Konkordanz der Klassifikationen'},
+  systemsIntro: {it:'Le stesse quattordici classi lette da quattro sistemi diversi. Nessuno è « quello giusto »: Vox guarda alla forma, Novarese al secolo, Bringhurst al movimento artistico, e i manuali li usano senza avvertire quando passano dall’uno all’altro. La tabella serve a riconoscere che « Réales », « Barocche » e « Transitional » sono la stessa cosa. I nomi restano nella lingua di chi li ha coniati, perché sono nomi propri di categoria.', en:'The same fourteen classes read through four different systems. None is “the right one”: Vox looks at form, Novarese at the century, Bringhurst at the artistic movement — and manuals switch between them without warning. This table is here so you can tell that “Réales”, “Barocche” and “Transitional” are one and the same. Names are kept in the language of whoever coined them, since they are proper names of categories.', de:'Dieselben vierzehn Klassen, gelesen durch vier verschiedene Systeme. Keines ist „das richtige“: Vox schaut auf die Form, Novarese auf das Jahrhundert, Bringhurst auf die Kunstströmung — und Handbücher wechseln unangekündigt zwischen ihnen. Diese Tabelle zeigt, dass „Réales“, „Barocche“ und „Transitional“ ein und dasselbe sind. Die Namen bleiben in der Sprache ihrer Urheber, denn es sind Eigennamen von Kategorien.'},
+  systemsColClass: {it:'Classe', en:'Class', de:'Klasse'},
+  systemsColVox: {it:'Vox 1954', en:'Vox 1954', de:'Vox 1954'},
+  systemsColBs: {it:'Vox-ATypI · BS 2961:1967', en:'Vox-ATypI · BS 2961:1967', de:'Vox-ATypI · BS 2961:1967'},
+  systemsColNov: {it:'Novarese 1958', en:'Novarese 1958', de:'Novarese 1958'},
+  systemsColBri: {it:'Bringhurst 1992', en:'Bringhurst 1992', de:'Bringhurst 1992'},
+  systemsColEra: {it:'Epoca', en:'Period', de:'Epoche'},
+  systemsColEx: {it:'Esempi', en:'Examples', de:'Beispiele'},
+  systemsNoteAtypi: {it:'† Gotiche e non latine non erano nelle nove classi di Vox del 1954: le ha aggiunte ATypI nel 1962, e le gaeliche nel 2010.', en:'† Blackletter and non-Latin were not among Vox’s nine classes of 1954: ATypI added them in 1962, and Gaelic in 2010.', de:'† Gebrochene und nichtlateinische Schriften gehörten nicht zu Vox’ neun Klassen von 1954: ATypI fügte sie 1962 hinzu, die gälischen 2010.'},
+  systemsNoteLineal: {it:'‡ Per Vox le lineari sono una classe sola. Le quattro sottoclassi — grottesca, neogrottesca, geometrica, umanistica — le introduce il British Standard 2961 nel 1967.', en:'‡ For Vox the lineals are a single class. The four subclasses — grotesque, neo-grotesque, geometric, humanist — were introduced by British Standard 2961 in 1967.', de:'‡ Für Vox sind die Linearen eine einzige Klasse. Die vier Unterklassen — Grotesk, Neo-Grotesk, geometrisch, humanistisch — führte der British Standard 2961 im Jahr 1967 ein.'},
+  systemsNoteBri: {it:'La casella vuota nella colonna Bringhurst non è una dimenticanza: quel sistema classifica per periodo storico, e per incise, scritte, manuali e gotiche non prevede una divisione.', en:'An empty cell in the Bringhurst column is not an omission: that system classifies by historical period, and provides no division for glyphic, script, graphic and blackletter faces.', de:'Ein leeres Feld in der Bringhurst-Spalte ist kein Versehen: Dieses System ordnet nach historischer Epoche und sieht für Incise-, Schreib-, Hand- und gebrochene Schriften keine Einteilung vor.'},
+  systemsDeadopted: {it:'ATypI ha de-adottato il sistema Vox-ATypI il 27 aprile 2021, per rifarne uno che comprenda le scritture non latine. Resta la nomenclatura più diffusa, ma non è più uno standard vigente.', en:'ATypI de-adopted the Vox-ATypI system on 27 April 2021, to build one that includes non-Latin scripts. It remains the most widespread nomenclature, but it is no longer a current standard.', de:'ATypI hat das Vox-ATypI-System am 27. April 2021 zurückgezogen, um ein neues zu schaffen, das nichtlateinische Schriften einschließt. Es bleibt die verbreitetste Nomenklatur, ist aber kein geltender Standard mehr.'},
   periodicNumKey: {it:'Il numero è la posizione cronologica, da 1 (1455) a 100 (2016).', en:'The number is the chronological position, from 1 (1455) to 100 (2016).', de:'Die Zahl ist die chronologische Position, von 1 (1455) bis 100 (2016).'},
   periodicSubKey: {it:'Il segno ° indica una casella composta in un carattere sostitutivo.', en:'The ° mark indicates a cell set in a substitute typeface.', de:'Das Zeichen ° kennzeichnet ein Feld, das in einer Ersatzschrift gesetzt ist.'},
   periodicOpenCard: {it:'Apri la scheda', en:'Open the card', de:'Karte öffnen'},
@@ -1031,6 +1046,104 @@ const CLASS_COLORS = {
 
 // Tinta di riserva, se un carattere non dichiara la classificazione
 const CLASS_COLOR_FALLBACK = '#D6CFC4';
+
+/* ---------- CONCORDANZA DELLE CLASSIFICAZIONI ----------
+   Quattro sistemi affiancati, uno per colonna, sulle stesse quattordici
+   classi della tavola periodica. Serve a leggere senza inciampi i manuali
+   che usano nomenclature diverse: quello che Vox chiama « Réales » in
+   Italia si chiama « Barocche » e Bringhurst lo divide fra Barocco e
+   Neoclassico.
+
+   I nomi restano nella lingua del sistema che li ha coniati — francese per
+   Vox, inglese per il British Standard, italiano per Novarese — perché sono
+   nomi propri di categoria, non traduzioni. Fanno eccezione le divisioni di
+   Bringhurst, che sono periodi della storia dell'arte e si traducono.
+
+   Fonti: Vox-ATypI su Wikipedia (EN) e Britannica; BS 2961:1967 nella
+   ricostruzione di Luc Devroye e McLean, « The Thames & Hudson Manual of
+   Typography », pp. 58–64; Novarese in `tipografia_riferimento.pdf` e in
+   Rattin-Ricci, « Questioni di carattere »; Bringhurst, « The Elements of
+   Typographic Style », capitolo 7.
+
+   Avvertenze registrate nelle note:
+   • Vox 1954 aveva nove classi. Le gotiche e le non latine sono aggiunte
+     ATypI del 1962, le gaeliche del 2010; il segno † le marca.
+   • Le quattro lineari sono un'articolazione del solo British Standard:
+     per Vox sono un'unica classe, « Linéales ».
+   • Bringhurst non ha una divisione per incise, scritte, manuali e gotiche:
+     classifica per periodo, non per forma della grazia. Lì la casella
+     resta vuota, e vuota deve restare — riempirla sarebbe un'invenzione. */
+const CLASS_SYSTEMS = [
+  {cls:'umanista',
+   vox:'Humanes', bs:'Humanist / Venetian', nov:'Rinascimentali',
+   bri:{it:'Rinascimento', en:'Renaissance', de:'Renaissance'},
+   era:{it:'1465–1500', en:'1465–1500', de:'1465–1500'}},
+
+  {cls:'garalda',
+   vox:'Garaldes', bs:'Garalde', nov:'Rinascimentali',
+   bri:{it:'Rinascimento · Barocco', en:'Renaissance · Baroque', de:'Renaissance · Barock'},
+   era:{it:'1495–1700', en:'1495–1700', de:'1495–1700'}},
+
+  {cls:'transizionale',
+   vox:'Réales', bs:'Transitional', nov:'Barocche',
+   bri:{it:'Barocco · Neoclassico', en:'Baroque · Neoclassical', de:'Barock · Klassizismus'},
+   era:{it:'1690–1790', en:'1690–1790', de:'1690–1790'}},
+
+  {cls:'didone',
+   vox:'Didones', bs:'Didone', nov:'Neoclassiche',
+   bri:{it:'Romantico', en:'Romantic', de:'Romantik'},
+   era:{it:'1780–1830', en:'1780–1830', de:'1780–1830'}},
+
+  {cls:'meccana',
+   vox:'Mécanes', bs:'Slab-serif / Mechanistic', nov:'Egiziane',
+   bri:{it:'Realista', en:'Realist', de:'Realismus'},
+   era:{it:'1815–1900', en:'1815–1900', de:'1815–1900'}},
+
+  {cls:'grottesca',
+   vox:'Linéales ‡', bs:'Lineal: Grotesque', nov:'Lineari grottesche',
+   bri:{it:'Realista', en:'Realist', de:'Realismus'},
+   era:{it:'1816–1900', en:'1816–1900', de:'1816–1900'}},
+
+  {cls:'neogrottesca',
+   vox:'Linéales ‡', bs:'Lineal: Neo-grotesque', nov:'Lineari grottesche',
+   bri:{it:'Realista', en:'Realist', de:'Realismus'},
+   era:{it:'1950–1970', en:'1950–1970', de:'1950–1970'}},
+
+  {cls:'geometrica',
+   vox:'Linéales ‡', bs:'Lineal: Geometric', nov:'Lineari geometriche',
+   bri:{it:'Modernista geometrico', en:'Geometric Modernist', de:'Geometrische Moderne'},
+   era:{it:'1920–1935', en:'1920–1935', de:'1920–1935'}},
+
+  {cls:'umanisticalineare',
+   vox:'Linéales ‡', bs:'Lineal: Humanist', nov:'Lineari geometriche',
+   bri:{it:'Modernista lirico', en:'Lyrical Modernist', de:'Lyrische Moderne'},
+   era:{it:'dal 1928', en:'from 1928', de:'ab 1928'}},
+
+  {cls:'incisa',
+   vox:'Incises', bs:'Glyphic / Incised', nov:'Lapidarie',
+   bri:null,
+   era:{it:'dal 1910', en:'from 1910', de:'ab 1910'}},
+
+  {cls:'scritta',
+   vox:'Scriptes', bs:'Script', nov:'Fantasia / Script',
+   bri:null,
+   era:{it:'ogni epoca', en:'all periods', de:'alle Epochen'}},
+
+  {cls:'manuale',
+   vox:'Manuaires', bs:'Graphic', nov:'Fantasia / Script',
+   bri:null,
+   era:{it:'ogni epoca', en:'all periods', de:'alle Epochen'}},
+
+  {cls:'gotica',
+   vox:'Fractures †', bs:'Blackletter', nov:'Gotiche',
+   bri:null,
+   era:{it:'1150–1940', en:'1150–1940', de:'1150–1940'}},
+
+  {cls:'nonlatine',
+   vox:'Non-latines †', bs:'Non-Latin', nov:'Non latine',
+   bri:null,
+   era:{it:'ogni epoca', en:'all periods', de:'alle Epochen'}},
+];
 
 const TYPEFACES = [
 

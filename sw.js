@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v22';
+const CACHE_VERSION = 'glifo-v23';
 
 const ASSETS = [
   './',

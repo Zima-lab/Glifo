@@ -1180,6 +1180,87 @@ button, a, [role="button"], [tabindex] { touch-action: manipulation; }
   .pt-cell:hover { transform: none; }
 }
 
+/* ---------- CONCORDANZA DELLE CLASSIFICAZIONI ----------
+   Segue la tavola periodica. È una tabella vera, non una griglia finta:
+   riga = classe, colonna = sistema. La prima cella di ogni riga porta la
+   pastiglia del colore della classe, la stessa della colonna qui sopra —
+   è il filo che tiene insieme i due oggetti. */
+.systems {
+  margin: var(--sp-6) 0 var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.sys-title {
+  font-size: var(--fs-2xl); margin-bottom: var(--sp-2);
+}
+.sys-intro {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  margin: 0 0 var(--sp-4); max-width: 68ch;
+}
+
+/* Sette colonne non stanno su un telefono: si scorre, come la tavola. */
+.sys-scroll {
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--sp-2);
+  scrollbar-width: thin;
+}
+.sys-scroll:focus-visible { outline: 2px solid var(--accent1); outline-offset: 3px; }
+
+.sys-table {
+  border-collapse: collapse;
+  width: 100%; min-width: 760px;
+  font-size: var(--fs-2xs); line-height: 1.35;
+  text-align: left;
+}
+.sys-table th, .sys-table td {
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.sys-table thead th {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--bg);
+  font-weight: 800; color: var(--text);
+  letter-spacing: .02em;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+/* Prima colonna: il nome della classe, in evidenza — è la chiave di riga */
+.sys-cls {
+  font-weight: 700; color: var(--text); white-space: nowrap;
+  padding-right: var(--sp-4) !important;
+}
+.sys-sw {
+  display: inline-block; width: 10px; height: 10px;
+  border-radius: 3px; margin-right: 6px;
+  vertical-align: baseline;
+}
+
+/* I nomi coniati dai quattro sistemi: restano nella loro lingua, quindi
+   niente sillabazione automatica che li spezzerebbe a caso. */
+.sys-src { color: var(--text); hyphens: none; }
+.sys-none { color: var(--text-soft); }
+.sys-era { color: var(--text-soft); white-space: nowrap; }
+.sys-ex  { color: var(--text-soft); font-style: italic; }
+
+.sys-notes {
+  margin: var(--sp-3) 0 0; max-width: 68ch;
+}
+.sys-notes p {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-2xs); line-height: 1.45; color: var(--text-soft);
+}
+.sys-notes p:last-child { margin-bottom: 0; }
+
+/* Didascalia della tabella: la leggono gli screen reader, non gli occhi */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
 /* Legenda delle quattro famiglie Vox, in testa alla griglia */
 .type-legend {
   display: flex; flex-wrap: wrap; gap: var(--sp-4);

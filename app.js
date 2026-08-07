@@ -1158,6 +1158,90 @@
     }
   }
 
+  /* ---------- CONCORDANZA DELLE CLASSIFICAZIONI ----------
+     Segue la tavola periodica come una chiave di lettura: la tavola dice
+     dove sta un carattere, questa tabella dice come chiamano quel posto i
+     quattro sistemi che si incontrano nei manuali. Le righe sono le stesse
+     quattordici classi, nello stesso ordine e con la stessa tinta delle
+     colonne della tavola: chi ha appena guardato la tavola ritrova qui i
+     colori e non deve reimparare nulla.
+
+     È una tabella vera — <table>, con <th scope> — e non una griglia di
+     <div>: qui i dati sono tabulari sul serio, e uno screen reader deve
+     poter annunciare « riga Didone, colonna Novarese, Neoclassiche ». */
+  function renderSystems(host) {
+    clear(host);
+
+    host.appendChild(el('h2', 'sys-title', t('systemsTitle')));
+    host.appendChild(el('p', 'sys-intro', t('systemsIntro')));
+
+    // Sette colonne non stanno in 360 px: si scorre, come la tavola.
+    const scroll = el('div', 'sys-scroll');
+    scroll.setAttribute('role', 'region');
+    scroll.setAttribute('aria-label', t('systemsTitle'));
+    scroll.tabIndex = 0;
+
+    const table = el('table', 'sys-table');
+    const cap = el('caption', 'sr-only', t('systemsTitle'));
+    table.appendChild(cap);
+
+    const thead = el('thead');
+    const hr = el('tr');
+    ['systemsColClass', 'systemsColVox', 'systemsColBs', 'systemsColNov',
+     'systemsColBri', 'systemsColEra', 'systemsColEx'].forEach(function (k) {
+      const th = el('th', null, t(k));
+      th.scope = 'col';
+      hr.appendChild(th);
+    });
+    thead.appendChild(hr);
+    table.appendChild(thead);
+
+    const tb = el('tbody');
+    CLASS_SYSTEMS.forEach(function (s) {
+      const cl = CLASSIFICATIONS.find(function (c) { return c.id === s.cls; });
+      const tr_ = el('tr');
+
+      // Prima cella: il nome della classe, con la pastiglia del suo colore.
+      // È la stessa tinta della colonna nella tavola qui sopra.
+      const th = el('th', 'sys-cls');
+      th.scope = 'row';
+      const sw = el('span', 'sys-sw');
+      sw.style.background = CLASS_COLORS[s.cls] || CLASS_COLOR_FALLBACK;
+      th.appendChild(sw);
+      th.appendChild(document.createTextNode(
+        tr(CLASS_SHORT[s.cls]) || (cl ? tr(cl.name) : s.cls)));
+      tr_.appendChild(th);
+
+      tr_.appendChild(el('td', 'sys-src', s.vox));
+      tr_.appendChild(el('td', 'sys-src', s.bs));
+      tr_.appendChild(el('td', 'sys-src', s.nov));
+
+      // Vuota dove Bringhurst non prevede una divisione: la lineetta lo
+      // dichiara, e la nota sotto la tabella spiega perché.
+      const bri = el('td', 'sys-src');
+      if (s.bri) { bri.textContent = tr(s.bri); }
+      else { bri.textContent = '—'; bri.className = 'sys-src sys-none'; }
+      tr_.appendChild(bri);
+
+      tr_.appendChild(el('td', 'sys-era', tr(s.era)));
+      tr_.appendChild(el('td', 'sys-ex', cl && cl.examples ? cl.examples : ''));
+
+      tb.appendChild(tr_);
+    });
+    table.appendChild(tb);
+
+    scroll.appendChild(table);
+    host.appendChild(scroll);
+
+    // Le note: senza, i due segni e le caselle vuote restano enigmi
+    const notes = el('div', 'sys-notes');
+    [t('systemsNoteAtypi'), t('systemsNoteLineal'),
+     t('systemsNoteBri'), t('systemsDeadopted')].forEach(function (n) {
+      notes.appendChild(el('p', null, n));
+    });
+    host.appendChild(notes);
+  }
+
   function renderType() {
     const grid = $('typeGrid'), detail = $('typeDetail');
     const open = state.typeface && TYPEFACES.find(function (x) { return x.id === state.typeface; });
@@ -1170,6 +1254,9 @@
     // La tavola sta in primo piano: è l'indice della sezione, le schede
     // che seguono ne sono l'approfondimento.
     renderPeriodic($('typePeriodic'));
+    // Subito sotto la tavola, la concordanza fra i sistemi: la tavola dice
+    // dove sta un carattere, la tabella come si chiama quel posto altrove.
+    renderSystems($('typeSystems'));
     // Legenda: senza, il colore resta un vezzo. Con, diventa una chiave
     // di lettura che si impara guardando la griglia due volte.
     const leg = $('typeLegend');
