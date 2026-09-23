@@ -134,4 +134,4 @@ hanno licenze proprie che la GPL non può concedere. I dettagli sono in
 
 In breve: Blacker Pro (Latinotype) è sotto licenza per uso non commerciale e
 non è riutilizzabile; i campioni in `fonts/specimen/` hanno licenza SIL OFL e
-sono liberi.
+sono liberi. 
