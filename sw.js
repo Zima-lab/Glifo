@@ -5,11 +5,12 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v33';
+const CACHE_VERSION = 'glifo-v34';
 
 const ASSETS = [
+  // Solo './': su Cloudflare 'index.html' risponde 307 verso '/', e un
+  // redirect nella lista può far fallire addAll() e con lui l'offline.
   './',
-  'index.html',
   'style.css',
   'data.js',
   'app.js',
@@ -182,6 +183,6 @@ self.addEventListener('fetch', function (event) {
         }
         return res;
       });
-    }).catch(function () { return caches.match('index.html'); })
+    }).catch(function () { return caches.match('./'); })
   );
 });
