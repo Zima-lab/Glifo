@@ -1,0 +1,1627 @@
+/* Glifo — STILE
+   Palette e token in :root, sovrascritti da [data-theme="dark"].
+   I valori sono gli stessi definiti in data.js (THEMES): qui vivono come
+   variabili CSS così il cambio tema è istantaneo e non ridisegna tutto in JS. */
+
+/* ---------- BLACKER PRO (font del progetto) ----------
+   Licenza per uso non commerciale. Blacker Pro Text per titoli e numeri,
+   Blacker Sans Pro per l'interfaccia.
+   font-display:swap → il testo è leggibile subito col font di sistema. */
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Light.woff2') format('woff2'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Light-Italic.woff2') format('woff2'); font-weight:300; font-style:italic; font-display:swap; }
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Medium.woff2') format('woff2'); font-weight:600; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Pro Text'; src:url('fonts/Blacker-Pro-Text-Medium-Italic.woff2') format('woff2'); font-weight:600; font-style:italic; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Book.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Book-Italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Extrabold.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blacker Sans Pro'; src:url('fonts/Blacker-Sans-Pro-Extrabold-Italic.woff2') format('woff2'); font-weight:800; font-style:italic; font-display:swap; }
+
+/* ---------- CARATTERI CAMPIONE (glossario e quiz) ----------
+   Le dieci famiglie che illustrano le classificazioni tipografiche.
+   Erano caricate da Google Fonts: ora sono locali, così i campioni
+   restano fedeli anche offline. Sottoinsieme "latin" (U+0000-00FF):
+   copre tutto l'alfabeto usato dall'app in italiano, inglese e tedesco.
+   Licenza SIL Open Font License, vedi fonts/specimen/OFL.txt. */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/archivo-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/archivo-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/cinzel-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/cinzel-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/cormorant-garamond-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/cormorant-garamond-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/dm-sans-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/dm-sans-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Dancing Script';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/dancing-script-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/eb-garamond-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/eb-garamond-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/pt-serif-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/pt-serif-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/Futura/Futura-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/Futura/Futura-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/playfair-display-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/playfair-display-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/specimen/roboto-slab-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/roboto-slab-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'UnifrakturCook';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/unifrakturcook-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/caveat-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'HelveticaLT55';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/helvetica-lt-55-roman.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/inter-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/inter-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/noto-sans-400-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/noto-sans-400-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('fonts/specimen/noto-sans-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/source-sans-3-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/source-sans-3-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Campioni della tavola di riconoscimento.
+   Cinque famiglie aggiunte per coprire i gruppi che restavano senza
+   campione: senza di loro le righe più difficili della tavola — quelle
+   dove le differenze sono di un grado di inclinazione — sarebbero rimaste
+   vuote proprio dove il confronto serve di più. Tutte SIL OFL. */
+@font-face {
+  font-family: 'Museum';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/museum-fourteen-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Crimson Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/crimson-pro-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Libre Caslon Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/libre-caslon-text-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Century Catalogue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/century-catalogue-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bitter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/bitter-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Campioni delle schede della sezione Type.
+   Sono tutti revival o equivalenti liberi di caratteri commerciali: la
+   scheda lo dichiara nel campo `substitute` di data.js, perché un
+   campione spacciato per l'originale insegnerebbe forme sbagliate. */
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/libre-baskerville-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/libre-baskerville-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Linotype Didot (Adrian Frutiger, 1991): carattere commerciale, presente
+   su macOS come font di sistema. Come Blacker, Helvetica LT e Futura non
+   rientra nella licenza libera del progetto — vedi NOTICE.md. */
+@font-face {
+  font-family: 'Didot LT';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/didot-lt-regular.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/bodoni-moda-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/specimen/bodoni-moda-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Tinos';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/tinos-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Tinos';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/tinos-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/anton-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Kabel (Image Club Graphics, 1992): digitalizzazione commerciale del
+   carattere di Rudolf Koch. Come Didot LT, Blacker, Helvetica LT e Futura
+   non rientra nella licenza libera del progetto — vedi NOTICE.md.
+   Nessun unicode-range: il font è del 1992 e non ha l’euro né il segno meno
+   U+2212, che quindi passano al carattere dell’interfaccia. */
+@font-face {
+  font-family: 'Kabel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/kabel-book.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/specimen/comic-neue-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/specimen/comic-neue-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light;
+  --bg:#FBF7F2; --surface:#FFFFFF; --border:#E8DFD3;
+  --text:#1B1712; --text-soft:#6E6558; --chip:#F3EEE4;
+  --accent1:#D62F55; --accent2:#FFD166; --accent2-dark:#8A6100;
+  --accent3:#0A7D5E; --accent4:#0F6E8C;
+  --toggle-track:#E8DFD3; --toggle-knob:#FFFFFF;
+  --on-accent:#FFFFFF;
+
+  /* elevazione: tre livelli, come nell'app del vocabolario */
+  --e1: 0 1px 2px rgba(27,23,18,.06), 0 1px 1px rgba(27,23,18,.05);
+  --e2: 0 6px 16px rgba(27,23,18,.10), 0 2px 5px rgba(27,23,18,.06);
+  --e3: 0 20px 50px rgba(27,23,18,.18), 0 6px 16px rgba(27,23,18,.10);
+
+  /* scala tipografica in rem: rispetta la dimensione testo scelta dall'utente */
+  --fs-2xs:.6875rem; --fs-xs:.78125rem; --fs-sm:.8125rem; --fs-md:.875rem;
+  --fs-base:.9375rem; --fs-lg:1.0625rem; --fs-xl:1.125rem; --fs-2xl:1.375rem;
+  --fs-3xl:1.625rem; --fs-4xl:2.375rem;
+
+  /* spaziature a passo 4px */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px;
+  --radius:10px; --radius-lg:14px; --radius-xl:18px;
+
+  /* Altezza della barra superiore: marchio (58px) più la riga di ricerca
+     (50px). Sta in una variabile perché tre regole ci si appoggiano — la
+     colonna laterale appiccicata, la sua altezza massima e l'impianto —
+     e se cambia l'una senza le altre la navigazione finisce sotto il titolo. */
+  --topbar-h:108px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:#14181A; --surface:#1C2226; --border:#2C3438;
+  --text:#F2EFE9; --text-soft:#9AA3A6; --chip:#232B2F;
+  --accent1:#FF8FA8; --accent2:#FFD166; --accent2-dark:#FFD166;
+  --accent3:#4FE7B8; --accent4:#6FC9EC;
+  --toggle-track:#2C3438; --toggle-knob:#F2EFE9;
+  --on-accent:#14181A;
+  --e1: 0 1px 2px rgba(0,0,0,.35), 0 1px 1px rgba(0,0,0,.2);
+  --e2: 0 6px 18px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3);
+  --e3: 0 20px 60px rgba(0,0,0,.65), 0 6px 20px rgba(0,0,0,.4);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Blacker Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size:var(--fs-md); line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  padding-top: env(safe-area-inset-top);
+  transition: background-color .2s ease, color .2s ease;
+}
+h1,h2,h3,h4 { font-family:'Blacker Pro Text', Georgia, 'Iowan Old Style', Palatino, serif; font-weight:600; margin:0; letter-spacing:-.01em; }
+button { font-family:inherit; }
+
+/* Focus visibile ovunque per chi naviga da tastiera */
+button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+  outline:2px solid var(--accent1); outline-offset:2px;
+}
+/* Niente ritardo del doppio tap su iOS/Android */
+button, a, [role="button"], [tabindex] { touch-action: manipulation; }
+
+/* ---------- BARRA SUPERIORE ---------- */
+.topbar {
+  position:sticky; top:0; z-index:30;
+  background:var(--surface); border-bottom:1px solid var(--border);
+}
+.topbar-inner {
+  max-width:1180px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3);
+  padding:var(--sp-3) var(--sp-5);
+}
+.brand { display:flex; align-items:baseline; gap:var(--sp-2); min-width:0; }
+.brand-name { font-family:'Blacker Pro Text', Georgia, serif; font-weight:600; font-size:var(--fs-2xl); }
+.brand-tag { font-size:var(--fs-xs); color:var(--text-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.topbar-actions { display:flex; align-items:center; gap:var(--sp-2); flex-shrink:0; }
+
+.xp-chip {
+  font-size:var(--fs-xs); font-weight:800; color:var(--accent1);
+  background:var(--chip); border-radius:999px; padding:6px 11px; white-space:nowrap;
+}
+.lang-toggle { display:flex; gap:3px; padding:3px; border-radius:var(--radius); background:var(--chip); }
+.lang-opt {
+  border:none; background:transparent; color:var(--text-soft);
+  padding:7px 9px; border-radius:7px; font-size:var(--fs-xs); font-weight:800;
+  letter-spacing:.03em; cursor:pointer; transition:background .15s, color .15s;
+}
+.lang-opt:hover { background:var(--border); }
+.lang-opt.active { background:var(--accent1); color:var(--on-accent); }
+
+.theme-toggle {
+  width:46px; height:26px; border-radius:14px; border:1px solid var(--border);
+  background:var(--toggle-track); position:relative; cursor:pointer; padding:0; flex-shrink:0;
+}
+.theme-knob {
+  position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+  background:var(--toggle-knob); box-shadow:var(--e1); transition:left .18s ease;
+}
+[data-theme="dark"] .theme-knob { left:22px; }
+
+/* ---------- RICERCA ----------
+   Seconda riga della barra superiore. Il campo è largo quanto la colonna di
+   lettura perché una query è una frase corta: allargarlo a tutta la finestra
+   lo farebbe sembrare un campo da modulo, non uno strumento di consultazione. */
+.searchbar {
+  max-width:1180px; margin:0 auto;
+  padding:0 var(--sp-5) var(--sp-3);
+}
+.search-wrap {
+  position:relative; display:flex; align-items:center; gap:var(--sp-2);
+  background:var(--chip); border:1px solid var(--border);
+  border-radius:var(--radius); padding:0 10px; height:38px;
+  transition:border-color .15s, box-shadow .15s, background .15s;
+}
+.search-wrap:focus-within {
+  border-color:var(--accent1); background:var(--surface); box-shadow:var(--e2);
+}
+.search-ic { display:flex; flex-shrink:0; color:var(--text-soft); }
+.search-ic svg { width:17px; height:17px; }
+.search-wrap:focus-within .search-ic { color:var(--accent1); }
+
+.search-input {
+  flex:1; min-width:0; border:none; background:transparent; color:var(--text);
+  font-family:inherit; font-size:var(--fs-base); line-height:1.4;
+  padding:0; outline:none;
+  /* iOS ingrandisce la pagina se il campo scende sotto i 16px: su telefono
+     il corpo torna a 16px nella media query in fondo. */
+}
+.search-input::placeholder { color:var(--text-soft); opacity:1; }
+.search-input::-webkit-search-cancel-button { display:none; }
+
+.search-clear {
+  flex-shrink:0; border:none; background:transparent; cursor:pointer;
+  color:var(--text-soft); display:flex; align-items:center; padding:4px;
+  border-radius:50%; position:relative;
+}
+/* Bersaglio tattile pieno senza allargare il segno disegnato */
+.search-clear::after { content:""; position:absolute; inset:-9px; }
+.search-clear:hover { color:var(--text); background:var(--border); }
+.search-clear svg { width:15px; height:15px; }
+
+/* ---- la tendina dei suggerimenti ---- */
+.search-list {
+  position:absolute; z-index:40; top:calc(100% + 6px); left:0; right:0;
+  max-height:min(62vh, 460px); overflow-y:auto;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-lg); box-shadow:var(--e3);
+  padding:var(--sp-1); -webkit-overflow-scrolling:touch;
+}
+.search-item {
+  display:flex; align-items:center; gap:var(--sp-3);
+  width:100%; text-align:left; border:none; background:transparent;
+  color:var(--text); cursor:pointer;
+  padding:9px 10px; border-radius:8px; min-height:44px;
+}
+.search-item:hover, .search-item.is-on { background:var(--chip); }
+/* Il glifo o il numero d'ordine: dà alla riga un appiglio visivo, come la
+   letterina in testa alla voce nelle schede della sezione Anatomia. */
+.search-mark {
+  flex-shrink:0; width:32px; height:32px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:var(--fs-lg); line-height:1;
+  background:var(--chip); color:var(--text);
+  font-family:'Blacker Pro Text', Georgia, serif;
+}
+.search-item:hover .search-mark, .search-item.is-on .search-mark { background:var(--border); }
+/* Con il fondo colorato della classificazione il testo deve restare scuro:
+   le tinte di CLASS_COLORS sono chiare e pensate per il nero del libro, non
+   per il bianco del tema scuro. Il fondo arriva come stile in linea, quindi
+   vince sul :hover qui sopra e la pastiglia resta del colore della classe
+   anche sotto il puntatore. */
+.search-mark.is-tinted { color:#1B1712; }
+.search-mark svg { width:17px; height:17px; }
+.search-texts { min-width:0; flex:1; }
+.search-name {
+  display:block; font-weight:600; font-size:var(--fs-base);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.search-sub {
+  display:block; font-size:var(--fs-xs); color:var(--text-soft);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+/* L'etichetta di sezione: dice dove porta il risultato prima di cliccarlo */
+.search-where {
+  flex-shrink:0; font-size:var(--fs-2xs); font-weight:800;
+  letter-spacing:.04em; text-transform:uppercase;
+  color:var(--text-soft); background:var(--chip);
+  border-radius:999px; padding:3px 8px;
+}
+.search-item.is-on .search-where, .search-item:hover .search-where { background:var(--border); }
+
+.search-none { padding:var(--sp-4) var(--sp-3); }
+.search-none-t { font-size:var(--fs-base); font-weight:600; margin:0 0 4px; }
+.search-none-h { font-size:var(--fs-xs); color:var(--text-soft); margin:0; }
+
+/* Il lampo che segue il salto: la voce si apre in mezzo alla pagina e senza
+   un segnale l'occhio non sa dove è atterrato. Due secondi, poi svanisce. */
+.is-flash { animation:flash 2s ease-out; }
+@keyframes flash {
+  0%, 12% { box-shadow:0 0 0 3px var(--accent1); }
+  100% { box-shadow:0 0 0 3px rgba(0,0,0,0); }
+}
+
+/* ---------- IMPIANTO ---------- */
+.shell { max-width:1180px; margin:0 auto; display:flex; min-height:calc(100vh - var(--topbar-h)); }
+.sidebar {
+  width:212px; flex-shrink:0; border-right:1px solid var(--border);
+  padding:var(--sp-5) var(--sp-3); display:flex; flex-direction:column; gap:3px;
+  position:sticky; top:var(--topbar-h); align-self:flex-start;
+  max-height:calc(100vh - var(--topbar-h)); overflow-y:auto;
+}
+.nav-item {
+  display:flex; align-items:center; gap:var(--sp-3);
+  border:none; background:transparent; color:var(--text);
+  text-align:left; padding:10px 12px; border-radius:9px; cursor:pointer;
+  font-size:var(--fs-base); font-weight:600; min-height:44px;
+  transition:background .15s, color .15s;
+}
+.nav-item:hover { background:var(--chip); }
+.nav-item.active { background:var(--chip); color:var(--accent1); }
+.nav-item svg { width:19px; height:19px; flex-shrink:0; }
+
+.content { flex:1; min-width:0; padding:var(--sp-8) var(--sp-5) 80px; }
+.view { max-width:920px; margin:0 auto; animation:fade .3s ease; }
+@keyframes fade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+.view-title { font-size:var(--fs-3xl); margin-bottom:var(--sp-2); }
+.view-intro { font-size:var(--fs-base); color:var(--text-soft); margin:0 0 var(--sp-6); line-height:1.6; }
+
+/* ---------- HOME ---------- */
+.hero { text-align:center; margin-bottom:var(--sp-8); }
+.hero-kicker {
+  font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-sm);
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent1);
+  font-weight:600; margin:0 0 var(--sp-3);
+}
+.hero-title { font-size:var(--fs-4xl); line-height:1.12; margin:0 0 var(--sp-4); }
+.hero-quote { font-size:var(--fs-base); font-style:italic; color:var(--text-soft); max-width:520px; margin:0 auto var(--sp-1); line-height:1.6; }
+.hero-author { font-size:var(--fs-xs); color:var(--accent1); font-weight:800; margin:0; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(215px, 1fr)); gap:var(--sp-3); margin-bottom:var(--sp-6); }
+
+.tile {
+  position:relative; overflow:hidden; text-align:left;
+  border:1px solid var(--border); background:var(--surface); border-radius:var(--radius-lg);
+  padding:var(--sp-5); cursor:pointer; color:var(--text);
+  display:flex; flex-direction:column; gap:var(--sp-2); min-height:130px;
+  box-shadow:var(--e1); transition:border-color .15s, box-shadow .15s, transform .12s;
+}
+.tile:hover { border-color:var(--accent1); box-shadow:var(--e2); }
+.tile:active { transform:translateY(1px); }
+.tile-glyph {
+  position:absolute; right:-12px; bottom:-34px; font-size:110px; line-height:1;
+  font-weight:700; opacity:.12; pointer-events:none; user-select:none;
+}
+.tile-title { font-size:var(--fs-base); font-weight:800; position:relative; }
+.tile-desc { font-size:var(--fs-xs); color:var(--text-soft); line-height:1.45; position:relative; }
+.tile-meta { font-size:var(--fs-2xs); color:var(--accent3); font-weight:800; margin-top:auto; position:relative; }
+
+.panel {
+  border:1px solid var(--border); background:var(--surface);
+  border-radius:var(--radius-lg); padding:var(--sp-6); box-shadow:var(--e1);
+}
+.panel-title {
+  font-family:'Blacker Sans Pro', sans-serif;
+  font-size:var(--fs-xs); font-weight:800; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--text-soft); margin-bottom:var(--sp-4);
+}
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(125px, 1fr)); gap:var(--sp-4); }
+.stat-value { font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-2xl); font-weight:600; }
+.stat-label { font-size:var(--fs-xs); color:var(--text-soft); }
+
+/* ---------- LISTE A FISARMONICA (glossario, anatomia) ---------- */
+.list { display:flex; flex-direction:column; gap:var(--sp-2); }
+.item {
+  border:1px solid var(--border); background:var(--surface);
+  border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--e1);
+  transition:box-shadow .15s;
+}
+.item.open { box-shadow:var(--e2); }
+.item-head {
+  width:100%; display:flex; align-items:center; gap:var(--sp-4);
+  padding:15px 18px; background:transparent; border:none; cursor:pointer;
+  color:var(--text); text-align:left; min-height:44px;
+  transition:background .15s;
+}
+.item-head:hover { background:var(--chip); }
+.item-specimen {
+  font-size:28px; flex-shrink:0; width:56px; text-align:center; color:var(--accent1); line-height:1.2;
+}
+/* Campioni di tre segni — "123", "XIV", "ABC" — nella stessa casella:
+   si riduce il corpo, non la larghezza, così le voci restano incolonnate. */
+.item-specimen-sm { font-size:17px; letter-spacing:.01em; }
+.item-main { flex:1; min-width:0; }
+.lang-tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:var(--sp-1); }
+.lang-tag {
+  font-size:var(--fs-2xs); font-weight:800; padding:2px 6px; border-radius:5px;
+  background:var(--chip); color:var(--text-soft); white-space:nowrap;
+}
+.item-name { display:block; font-size:var(--fs-base); font-weight:800; }
+.item-sub { display:block; font-size:var(--fs-xs); color:var(--text-soft); }
+.item-chev { font-size:var(--fs-xl); color:var(--text-soft); flex-shrink:0; width:18px; text-align:center; }
+.item-body { padding:0 18px var(--sp-5); border-top:1px solid var(--border); }
+.item-desc { font-size:var(--fs-sm); line-height:1.65; color:var(--text-soft); margin:var(--sp-4) 0; }
+.specimen-box { padding:18px; background:var(--chip); border-radius:var(--radius); }
+.specimen-word { font-size:28px; margin-bottom:var(--sp-1); line-height:1.3; }
+.specimen-alphabet { font-size:var(--fs-sm); color:var(--text-soft); letter-spacing:.02em; overflow-wrap:anywhere; }
+
+/* ---------- TIMELINE ---------- */
+.timeline { display:flex; flex-direction:column; }
+.tl-row { display:flex; gap:var(--sp-4); padding-bottom:var(--sp-5); }
+.tl-year {
+  width:58px; flex-shrink:0; text-align:right;
+  font-family:'Blacker Pro Text', Georgia, serif; font-weight:600;
+  font-size:var(--fs-lg); color:var(--accent1); padding-top:2px;
+}
+.tl-line { width:2px; background:var(--border); flex-shrink:0; position:relative; }
+.tl-dot { width:9px; height:9px; border-radius:50%; background:var(--accent1); position:absolute; left:-3.5px; top:6px; }
+.tl-card {
+  flex:1; text-align:left; border:1px solid var(--border); background:var(--surface);
+  border-radius:var(--radius); padding:14px 16px; cursor:pointer; color:var(--text);
+  box-shadow:var(--e1); transition:border-color .15s, box-shadow .15s;
+}
+.tl-card:hover { border-color:var(--accent1); box-shadow:var(--e2); }
+.tl-title { font-weight:800; font-size:var(--fs-base); }
+.tl-desc { font-size:var(--fs-sm); color:var(--text-soft); line-height:1.6; margin-top:var(--sp-2); }
+
+/* ---------- DESIGNER ---------- */
+.designer { align-items:flex-start; min-height:0; }
+.designer-head { display:flex; align-items:center; gap:var(--sp-3); margin-bottom:var(--sp-1); }
+.designer-photo {
+  width:60px; height:60px; border-radius:50%; flex-shrink:0; object-fit:cover;
+  background:var(--chip); border:1px solid var(--border);
+}
+.designer-name { font-family:'Blacker Pro Text', Georgia, serif; font-weight:600; font-size:var(--fs-lg); }
+.designer-years { font-size:var(--fs-xs); color:var(--text-soft); }
+.designer-known { font-size:var(--fs-xs); color:var(--accent1); font-weight:800; }
+.designer-bio { font-size:var(--fs-xs); color:var(--text-soft); line-height:1.6; margin-top:var(--sp-1); }
+
+/* ---------- QUIZ ---------- */
+.back-link {
+  border:none; background:none; color:var(--text-soft); font-size:var(--fs-sm);
+  cursor:pointer; padding:0 0 var(--sp-4); font-weight:600; min-height:32px;
+}
+.back-link:hover { color:var(--text); }
+.quiz-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--sp-4); }
+.quiz-count { font-size:var(--fs-sm); color:var(--text-soft); font-weight:600; }
+.quiz-score { font-size:var(--fs-sm); font-weight:800; color:var(--accent1); }
+.quiz-card {
+  border:1px solid var(--border); background:var(--surface); border-radius:var(--radius-xl);
+  padding:var(--sp-6); margin-bottom:var(--sp-4); box-shadow:var(--e2);
+}
+.quiz-prompt { font-size:var(--fs-sm); color:var(--text-soft); margin-bottom:var(--sp-4); }
+.quiz-specimen { font-size:42px; text-align:center; padding:18px 0; line-height:1.3; overflow-wrap:anywhere; }
+.quiz-text { font-size:var(--fs-xl); text-align:center; padding:10px 8px; line-height:1.5; font-weight:600; }
+.quiz-choices { display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); }
+.choice {
+  padding:14px 12px; border-radius:var(--radius); font-size:var(--fs-md); font-weight:600;
+  cursor:pointer; text-align:center; background:var(--surface);
+  border:1.5px solid var(--border); color:var(--text); min-height:48px;
+  transition:border-color .15s, background .15s;
+}
+.choice:hover:not(:disabled) { border-color:var(--accent1); }
+.choice:disabled { cursor:default; }
+.choice.right { background:var(--chip); border-color:var(--accent3); color:var(--accent3); }
+.choice.wrong { background:var(--chip); border-color:var(--accent1); color:var(--accent1); }
+.quiz-foot { display:flex; justify-content:space-between; align-items:center; margin-top:var(--sp-5); flex-wrap:wrap; gap:var(--sp-3); }
+.quiz-feedback { font-size:var(--fs-sm); font-weight:800; }
+.quiz-feedback.ok { color:var(--accent3); }
+.quiz-feedback.ko { color:var(--accent1); }
+.quiz-verdict { display:flex; flex-direction:column; gap:3px; }
+.quiz-specimen-name { font-size:var(--fs-xs); color:var(--text-soft); font-weight:600; }
+.quiz-specimen-font { font-weight:700; color:var(--text); }
+.quiz-class-examples { font-size:var(--fs-xs); color:var(--text-soft); }
+.btn-solid {
+  padding:11px 20px; border-radius:9px; border:none; background:var(--text); color:var(--bg);
+  font-weight:800; font-size:var(--fs-sm); cursor:pointer; min-height:44px;
+}
+.btn-solid:hover { opacity:.85; }
+.btn-outline {
+  padding:11px 20px; border-radius:9px; border:1.5px solid var(--border); background:transparent;
+  color:var(--text); font-weight:800; font-size:var(--fs-sm); cursor:pointer; min-height:44px;
+}
+.btn-outline:hover { background:var(--chip); }
+.btn-accent {
+  padding:12px 24px; border-radius:var(--radius); border:none;
+  background:var(--accent1); color:var(--on-accent);
+  font-weight:800; font-size:var(--fs-md); cursor:pointer; min-height:44px;
+}
+.btn-accent:hover { opacity:.88; }
+.quiz-done { text-align:center; border:1px solid var(--border); background:var(--surface); border-radius:var(--radius-xl); padding:38px 24px; box-shadow:var(--e2); }
+.done-score { font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-4xl); font-weight:600; color:var(--accent1); margin-bottom:var(--sp-2); }
+.done-msg { font-size:var(--fs-base); color:var(--text-soft); margin-bottom:var(--sp-5); }
+.done-actions { display:flex; gap:var(--sp-3); justify-content:center; flex-wrap:wrap; }
+
+/* ---------- PROFILO ---------- */
+.level-panel { display:flex; align-items:center; gap:var(--sp-5); flex-wrap:wrap; margin-bottom:var(--sp-5); }
+.level-num { font-family:'Blacker Pro Text', Georgia, serif; font-size:var(--fs-4xl); font-weight:600; line-height:1; }
+.level-label { font-size:var(--fs-2xs); color:var(--text-soft); font-weight:800; text-transform:uppercase; letter-spacing:.06em; margin-top:var(--sp-1); }
+.level-bar-wrap { flex:1; min-width:170px; }
+.level-track { height:8px; border-radius:5px; background:var(--chip); overflow:hidden; }
+.level-fill { height:100%; background:var(--accent1); border-radius:5px; transition:width .4s ease; }
+.level-meta { font-size:var(--fs-xs); color:var(--text-soft); margin-top:var(--sp-2); }
+.stat-box { border:1px solid var(--border); background:var(--chip); border-radius:var(--radius); padding:var(--sp-4); }
+
+/* ---------- TAB BAR (solo mobile) ---------- */
+.tabbar { display:none; }
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 859px) {
+  .sidebar { display:none; }
+  .content { padding:var(--sp-5) var(--sp-4) calc(84px + env(safe-area-inset-bottom)); }
+  .brand-tag { display:none; }
+
+  .searchbar { padding:0 var(--sp-4) 10px; }
+  /* Safari su iOS ingrandisce la pagina quando si tocca un campo sotto i
+     16px: qui il corpo torna a 16px e lo zoom automatico non scatta. */
+  .search-input { font-size:16px; }
+  .search-list { max-height:min(58vh, 400px); }
+  /* La pastiglia di sezione resta: è l'informazione che dice dove porta il
+     risultato. Si stringe, non sparisce. */
+  .search-where { padding:3px 6px; max-width:34vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .hero-title { font-size:var(--fs-3xl); }
+  .quiz-choices { grid-template-columns:1fr; }
+  .tabbar {
+    display:flex; position:fixed; bottom:0; left:0; right:0; z-index:50;
+    background:var(--surface); border-top:1px solid var(--border);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+    box-shadow:0 -2px 12px rgba(27,23,18,.08);
+  }
+  .tab {
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;
+    border:none; background:transparent; padding:6px 2px; cursor:pointer;
+    color:var(--text-soft); font-size:var(--fs-2xs); font-weight:600; min-height:48px;
+    border-radius:var(--radius);
+  }
+  .tab svg { width:21px; height:21px; }
+  .tab.active { color:var(--accent1); background:var(--chip); font-weight:800; }
+}
+
+/* Riduzione movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, .view, .level-fill, .theme-knob { animation:none !important; transition:none !important; }
+}
+
+/* ---------- AGGIUNTE: nota, gruppi, monogramma, esempi ---------- */
+
+/* Nota in coda all'introduzione di una vista (es. la de-adozione di Vox-ATypI) */
+.view-note {
+  font-size: var(--fs-sm); color: var(--text-soft); line-height: 1.6;
+  margin: calc(var(--sp-6) * -1 + var(--sp-2)) 0 var(--sp-6);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--chip); border-radius: var(--radius);
+  border-left: 3px solid var(--accent2-dark); border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Intestazione che divide una lista in gruppi (tecnica: stampa / composizione) */
+.group-head {
+  font-family: 'Blacker Sans Pro', sans-serif;
+  font-size: var(--fs-xs); font-weight: 800; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text-soft);
+  margin: var(--sp-5) 0 var(--sp-2); padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--border);
+}
+.group-head:first-child { margin-top: 0; }
+
+/* Designer senza ritratto: monogramma con le iniziali */
+.designer-mono {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Blacker Pro Text', Georgia, serif; font-weight: 600;
+  font-size: var(--fs-lg); color: var(--accent1);
+  background: var(--chip); border-color: var(--border);
+}
+
+/* Esempi di caratteri sotto la descrizione di una classificazione */
+.item-examples {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  margin: var(--sp-3) 0 0; line-height: 1.6;
+}
+.examples-label {
+  font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+  font-size: var(--fs-2xs); color: var(--text);
+}
+
+/* Le definizioni ora sono lunghe: il testo va tenuto leggibile */
+.item-desc, .tl-desc, .designer-bio { max-width: 62ch; }
+
+/* ---------- TAVOLE ILLUSTRATE ----------
+   Le tavole hanno il proprio fondo di carta, quindi non seguono il tema:
+   restano leggibili sia in chiaro sia in scuro, come una figura incollata
+   in un libro. Il bordo e l'ombra le staccano appena dalla pagina. */
+.plate {
+  margin: 0 0 var(--sp-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #F2E8D5;
+  box-shadow: var(--e1);
+}
+.plate img { display: block; width: 100%; height: auto; }
+.plate-cap {
+  font-size: var(--fs-xs); line-height: 1.55; color: var(--text-soft);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--surface); border-top: 1px solid var(--border);
+}
+.plate-n {
+  font-family: 'Blacker Pro Text', Georgia, serif; font-weight: 600;
+  color: var(--accent1); letter-spacing: .04em;
+}
+/* Dentro una voce aperta la tavola è più contenuta e stacca dal testo */
+.plate-compact { margin-top: var(--sp-4); margin-bottom: 0; }
+
+[data-theme="dark"] .plate { border-color: #3A3226; }
+
+/* ---------- SEZIONE TYPE ----------
+   Le schede riprendono le « carte d'identità tipografiche » a stampa:
+   fondo colorato, due lettere grandi in diagonale e l'alfabeto completo
+   in piccolo. Il testo è sempre scuro sul colore, che è volutamente spento
+   perché il contrasto regga. */
+
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: var(--sp-4);
+}
+
+.tcard {
+  position: relative; overflow: hidden;
+  border: none; border-radius: var(--radius-lg);
+  aspect-ratio: 3 / 4; padding: var(--sp-4);
+  cursor: pointer; text-align: left; color: #1B1712;
+  box-shadow: var(--e1);
+  transition: transform .15s, box-shadow .15s;
+  display: block;
+}
+.tcard:hover { transform: translateY(-3px); box-shadow: var(--e2); }
+.tcard:active { transform: translateY(0); }
+.tcard:focus-visible { outline: 2px solid var(--accent1); outline-offset: 3px; }
+
+/* Le due lettere grandi: una in alto a sinistra, una in basso a destra.
+   Sono ritagliate dal bordo, come nel modello a stampa. */
+.tcard-glyph {
+  position: absolute; font-size: 148px; line-height: .78;
+  color: #1B1712; pointer-events: none; user-select: none;
+}
+.tcard-a { top: 4%; left: 6%; }
+.tcard-b { bottom: 2%; right: 7%; }
+
+/* Il blocco dell'alfabeto: allineato a destra, con i filetti puntinati
+   che separano le righe come nella scheda originale. */
+.tcard-spec {
+  position: absolute; right: var(--sp-4); left: var(--sp-4);
+  top: 50%; transform: translateY(-50%);
+  text-align: right; color: #1B1712;
+}
+.tcard-name {
+  font-size: var(--fs-lg); margin-bottom: 3px;
+  border-bottom: 1.5px solid rgba(27,23,18,.55); padding-bottom: 2px;
+  display: inline-block;
+}
+.tcard-row {
+  font-size: 10px; line-height: 1.9; letter-spacing: .01em;
+  border-bottom: 1px dotted rgba(27,23,18,.42);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tcard-row:last-child { border-bottom: none; }
+
+/* ---------- Carta d'identità ---------- */
+.tdetail-head { margin-bottom: var(--sp-5); }
+.tdetail-name {
+  font-size: var(--fs-4xl); margin: 0 0 var(--sp-2);
+  border-bottom: 2px solid var(--accent1);
+  display: inline-block; padding-bottom: var(--sp-1);
+}
+.tdetail-meta { font-size: var(--fs-sm); color: var(--text-soft); margin: 0; }
+
+.tdetail-spec {
+  border-radius: var(--radius-lg); padding: var(--sp-5) var(--sp-5) var(--sp-4);
+  margin-bottom: var(--sp-6); color: #1B1712; overflow: hidden;
+}
+.tdetail-row {
+  font-size: clamp(13px, 2.4vw, 19px); line-height: 2;
+  border-bottom: 1px dotted rgba(27,23,18,.42);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tdetail-row:last-child { border-bottom: none; }
+
+.tdetail-quote {
+  margin: 0 0 var(--sp-6); padding: 0 0 0 var(--sp-5);
+  border-left: 3px solid var(--accent1);
+}
+.tdetail-quote p {
+  font-family: 'Blacker Pro Text', Georgia, serif;
+  font-size: var(--fs-lg); font-style: italic; line-height: 1.55;
+  margin: 0 0 var(--sp-2); color: var(--text);
+}
+.tdetail-quote cite {
+  font-size: var(--fs-sm); color: var(--text-soft); font-style: normal;
+}
+
+.tdetail-sub {
+  font-family: 'Blacker Sans Pro', sans-serif;
+  font-size: var(--fs-xs); font-weight: 800; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text-soft);
+  margin: var(--sp-6) 0 var(--sp-2); padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--border);
+}
+.tdetail-body {
+  font-size: var(--fs-base); line-height: 1.7; color: var(--text);
+  max-width: 62ch; margin: 0 0 var(--sp-3);
+}
+.tdetail-link {
+  display: inline-block; margin-top: var(--sp-5);
+  font-size: var(--fs-sm); font-weight: 800; color: var(--accent1);
+  text-decoration: none; border-bottom: 1px solid var(--accent1);
+  padding-bottom: 2px; min-height: 32px;
+}
+.tdetail-link:hover { opacity: .75; }
+
+.tdetail-note {
+  margin-top: var(--sp-6); padding: var(--sp-4);
+  background: var(--chip); border-radius: var(--radius);
+  border-left: 3px solid var(--accent2-dark); border-radius: 0 var(--radius) var(--radius) 0;
+}
+.tdetail-note-lb {
+  display: block; font-size: var(--fs-2xs); font-weight: 800;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: var(--accent2-dark); margin-bottom: var(--sp-2);
+}
+.tdetail-note p {
+  margin: 0; font-size: var(--fs-sm); line-height: 1.65; color: var(--text-soft);
+}
+
+@media (max-width: 859px) {
+  .type-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .tcard-glyph { font-size: 116px; }
+}
+
+/* ---------- Colore per classificazione ----------
+   L'etichetta in cima alla scheda dice a quale classe appartiene il
+   carattere. Il colore da solo non basterebbe: serve il nome perché
+   l'associazione fra tinta e famiglia si impari. */
+.tcard-cls {
+  position: absolute; top: var(--sp-4); right: var(--sp-4);
+  font-size: var(--fs-2xs); font-weight: 800;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: rgba(27,23,18,.62);
+  max-width: 55%; text-align: right; line-height: 1.3;
+}
+
+/* ---------- TAVOLA PERIODICA DEI CARATTERI ----------
+   Quattordici colonne, una per classe Vox, e dentro ogni colonna si
+   scende in ordine di data. I fondi sono gli stessi CLASS_COLORS delle
+   schede: chi ha già visto la griglia riconosce le famiglie senza
+   rileggere la legenda. Il testo resta sempre scuro sul colore — le
+   tinte sono calibrate per reggere il contrasto anche a 10 px. */
+
+.periodic { position: relative; margin: 0 0 var(--sp-8); }
+
+.pt-title {
+  font-size: var(--fs-2xl); margin-bottom: var(--sp-2);
+}
+.pt-intro {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  margin: 0 0 var(--sp-4); max-width: 68ch;
+}
+
+/* Su schermo stretto la tavola scorre invece di comprimersi: quattordici
+   colonne dentro 360 px sarebbero illeggibili. */
+.pt-scroll {
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--sp-2);
+  scrollbar-width: thin;
+}
+.pt-scroll:focus-visible { outline: 2px solid var(--accent1); outline-offset: 3px; }
+
+.pt-table {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(62px, 1fr));
+  gap: 3px;
+  min-width: 924px;
+}
+
+/* Prima riga: la fascia delle quattro famiglie Vox, sfumata sui colori
+   delle classi che contiene — la stessa pastiglia della legenda. */
+.pt-band {
+  font-size: var(--fs-2xs); font-weight: 800; color: #1B1712;
+  letter-spacing: .04em; text-transform: uppercase;
+  padding: 3px var(--sp-2); border-radius: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: var(--sp-1);
+}
+
+/* Seconda riga: il nome breve della classe, con un filetto del suo colore. */
+.pt-head {
+  font-size: var(--fs-2xs); line-height: 1.15; font-weight: 700;
+  color: var(--text-soft);
+  padding: 0 2px var(--sp-1);
+  border-bottom: 3px solid var(--border);
+  display: flex; align-items: flex-end;
+  hyphens: auto; overflow-wrap: anywhere;
+  margin-bottom: var(--sp-1);
+}
+
+/* La casella: numero in alto a sinistra, simbolo al centro, nome e anno
+   in basso. Il rapporto è quasi quadrato, come nella tavola vera. */
+.pt-cell {
+  position: relative; border: none; border-radius: 4px;
+  aspect-ratio: 1 / 1.12; padding: 3px 4px 4px;
+  cursor: pointer; text-align: left; color: #1B1712;
+  display: flex; flex-direction: column; align-items: stretch;
+  overflow: hidden;
+  transition: transform .12s, box-shadow .12s;
+}
+.pt-cell:hover { transform: translateY(-2px); box-shadow: var(--e2); z-index: 2; }
+.pt-cell:active { transform: translateY(0); }
+.pt-cell:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; z-index: 3; }
+.pt-cell.is-on {
+  box-shadow: 0 0 0 2px #1B1712 inset, var(--e2); z-index: 2;
+}
+
+.pt-n {
+  font-size: 9px; line-height: 1; font-weight: 700;
+  opacity: .6; letter-spacing: .02em;
+}
+.pt-sym {
+  flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
+  font-size: 22px; line-height: 1; font-weight: 600;
+  letter-spacing: -.01em; padding: 2px 0;
+  overflow: hidden;
+}
+.pt-sub-mark { font-size: 9px; opacity: .55; align-self: flex-start; }
+.pt-name {
+  font-size: 8.5px; line-height: 1.15; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pt-year {
+  font-size: 8px; line-height: 1.2; opacity: .62;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Le due chiavi di lettura: il numero e il segno del sostituto */
+.pt-keys {
+  display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-4);
+  margin: var(--sp-3) 0 0; font-size: var(--fs-2xs); color: var(--text-soft);
+}
+
+/* Il fumetto: ancorato alla casella, non appeso in fondo alla tavola.
+   Sta dentro .periodic e non dentro lo scroller, altrimenti l'overflow
+   orizzontale lo taglierebbe a metà. */
+.pt-pop {
+  position: absolute; z-index: 20;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); box-shadow: var(--e3);
+  overflow: hidden;
+}
+.pt-pop:focus { outline: none; }
+.pt-pop:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; }
+
+/* La punta, che insegue la casella tramite --pt-arrow */
+.pt-pop::before {
+  content: ''; position: absolute;
+  left: calc(var(--pt-arrow, 50%) - 7px); top: -7px;
+  border: 7px solid transparent; border-top: 0;
+  border-bottom-color: var(--border);
+}
+.pt-pop.is-above::before { top: auto; bottom: -7px; border: 7px solid transparent; border-bottom: 0; border-top-color: var(--border); }
+
+.pt-p-shut {
+  position: absolute; top: 6px; right: 8px; z-index: 2;
+  border: none; background: transparent; cursor: pointer;
+  font-size: 20px; line-height: 1; padding: 4px 6px;
+  color: #1B1712; opacity: .5; border-radius: 999px;
+}
+.pt-p-shut:hover { opacity: 1; background: rgba(27,23,18,.10); }
+
+.pt-p-head {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4); color: #1B1712;
+}
+.pt-p-sym { font-size: 34px; line-height: 1; font-weight: 600; flex-shrink: 0; }
+.pt-p-titles { min-width: 0; }
+.pt-p-name { font-size: var(--fs-xl); color: #1B1712; }
+.pt-p-num { margin: 0; font-size: var(--fs-2xs); font-weight: 700; opacity: .6; }
+
+.pt-p-meta {
+  margin: 0; padding: var(--sp-3) var(--sp-4) 0;
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 2px var(--sp-3); font-size: var(--fs-xs);
+}
+.pt-p-meta dt { color: var(--text-soft); font-weight: 700; }
+.pt-p-meta dd { margin: 0; }
+
+.pt-p-note {
+  margin: var(--sp-3) 0 0; padding: 0 var(--sp-4);
+  font-size: var(--fs-sm);
+}
+.pt-p-nocard {
+  margin: var(--sp-2) 0 var(--sp-4); padding: 0 var(--sp-4);
+  font-size: var(--fs-2xs); color: var(--text-soft); font-style: italic;
+}
+.pt-p-go {
+  margin: var(--sp-3) var(--sp-4) var(--sp-4);
+  border: none; border-radius: 999px; cursor: pointer;
+  background: var(--accent1); color: var(--on-accent);
+  font-size: var(--fs-xs); font-weight: 700; padding: 8px 16px;
+}
+.pt-p-go:hover { filter: brightness(1.06); }
+
+.pt-p-sub {
+  margin: 0; padding: var(--sp-2) var(--sp-4);
+  border-top: 1px solid var(--border); background: var(--chip);
+  font-size: var(--fs-2xs); color: var(--text-soft);
+}
+.pt-p-sub-lb { font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pt-cell { transition: none; }
+  .pt-cell:hover { transform: none; }
+}
+
+/* ---------- CONCORDANZA DELLE CLASSIFICAZIONI ----------
+   Segue la tavola periodica. È una tabella vera, non una griglia finta:
+   riga = classe, colonna = sistema. La prima cella di ogni riga porta la
+   pastiglia del colore della classe, la stessa della colonna qui sopra —
+   è il filo che tiene insieme i due oggetti. */
+/* ---------- LE PROPOSTE DI CLASSIFICAZIONE ----------
+   Una lista cronologica, non una tabella: le righe non si confrontano fra
+   loro, si scorrono. L'anno sta in una colonna fissa a sinistra così che
+   la cronologia si legga anche saltando i titoli. Le sei proposte che
+   l'app usa davvero hanno il filetto a sinistra e la pastiglia: sono
+   l'unica cosa che deve saltare all'occhio in ventisei righe. */
+.proposals {
+  margin: var(--sp-6) 0 var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.prop-list {
+  list-style: none; margin: 0 0 var(--sp-3); padding: 0;
+  max-width: 68ch;
+}
+.prop-item {
+  display: flex; gap: var(--sp-3);
+  padding: var(--sp-2) 0 var(--sp-2) var(--sp-2);
+  border-top: 1px solid var(--border);
+  border-left: 3px solid transparent;
+}
+.prop-item:last-child { border-bottom: 1px solid var(--border); }
+.prop-used { border-left-color: var(--accent1); background: var(--chip); }
+.prop-year {
+  flex-shrink: 0; width: 8ch;
+  font-size: var(--fs-xs); font-weight: 800;
+  color: var(--text-soft); font-variant-numeric: tabular-nums;
+  padding-top: 2px;
+}
+.prop-used .prop-year { color: var(--accent1); }
+.prop-main { flex: 1; min-width: 0; }
+.prop-by { display: block; font-size: var(--fs-sm); font-weight: 800; }
+.prop-title { display: block; font-size: var(--fs-sm); font-style: italic; color: var(--text-soft); }
+.prop-alt { display: block; font-size: var(--fs-2xs); color: var(--text-soft); }
+.prop-note {
+  display: block; margin-top: var(--sp-1);
+  font-size: var(--fs-2xs); line-height: 1.45; color: var(--text-soft);
+}
+.prop-badge {
+  display: inline-block; margin-top: var(--sp-1);
+  font-size: var(--fs-2xs); font-weight: 800;
+  padding: 2px 7px; border-radius: 5px;
+  background: var(--accent1); color: var(--bg);
+}
+.prop-source {
+  margin: 0; max-width: 68ch;
+  font-size: var(--fs-2xs); line-height: 1.45; color: var(--text-soft);
+}
+
+.systems {
+  margin: var(--sp-6) 0 var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.sys-title {
+  font-size: var(--fs-2xl); margin-bottom: var(--sp-2);
+}
+.sys-intro {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  margin: 0 0 var(--sp-4); max-width: 68ch;
+}
+
+/* Nove colonne non stanno su un telefono: si scorre, come la tavola. */
+.sys-scroll {
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--sp-2);
+  scrollbar-width: thin;
+}
+.sys-scroll:focus-visible { outline: 2px solid var(--accent1); outline-offset: 3px; }
+
+.sys-table {
+  border-collapse: collapse;
+  width: 100%; min-width: 760px;
+  font-size: var(--fs-2xs); line-height: 1.35;
+  text-align: left;
+}
+.sys-table th, .sys-table td {
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.sys-table thead th {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--bg);
+  font-weight: 800; color: var(--text);
+  letter-spacing: .02em;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+/* Prima colonna: il nome della classe, in evidenza — è la chiave di riga */
+.sys-cls {
+  font-weight: 700; color: var(--text); white-space: nowrap;
+  padding-right: var(--sp-4) !important;
+}
+.sys-sw {
+  display: inline-block; width: 10px; height: 10px;
+  border-radius: 3px; margin-right: 6px;
+  vertical-align: baseline;
+}
+
+/* I nomi coniati dai quattro sistemi: restano nella loro lingua, quindi
+   niente sillabazione automatica che li spezzerebbe a caso. */
+.sys-src { color: var(--text); hyphens: none; }
+.sys-none { color: var(--text-soft); }
+.sys-era { color: var(--text-soft); white-space: nowrap; }
+.sys-ex  { color: var(--text-soft); font-style: italic; }
+
+.sys-notes {
+  margin: var(--sp-3) 0 0; max-width: 68ch;
+}
+.sys-notes p {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-2xs); line-height: 1.45; color: var(--text-soft);
+}
+.sys-notes p:last-child { margin-bottom: 0; }
+
+/* ---------- TAVOLA DI RICONOSCIMENTO ----------
+   Una scheda per gruppo, non una tabella: i campioni vanno visti larghi,
+   e una cella su 360 px li strozzerebbe. Le lettere-spia stanno a
+   sinistra in corpo grande, i parametri al centro, i campioni sotto in
+   righe piene — l'ordine in cui si guarda un carattere per davvero. */
+.recognition { margin-top: var(--sp-8); }
+
+.rec-title { font-size: var(--fs-2xl); margin-bottom: var(--sp-2); }
+.rec-intro, .rec-keyswhy {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  margin: 0 0 var(--sp-3); max-width: 68ch;
+}
+.rec-keyswhy { font-size: var(--fs-2xs); line-height: 1.45; }
+
+.rec-card {
+  --rec-tint: var(--border);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--rec-tint);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4);
+  margin: 0 0 var(--sp-4);
+  background: var(--surface);
+}
+
+.rec-head {
+  display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: var(--sp-2); margin-bottom: var(--sp-3);
+}
+.rec-num {
+  font-size: var(--fs-2xs); font-weight: 800;
+  color: var(--text-soft); letter-spacing: .08em;
+  min-width: 2ch;
+}
+.rec-name { font-size: var(--fs-lg); margin: 0; }
+.rec-badge {
+  font-size: var(--fs-2xs); font-weight: 700;
+  color: #1B1712; padding: 2px var(--sp-2);
+  border-radius: 999px; white-space: nowrap;
+}
+
+/* Le lettere-spia. Il corpo è grande davvero — è l'unico modo di vedere
+   un'inclinazione d'asse — e il colore è tenue perché non sono un titolo
+   ma un campione da osservare. */
+.rec-keys {
+  font-size: clamp(3.5rem, 14vw, 6rem);
+  line-height: .95;
+  letter-spacing: .06em;
+  color: var(--text);
+  margin-bottom: var(--sp-3);
+  display: flex; gap: .12em; align-items: baseline;
+  overflow: hidden;
+}
+.rec-key { display: inline-block; }
+
+/* I parametri: etichetta e valore su due colonne, che su schermo stretto
+   diventano una sola. Sono la parte che si legge, non si guarda. */
+.rec-pars {
+  display: grid; grid-template-columns: max-content 1fr;
+  gap: var(--sp-1) var(--sp-3);
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-2xs); line-height: 1.4;
+}
+.rec-pars dt { font-weight: 700; color: var(--text-soft); }
+.rec-pars dd { margin: 0; color: var(--text); }
+
+.rec-desc {
+  font-size: var(--fs-sm); line-height: 1.55;
+  margin: 0 0 var(--sp-3); max-width: 68ch;
+}
+.rec-models {
+  font-size: var(--fs-2xs); color: var(--text-soft);
+  margin: 0 0 var(--sp-3);
+}
+.rec-label { font-weight: 700; }
+
+/* I campioni. La pangramma è la stessa per tutti: cambiarla renderebbe
+   le righe incomparabili, che è l'unica cosa che questa tavola sa fare. */
+.rec-specs { border-top: 1px solid var(--border); padding-top: var(--sp-3); }
+.rec-spec { margin-bottom: var(--sp-3); }
+.rec-spec:last-child { margin-bottom: 0; }
+.rec-spec-name {
+  font-size: var(--fs-2xs); color: var(--text-soft);
+  margin-bottom: 2px;
+  display: flex; gap: var(--sp-2); flex-wrap: wrap; align-items: baseline;
+}
+.rec-spec-name strong { color: var(--text); }
+.rec-spec-sub { font-style: italic; }
+.rec-spec-line {
+  font-size: clamp(1.1rem, 4.4vw, 1.6rem);
+  line-height: 1.3;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.rec-nospec {
+  font-size: var(--fs-2xs); color: var(--text-soft);
+  font-style: italic; margin: 0;
+}
+
+.rec-notes { margin: var(--sp-4) 0 0; max-width: 68ch; }
+.rec-notes p {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-2xs); line-height: 1.45; color: var(--text-soft);
+}
+.rec-notes p:last-child { margin-bottom: 0; }
+
+@media (min-width: 720px) {
+  /* Su schermo largo le lettere-spia vanno a fianco dei parametri:
+     si confrontano meglio se stanno sulla stessa altezza. */
+  .rec-card { display: grid; grid-template-columns: minmax(0, 22ch) 1fr;
+              gap: 0 var(--sp-5); align-items: start; }
+  .rec-head, .rec-specs { grid-column: 1 / -1; }
+  .rec-keys { grid-row: span 3; margin-bottom: 0; font-size: clamp(4rem, 9vw, 7rem); }
+  .rec-pars, .rec-desc, .rec-models { grid-column: 2; }
+}
+
+/* ---------- PRONTUARIO DEI CARATTERI ----------
+   Chiuso dietro un pulsante che dichiara quante voci contiene: sessantuno
+   schede aperte allungherebbero la pagina oltre ogni ragionevolezza per
+   chi è venuto a guardare le tavole. */
+.handbook { margin-top: var(--sp-6); }
+
+.hb-toggle {
+  display: flex; align-items: center; gap: var(--sp-3);
+  width: 100%; text-align: left;
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+}
+.hb-toggle:hover { border-color: var(--accent1); }
+.hb-toggle:focus-visible { outline: 2px solid var(--accent1); outline-offset: 3px; }
+.hb-toggle svg { width: 22px; height: 22px; flex: 0 0 auto; color: var(--text-soft); }
+.hb-toggle-label { font-size: var(--fs-md); font-weight: 700; }
+.hb-toggle-n {
+  font-size: var(--fs-2xs); color: var(--text-soft);
+  margin-left: auto; white-space: nowrap;
+}
+.hb-toggle-sign {
+  font-size: var(--fs-lg); color: var(--text-soft);
+  line-height: 1; width: 1ch; text-align: center;
+}
+
+.hb-body { padding-top: var(--sp-4); }
+.hb-intro {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  margin: 0 0 var(--sp-4); max-width: 68ch;
+}
+
+.hb-tools { margin-bottom: var(--sp-4); }
+.hb-search {
+  width: 100%; max-width: 34ch;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg); color: var(--text);
+  font: inherit; font-size: var(--fs-sm);
+}
+.hb-search:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; }
+.hb-count {
+  font-size: var(--fs-2xs); color: var(--text-soft);
+  margin: var(--sp-1) 0 0; min-height: 1.2em;
+}
+
+/* Due colonne dove c'è spazio: le voci sono corte e in colonna unica
+   lascerebbero mezza pagina vuota. */
+.hb-list { display: grid; gap: var(--sp-3); }
+@media (min-width: 720px) { .hb-list { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1180px) { .hb-list { grid-template-columns: 1fr 1fr 1fr; } }
+
+.hb-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-3);
+  background: var(--surface);
+}
+/* Arrivando qui da un modello della tavola, la voce si segnala da sola */
+.hb-card.hb-target {
+  border-color: var(--accent1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent1) 22%, transparent);
+}
+
+.hb-head {
+  display: flex; align-items: baseline; gap: var(--sp-2);
+  flex-wrap: wrap; margin-bottom: 2px;
+}
+.hb-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  flex: 0 0 auto; align-self: center;
+}
+.hb-name { font-size: var(--fs-base); margin: 0; }
+.hb-house { font-size: var(--fs-2xs); color: var(--text-soft); }
+.hb-meta {
+  font-size: var(--fs-2xs); color: var(--text-soft);
+  margin: 0 0 var(--sp-2);
+}
+.hb-model {
+  font-size: var(--fs-2xs); color: var(--text-soft);
+  margin: 0 0 var(--sp-2); line-height: 1.4;
+}
+.hb-lab { font-weight: 700; }
+.hb-note { font-size: var(--fs-xs); line-height: 1.5; margin: 0; }
+
+.hb-foot {
+  display: flex; align-items: baseline; gap: var(--sp-3);
+  flex-wrap: wrap; margin: var(--sp-2) 0 0;
+}
+.hb-var { font-size: var(--fs-2xs); color: var(--text-soft); }
+.hb-card-link {
+  font: inherit; font-size: var(--fs-2xs); font-weight: 700;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--accent1); margin-left: auto;
+}
+.hb-card-link:hover { text-decoration: underline; }
+.hb-card-link:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; }
+
+.hb-none {
+  font-size: var(--fs-sm); color: var(--text-soft);
+  font-style: italic; margin: var(--sp-4) 0 0;
+}
+.hb-notes { margin: var(--sp-5) 0 0; max-width: 68ch; }
+.hb-notes p {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-2xs); line-height: 1.45; color: var(--text-soft);
+}
+.hb-notes p:last-child { margin-bottom: 0; }
+
+/* I modelli storici della tavola di riconoscimento che hanno una voce nel
+   prontuario. Sottolineati e non colorati: dentro un elenco di nomi, il
+   colore su metà delle voci farebbe sembrare le altre disattivate. */
+.rec-model-link {
+  font: inherit; background: none; border: 0; padding: 0;
+  cursor: pointer; color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+.rec-model-link:hover { color: var(--accent1); text-decoration-style: solid; }
+.rec-model-link:focus-visible { outline: 2px solid var(--accent1); outline-offset: 2px; }
+
+/* Didascalia della tabella: la leggono gli screen reader, non gli occhi */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Legenda delle quattro famiglie Vox, in testa alla griglia */
+.type-legend {
+  display: flex; flex-wrap: wrap; gap: var(--sp-4);
+  margin: 0 0 var(--sp-5); padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+.legend-item {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  font-size: var(--fs-xs); color: var(--text-soft); font-weight: 600;
+}
+.legend-sw {
+  width: 34px; height: 12px; border-radius: 999px;
+  border: 1px solid rgba(27,23,18,.14); flex-shrink: 0;
+}
+[data-theme="dark"] .legend-sw { border-color: rgba(255,255,255,.16); }
+
+/* ---------- VERSIONE ----------
+   Serve a distinguere subito una pubblicazione nuova da una copia rimasta
+   nella cache del service worker. */
+.app-version {
+  max-width: 920px; margin: var(--sp-8) auto 0;
+  padding-top: var(--sp-4); border-top: 1px solid var(--border);
+  text-align: center; font-size: var(--fs-2xs);
+  color: var(--text-soft); opacity: .8; letter-spacing: .3px;
+}
