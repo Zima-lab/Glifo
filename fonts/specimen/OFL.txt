@@ -1,0 +1,72 @@
+CARATTERI CAMPIONE — LICENZE
+============================
+
+I file .woff2 in questa cartella sono i caratteri usati per illustrare le
+classificazioni tipografiche nel glossario e nel quiz di riconoscimento.
+
+Salvo dove indicato, sono distribuiti con SIL Open Font License 1.1, che ne
+consente liberamente l'uso, l'incorporamento e la ridistribuzione, anche in
+progetti commerciali, purché i font non siano venduti da soli.
+
+Testo completo della licenza: https://openfontlicense.org
+
+CLASSIFICAZIONI (glossario e quiz)
+
+  Archivo             Omnibus-Type
+  Cinzel              Natanael Gama
+  Cormorant Garamond  Christian Thalmann / Catharsis Fonts
+  Dancing Script      Impallari Type
+  DM Sans             Colophon Foundry, Jonny Pinhorn, Indian Type Foundry
+  EB Garamond         Georg Duffner, Octavio Pardo
+  Playfair Display    Claus Eggers Sørensen
+  PT Serif            ParaType
+  Roboto Slab         Christian Robertson
+  UnifrakturCook      j. 'mach' wust
+
+TAVOLA DI RICONOSCIMENTO
+
+Campioni aggiunti per i gruppi che restavano scoperti. Nessuno è
+l'originale citato dai manuali: sono i sostituti liberi più vicini, e la
+tavola lo dichiara riga per riga.
+
+  Museum              Raph Levien               → Centaur, Jenson
+                      (SIL OFL 1.0)
+  Crimson Pro         Sebastian Kosch, Jacques
+                      Le Bailly                 → Plantin, Galliard
+  Libre Caslon Text   Impallari Type, Rodrigo
+                      Fuenzalida                → Caslon, Janson
+  Century Catalogue   Raph Levien               → Century Schoolbook
+                      (SIL OFL 1.0)
+  Bitter              Sol Matas / Huerta
+                      Tipográfica               → Clarendon
+
+SCHEDE DELLA SEZIONE TYPE
+
+Campioni dei caratteri raccontati nelle schede. Nessuno di questi è il
+carattere originale: sono revival o equivalenti liberi, e ogni scheda lo
+dichiara nel campo `substitute`.
+
+  Libre Baskerville   Impallari Type            → Baskerville
+  Bodoni Moda         Indestructible Type       → Bodoni
+  Anton               Vernon Adams              → Impact
+  Comic Neue          Craig Rozynski            → Comic Sans
+  Tinos               Steve Matteson            → Times New Roman
+                      (Apache License 2.0, non OFL)
+
+NON LIBERI — didot-lt-regular.woff2, kabel-book.woff2
+
+  Linotype Didot   Adrian Frutiger, 1991    Linotype/Monotype
+  Kabel            digitalizzazione 1992    Image Club Graphics
+
+Sono caratteri commerciali e NON rientrano in questa licenza: non possono
+essere estratti né ridistribuiti. Stanno qui alle stesse condizioni di
+Blacker, Helvetica LT e Futura — uso personale, repository privato.
+Vedi ../../NOTICE.md.
+
+I file sono stati scaricati da Google Fonts e limitati al sottoinsieme
+"latin" (U+0000-00FF e segni correlati), sufficiente per l'italiano,
+l'inglese e il tedesco usati dall'app.
+
+I caratteri in ../ (Blacker Pro Text e Blacker Sans Pro, Latinotype) NON
+rientrano in questa licenza: sono usati su licenza per progetti non
+commerciali.
