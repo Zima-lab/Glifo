@@ -1,0 +1,42 @@
+name: Controlli Glifo
+
+# La pubblicazione la fa Cloudflare, collegato a questo repository: a ogni
+# push ricostruisce il sito da solo. Questo workflow NON pubblica nulla —
+# prima pubblicava su GitHub Pages, sistema abbandonato ad agosto 2026.
+# Resta solo a fare da rete di sicurezza: se un file è rotto o le due
+# versioni divergono, il commit si segna in rosso e arriva un'email.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  controlli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Controllo sintassi
+        run: |
+          node --check data.js
+          node --check app.js
+          node --check sw.js
+
+      - name: Controllo allineamento versioni
+        run: |
+          APP=$(grep -oP "APP_VERSION\s*=\s*'\K[^']+" data.js)
+          SW=$(grep -oP "CACHE_VERSION\s*=\s*'\Kglifo-[^']+" sw.js | sed 's/^glifo-//')
+          echo "data.js APP_VERSION  = $APP"
+          echo "sw.js   CACHE_VERSION = glifo-$SW"
+          if [ "$APP" != "$SW" ]; then
+            echo "::error::Versioni disallineate: il footer mostrerebbe un numero falso."
+            exit 1
+          fi
+
+      - name: Controllo file offline
+        run: python3 tools/check-offline.py
