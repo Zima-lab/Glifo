@@ -26,7 +26,9 @@
 
   const state = {
     lang: localStorage.getItem('glifo-lang') || 'it',
-    theme: localStorage.getItem('glifo-theme') || 'light',
+    // Alla prima visita il tema segue quello del sistema; dopo, la scelta fatta qui
+    theme: localStorage.getItem('glifo-theme') ||
+           (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
     section: 'home',
     open: { class: {}, event: {}, designer: {}, term: {}, technique: {} },
     typeface: null,           // id del carattere aperto nella sezione Type
@@ -98,6 +100,7 @@
     clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.5 2"/>',
     people: '<circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9.5" r="2.3"/><path d="M15.5 19c.2-2 1.7-3.6 3.7-4"/>',
     cap: '<path d="M12 5 2 9.5l10 4.5 10-4.5L12 5Z"/><path d="M6 12v4.5c0 1 2.7 2 6 2s6-1 6-2V12"/>',
+    more: '<rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/>',
     person: '<circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5c0-3.5 3-6 7-6s7 2.5 7 6"/>',
     search: '<circle cx="10.8" cy="10.8" r="6.6"/><path d="M15.6 15.6 20.8 20.8"/>',
     close: '<path d="M6 6 18 18"/><path d="M18 6 6 18"/>',
@@ -122,9 +125,14 @@
     { key: 'profile',   icon: 'person', label: 'navProfile' },
   ];
 
-  // In basso su mobile ci stanno cinque voci: le altre restano raggiungibili
-  // dalle card della home e dalla barra laterale su schermi larghi.
-  const TABBAR = ['home', 'type', 'glossary', 'exercises', 'profile'];
+  /* In basso su mobile ci stanno cinque voci. Fino alla v34 erano Home,
+     Type, Glossario, Esercizi e Profilo, e Anatomia, Tecnica, Storia e
+     Designer si raggiungevano solo tornando alle card della home: quattro
+     sezioni su nove senza un ingresso diretto. Ora la quinta voce è
+     « Altro » e apre un pannello con le sezioni rimanenti; il Profilo resta
+     raggiungibile anche toccando i punti esperienza in alto. */
+  const TABBAR = ['home', 'glossary', 'type', 'exercises'];
+  const MORE = ['terms', 'technique', 'history', 'designers', 'profile'];
 
   function goto(section) {
     state.section = section;
@@ -132,8 +140,106 @@
     // a metà di un quiz senza contesto.
     if (section !== 'exercises') state.exMode = 'menu';
     if (section !== 'type') state.typeface = null;
+    closeMore();
     render();
     window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  /* ---- Indirizzo e tasto Indietro ----
+     Fino alla v34 la sezione viveva solo in memoria: il tasto Indietro del
+     browser, o il gesto sul telefono, usciva dall'app invece di tornare alla
+     vista precedente, e ricaricando si ripartiva sempre dalla home. Ora ogni
+     vista ha il suo indirizzo — #/storia non è tradotto: #/history, #/type,
+     #/type/garamond — e la cronologia del browser funziona come ci si
+     aspetta, compreso il punto della pagina a cui si era arrivati. */
+  let routeReady = false;
+
+  function routeOf() {
+    let h = '#/' + state.section;
+    if (state.section === 'type' && state.typeface) h += '/' + encodeURIComponent(state.typeface);
+    return h;
+  }
+
+  function applyRoute() {
+    const m = /^#\/([a-z]+)(?:\/([^/]+))?$/.exec(location.hash || '');
+    const ok = m && SECTIONS.some(function (s) { return s.key === m[1]; });
+    state.section = ok ? m[1] : 'home';
+    state.typeface = null;
+    if (ok && m[1] === 'type' && m[2]) {
+      const id = decodeURIComponent(m[2]);
+      if (TYPEFACES.some(function (tf) { return tf.id === id; })) state.typeface = id;
+    }
+    if (state.section !== 'exercises') state.exMode = 'menu';
+  }
+
+  // Chiamata alla fine di ogni render: aggiunge una voce alla cronologia solo
+  // se la vista è cambiata, non a ogni voce aperta o chiusa.
+  function syncRoute(prevY) {
+    const h = routeOf();
+    if (!routeReady) {
+      history.replaceState({ y: 0 }, '', h);
+      routeReady = true;
+      return;
+    }
+    if (location.hash === h) return;
+    // Prima di andare avanti, la voce attuale si ricorda dove eravamo
+    try { history.replaceState({ y: prevY }, ''); } catch (e) {}
+    history.pushState({ y: 0 }, '', h);
+  }
+
+  function onPopRoute(e) {
+    const before = routeOf();
+    applyRoute();
+    if (routeOf() === before && e.type === 'hashchange') return;
+    closeMore();
+    closeSearch();
+    render();
+    const y = e.state && typeof e.state.y === 'number' ? e.state.y : 0;
+    requestAnimationFrame(function () { window.scrollTo({ top: y, behavior: 'auto' }); });
+  }
+
+  /* ---- Pannello « Altro » (solo mobile) ---- */
+  function moreSheet() { return $('moreSheet'); }
+
+  function closeMore(refocus) {
+    const sh = moreSheet();
+    if (!sh || sh.hidden) return;
+    sh.hidden = true;
+    const btn = document.querySelector('.tab[data-nav="more"]');
+    if (btn) {
+      btn.setAttribute('aria-expanded', 'false');
+      if (refocus) btn.focus();
+    }
+  }
+
+  function openMore() {
+    let sh = moreSheet();
+    if (!sh) {
+      sh = el('div', 'more-sheet');
+      sh.id = 'moreSheet';
+      sh.setAttribute('role', 'dialog');
+      sh.setAttribute('aria-modal', 'false');
+      sh.addEventListener('click', function (e) { if (e.target === sh) closeMore(true); });
+      document.body.appendChild(sh);
+    }
+    clear(sh);
+    sh.setAttribute('aria-label', t('navMore'));
+    const panel = el('div', 'more-panel');
+    MORE.forEach(function (key) {
+      const s = SECTIONS.find(function (x) { return x.key === key; });
+      const b = el('button', 'more-item' + (state.section === key ? ' active' : ''));
+      b.type = 'button';
+      if (state.section === key) b.setAttribute('aria-current', 'page');
+      b.innerHTML = icon(s.icon) + '<span>' + t(s.label) + '</span>';
+      b.addEventListener('click', function () { goto(key); });
+      panel.appendChild(b);
+    });
+    sh.appendChild(panel);
+    sh.hidden = false;
+    const btn = document.querySelector('.tab[data-nav="more"]');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    const first = panel.querySelector('.more-item');
+    if (first) first.focus();
   }
 
   function renderNav() {
@@ -141,22 +247,40 @@
     const tabbar = $('tabbar');
     clear(sidebar); clear(tabbar);
 
+    function navButton(cls, key, ic, label, active) {
+      const b = el('button', cls + (active ? ' active' : ''));
+      b.type = 'button';
+      b.dataset.nav = key;
+      if (active) b.setAttribute('aria-current', 'page');
+      b.innerHTML = icon(ic) + '<span>' + label + '</span>';
+      return b;
+    }
+
     SECTIONS.forEach(function (s) {
       const active = s.key === state.section;
-
-      const side = el('button', 'nav-item' + (active ? ' active' : ''));
-      side.type = 'button';
-      side.innerHTML = icon(s.icon) + '<span>' + t(s.label) + '</span>';
+      const side = navButton('nav-item', s.key, s.icon, t(s.label), active);
       side.addEventListener('click', function () { goto(s.key); });
       sidebar.appendChild(side);
 
       if (TABBAR.indexOf(s.key) === -1) return;
-      const tab = el('button', 'tab' + (active ? ' active' : ''));
-      tab.type = 'button';
-      tab.innerHTML = icon(s.icon) + '<span>' + t(s.label) + '</span>';
+      const tab = navButton('tab', s.key, s.icon, t(s.label), active);
       tab.addEventListener('click', function () { goto(s.key); });
       tabbar.appendChild(tab);
     });
+
+    const inMore = MORE.indexOf(state.section) !== -1;
+    const more = navButton('tab', 'more', 'more', t('navMore'), inMore);
+    if (inMore) {
+      // la voce attiva è dentro il pannello: lo si dice anche a chi non vede
+      more.querySelector('span').textContent = t(SECTIONS.find(function (s) { return s.key === state.section; }).label);
+    }
+    more.setAttribute('aria-haspopup', 'dialog');
+    more.setAttribute('aria-expanded', 'false');
+    more.addEventListener('click', function () {
+      const sh = moreSheet();
+      if (sh && !sh.hidden) closeMore(); else openMore();
+    });
+    tabbar.appendChild(more);
   }
 
   /* ============ 4bis. RICERCA ============
@@ -237,8 +361,18 @@
     TERMS.forEach(function (x) {
       add('term', x.id, x, allLangs(x.term), [x.letter], allLangs(x.def));
     });
+    // Le righe delle tabelle entrano nel corpo della voce: « Ravizza » o
+    // « Bullock » stanno solo lì, e devono trovarsi lo stesso.
+    function tableWords(tb) {
+      if (!tb) return [];
+      const out = [];
+      tb.rows.forEach(function (r) {
+        r.forEach(function (c) { if (c != null) out.push.apply(out, typeof c === 'object' ? allLangs(c) : [String(c)]); });
+      });
+      return out;
+    }
     TECHNIQUES.forEach(function (x) {
-      add('technique', x.id, x, allLangs(x.term), [], allLangs(x.def));
+      add('technique', x.id, x, allLangs(x.term), [], allLangs(x.def).concat(tableWords(x.table)));
     });
     TYPEFACES.forEach(function (tf) {
       add('typeface', tf.id, tf, [tf.name],
@@ -521,7 +655,8 @@
   // Le stringhe della barra cambiano con la lingua, il resto no
   function applySearchStrings() {
     const inp = $('searchInput');
-    inp.placeholder = t('searchPlaceholder');
+    inp.placeholder = t(window.matchMedia && window.matchMedia('(max-width: 480px)').matches
+      ? 'searchPlaceholderShort' : 'searchPlaceholder');
     inp.setAttribute('aria-label', t('searchAria'));
     $('searchClear').setAttribute('aria-label', t('searchClearAria'));
     $('searchIcon').innerHTML = icon('search');
@@ -654,7 +789,9 @@
 
       tile.appendChild(g);
       tile.appendChild(el('span', 'tile-title', c.title));
-      tile.appendChild(el('span', 'tile-desc', c.desc.length > 88 ? c.desc.slice(0, 88) + '…' : c.desc));
+      // Il taglio a tre righe lo fa il CSS: tagliare a 88 caratteri in JS
+      // spezzava le parole a metà (« dell… », « param… »).
+      tile.appendChild(el('span', 'tile-desc', c.desc));
       tile.appendChild(el('span', 'tile-meta', c.n + ' ' + (state.lang === 'de' ? 'Einträge' : state.lang === 'en' ? 'entries' : 'voci')));
       tile.addEventListener('click', function () { goto(c.go); });
       grid.appendChild(tile);
@@ -703,13 +840,17 @@
       head.appendChild(spec);
     }
 
+    /* Prima il nome, poi le altre due lingue. Fino alla v34 le tre
+       pastiglie stavano sopra il titolo, compresa quella della lingua in
+       uso, che ripeteva il titolo parola per parola: l'occhio incontrava
+       tre etichette prima di sapere di che voce si trattava. */
     const main = el('div', 'item-main');
-    if (opts.tags) {
+    main.appendChild(el('span', 'item-name', opts.name));
+    if (opts.tags && opts.tags.length) {
       const tags = el('div', 'lang-tags');
       opts.tags.forEach(function (x) { tags.appendChild(el('span', 'lang-tag', x)); });
       main.appendChild(tags);
     }
-    main.appendChild(el('span', 'item-name', opts.name));
     if (opts.sub) main.appendChild(el('span', 'item-sub', opts.sub));
 
     head.appendChild(main);
@@ -721,6 +862,8 @@
       const body = el('div', 'item-body');
       body.appendChild(el('p', 'item-desc', opts.desc));
       if (opts.extra) body.appendChild(opts.extra);
+      if (opts.samples) body.appendChild(samplesBox(opts.samples));
+      if (opts.table) body.appendChild(dataTable(opts.table));
       if (opts.plate) {
         const f = plateFig(opts.plate, true);
         if (f) body.appendChild(f);
@@ -750,8 +893,79 @@
     return fig;
   }
 
+  // Le altre due lingue: quella in uso è già il titolo della voce
   function langTags(obj) {
-    return ['it', 'en', 'de'].map(function (l) { return l.toUpperCase() + ' ' + obj[l]; });
+    return ['it', 'en', 'de'].filter(function (l) { return l !== state.lang; })
+      .map(function (l) { return l.toUpperCase() + ' ' + obj[l]; });
+  }
+
+  /* ---- Tabelle ----
+     Una tabella in data.js è { caption, cols, rows, note, numeric }. Le
+     celle possono essere testo semplice, un oggetto {it,en,de} o null:
+     null diventa una lineetta, perché una casella vuota è un'informazione
+     (la tradizione non ha un nome per quel posto) e non va riempita.
+     Su telefono la tabella scorre in orizzontale dentro il suo riquadro,
+     senza allargare la pagina. */
+  function cellText(v) {
+    if (v == null) return null;
+    return typeof v === 'object' ? tr(v) : String(v);
+  }
+
+  function dataTable(tb) {
+    const fig = el('figure', 'dt-fig');
+    if (tb.caption) fig.appendChild(el('figcaption', 'dt-caption', tr(tb.caption)));
+    const scroll = el('div', 'dt-scroll');
+    scroll.tabIndex = 0;
+    scroll.setAttribute('role', 'region');
+    if (tb.caption) scroll.setAttribute('aria-label', tr(tb.caption));
+    const table = el('table', 'dt');
+    const num = tb.numeric || [];
+    const thead = el('thead');
+    const hr = el('tr');
+    tb.cols.forEach(function (c, i) {
+      const th = el('th', num.indexOf(i) !== -1 ? 'dt-num' : null, cellText(c));
+      th.scope = 'col';
+      hr.appendChild(th);
+    });
+    thead.appendChild(hr);
+    table.appendChild(thead);
+    const tbody = el('tbody');
+    tb.rows.forEach(function (row) {
+      const tr_ = el('tr');
+      row.forEach(function (c, i) {
+        const txt = cellText(c);
+        const isNum = num.indexOf(i) !== -1;
+        const td = el(i === 0 ? 'th' : 'td', (isNum ? 'dt-num' : '') + (txt == null ? ' dt-empty' : ''));
+        if (i === 0) td.scope = 'row';
+        td.textContent = txt == null ? '—' : txt;
+        if (txt == null) td.setAttribute('aria-label', t('emptyCell'));
+        tr_.appendChild(td);
+      });
+      tbody.appendChild(tr_);
+    });
+    table.appendChild(tbody);
+    scroll.appendChild(table);
+    fig.appendChild(scroll);
+    if (tb.note) fig.appendChild(el('p', 'dt-note', tr(tb.note)));
+    return fig;
+  }
+
+  /* Campioni composti: una riga di testo nel carattere indicato, con la
+     didascalia che dice quale carattere è e che cosa guardare. */
+  function samplesBox(list) {
+    const box = el('div', 'samples');
+    list.forEach(function (s) {
+      const row = el('div', 'sample');
+      const txt = el('div', 'sample-text', s.text);
+      txt.style.fontFamily = s.font;
+      if (s.weight) txt.style.fontWeight = s.weight;
+      if (s.style) txt.style.fontStyle = s.style;
+      txt.setAttribute('aria-hidden', 'true');
+      row.appendChild(txt);
+      row.appendChild(el('div', 'sample-label', tr(s.label)));
+      box.appendChild(row);
+    });
+    return box;
   }
 
   /* ---- Glossario ---- */
@@ -850,17 +1064,20 @@
 
     const groups = [
       { key: 'stampa', label: {it:'Tecnologie di stampa', en:'Printing technologies', de:'Drucktechniken'} },
+      { key: 'varianti', label: {it:'Varianti del carattere', en:'Type styles', de:'Schriftschnitte'} },
       { key: 'composizione', label: {it:'Parametri di composizione', en:'Typesetting parameters', de:'Satzparameter'} },
       { key: 'ottica', label: {it:'Correzioni ottiche e percezione', en:'Optical corrections and perception', de:'Optische Korrekturen und Wahrnehmung'} },
     ];
 
     groups.forEach(function (g) {
+      if (!TECHNIQUES.some(function (x) { return x.group === g.key; })) return;
       list.appendChild(el('h2', 'group-head', tr(g.label)));
       TECHNIQUES.filter(function (x) { return x.group === g.key; }).forEach(function (x) {
         const open = !!state.open.technique[x.id];
         list.appendChild(accordionItem({
           key: 'technique:' + x.id,
           open: open, tags: langTags(x.term), name: tr(x.term), desc: tr(x.def), plate: x.plate,
+          table: x.table, samples: x.samples,
           onToggle: function () {
             state.open.technique[x.id] = !open;
             if (!open) markViewed('viewedTechnique', x.id);
@@ -1613,6 +1830,7 @@
 
     $('typeTitle').textContent = t('navType');
     $('typeIntro').textContent = t('typeIntro');
+    renderTypeSubnav();
     // La tavola sta in primo piano: è l'indice della sezione, le schede
     // che seguono ne sono l'approfondimento.
     renderPeriodic($('typePeriodic'));
@@ -1649,10 +1867,70 @@
     TYPEFACES.forEach(function (tf) {
       list.appendChild(typeCard(tf, function () {
         state.typeface = tf.id;
+        state.typeFromGrid = true;
         markViewed('viewedTypeface', tf.id);
         render();
         window.scrollTo({ top: 0, behavior: 'auto' });
       }));
+    });
+  }
+
+  /* ---- Indice della sezione Type ----
+     Su telefono la sezione supera i ventimila pixel: tavola, proposte,
+     concordanza, riconoscimento, prontuario e solo in fondo le schede. Una
+     fila di pastiglie appiccicata sotto la barra dice che cosa c'è e porta
+     a ciascuna parte; quella in vista si accende mentre si scorre. */
+  const TYPE_PARTS = [
+    { id: 'typePeriodic',    lb: {it:'Tavola', en:'Table', de:'Tafel'} },
+    { id: 'typeProposals',   lb: {it:'Proposte', en:'Proposals', de:'Vorschläge'} },
+    { id: 'typeSystems',     lb: {it:'Concordanza', en:'Concordance', de:'Konkordanz'} },
+    { id: 'typeRecognition', lb: {it:'Riconoscere', en:'Recognition', de:'Erkennen'} },
+    { id: 'typeHandbook',    lb: {it:'Prontuario', en:'Handbook', de:'Handbuch'} },
+    { id: 'typeLegend',      lb: {it:'Schede', en:'Cards', de:'Karten'} },
+  ];
+
+  function renderTypeSubnav() {
+    const nav = $('typeSubnav');
+    if (!nav) return;
+    clear(nav);
+    nav.setAttribute('aria-label', t('typeSubnavAria'));
+    TYPE_PARTS.forEach(function (p) {
+      const b = el('button', 'subnav-chip', tr(p.lb));
+      b.type = 'button';
+      b.dataset.target = p.id;
+      b.addEventListener('click', function () {
+        const node = $(p.id);
+        if (!node) return;
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        node.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+      });
+      nav.appendChild(b);
+    });
+    requestAnimationFrame(updateTypeSubnav);
+  }
+
+  function updateTypeSubnav() {
+    if (state.section !== 'type' || state.typeface) return;
+    const nav = $('typeSubnav');
+    if (!nav) return;
+    const line = nav.getBoundingClientRect().bottom + 24;
+    let current = null;
+    TYPE_PARTS.forEach(function (p) {
+      const node = $(p.id);
+      if (node && node.getBoundingClientRect().top <= line) current = p.id;
+    });
+    Array.prototype.forEach.call(nav.children, function (b) {
+      const on = b.dataset.target === current;
+      if (on === b.classList.contains('active')) return;
+      b.classList.toggle('active', on);
+      if (on) {
+        b.setAttribute('aria-current', 'location');
+        // la pastiglia accesa resta visibile anche se la fila scorre
+        const r = b.getBoundingClientRect(), nr = nav.getBoundingClientRect();
+        if (r.left < nr.left || r.right > nr.right) nav.scrollLeft += r.left - nr.left - 16;
+      } else {
+        b.removeAttribute('aria-current');
+      }
     });
   }
 
@@ -1661,7 +1939,12 @@
 
     const back = el('button', 'back-link', '← ' + t('backToType'));
     back.type = 'button';
-    back.addEventListener('click', function () { state.typeface = null; render(); });
+    back.addEventListener('click', function () {
+      // Arrivati dalla griglia, « indietro » è proprio il tasto Indietro:
+      // si torna al punto della pagina da cui si era partiti.
+      if (state.typeFromGrid) { state.typeFromGrid = false; history.back(); return; }
+      state.typeface = null; render();
+    });
     box.appendChild(back);
 
     const head = el('div', 'tdetail-head');
@@ -1719,6 +2002,17 @@
   }
 
   /* ---- Storia ---- */
+  const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI',
+    'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
+  function centuryLabel(c) {
+    if (state.lang === 'en') {
+      const sfx = (c % 100 >= 11 && c % 100 <= 13) ? 'th' : ({1:'st', 2:'nd', 3:'rd'}[c % 10] || 'th');
+      return c + sfx + ' century';
+    }
+    if (state.lang === 'de') return c + '. Jahrhundert';
+    return (ROMAN[c] || c) + ' secolo';
+  }
+
   function renderHistory() {
     $('historyTitle').textContent = t('navHistory');
     $('historyIntro').textContent = t('historyIntro');
@@ -1727,7 +2021,15 @@
 
     // Le date non sono in ordine crescente nel file (1816 sta dopo 1818):
     // qui si ordinano, così la timeline resta coerente comunque si scriva data.js.
+    // Un'intestazione a ogni cambio di secolo: trentun date di fila senza
+    // punti di riferimento si scorrono senza sapere a che altezza si è.
+    let century = null;
     TIMELINE.slice().sort(function (a, b) { return a.year - b.year; }).forEach(function (ev) {
+      const c = Math.floor((ev.year - 1) / 100) + 1;
+      if (c !== century) {
+        century = c;
+        list.appendChild(el('h2', 'tl-century', centuryLabel(c)));
+      }
       const open = !!state.open.event[ev.year];
       const row = el('div', 'tl-row');
       row.dataset.key = 'event:' + ev.year;
@@ -1741,7 +2043,10 @@
       const card = el('button', 'tl-card');
       card.type = 'button';
       card.setAttribute('aria-expanded', String(open));
-      card.appendChild(el('div', 'tl-title', tr(ev.title)));
+      const top = el('div', 'tl-top');
+      top.appendChild(el('div', 'tl-title', tr(ev.title)));
+      top.appendChild(el('span', 'item-chev', open ? '−' : '+'));
+      card.appendChild(top);
       if (open) card.appendChild(el('div', 'tl-desc', tr(ev.desc)));
       card.addEventListener('click', function () {
         state.open.event[ev.year] = !open;
@@ -2088,9 +2393,38 @@
 
   /* ============ 7. RENDER E AVVIO ============ */
 
+  /* Ogni render ridisegna la vista da capo: senza questo, chi usa la
+     tastiera perdeva il segno a ogni voce aperta, perché il pulsante che
+     aveva il focus spariva e il focus tornava in cima alla pagina. Si annota
+     quale elemento lo aveva — la voce (data-key) o la navigazione
+     (data-nav) — e dopo il disegno lo si restituisce al suo gemello. */
+  function focusMemo() {
+    const a = document.activeElement;
+    if (!a || a === document.body) return null;
+    const nav = a.closest('[data-nav]');
+    if (nav) return { sel: '.' + nav.classList[0] + '[data-nav="' + nav.dataset.nav + '"]' };
+    const item = a.closest('[data-key]');
+    if (item && a.classList.length) {
+      return { sel: '[data-key="' + item.dataset.key + '"] .' + a.classList[0], self: '[data-key="' + item.dataset.key + '"].' + a.classList[0] };
+    }
+    return null;
+  }
+
+  function focusRestore(m) {
+    if (!m) return;
+    const a = document.activeElement;
+    if (a && a !== document.body) return;          // il focus è sopravvissuto da solo
+    const node = document.querySelector(m.sel) || (m.self && document.querySelector(m.self));
+    if (node && node.offsetParent !== null) node.focus({ preventScroll: true });
+  }
+
   function render() {
+    const memo = focusMemo();
+    const prevY = window.scrollY;   // prima di ridisegnare: dopo, la pagina può essere più corta
     document.documentElement.setAttribute('data-theme', state.theme);
     document.documentElement.lang = state.lang;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', THEMES[state.theme].bg);
 
     $('tagline').textContent = t('tagline');
     $('appVersion').textContent = 'Glifo ' + APP_VERSION;
@@ -2098,8 +2432,13 @@
     applySearchStrings();
 
     Array.prototype.forEach.call(document.querySelectorAll('.lang-opt'), function (b) {
-      b.classList.toggle('active', b.dataset.lang === state.lang);
+      const on = b.dataset.lang === state.lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', String(on));
     });
+    $('themeToggle').setAttribute('aria-pressed', String(state.theme === 'dark'));
+    $('themeToggle').setAttribute('aria-label', t('themeAria'));
+    $('xpChip').setAttribute('aria-label', t('navProfile') + ' — ' + state.profile.xp + ' XP');
 
     renderNav();
 
@@ -2130,6 +2469,8 @@
     }
 
     syncTopbarHeight();
+    syncRoute(prevY);
+    focusRestore(memo);
 
     // Il seguito di un salto dalla ricerca: la vista ora esiste, si può
     // scorrere fino alla voce e illuminarla.
@@ -2138,6 +2479,24 @@
 
   function init() {
     initSearch();
+    applyRoute();
+    window.addEventListener('popstate', onPopRoute);
+    window.addEventListener('hashchange', onPopRoute);
+
+    // I punti esperienza in alto portano al profilo: con la voce spostata
+    // dentro « Altro », è la scorciatoia più naturale.
+    $('xpChip').addEventListener('click', function () { goto('profile'); });
+
+    let subnavTick = false;
+    window.addEventListener('scroll', function () {
+      if (subnavTick || state.section !== 'type') return;
+      subnavTick = true;
+      requestAnimationFrame(function () { subnavTick = false; updateTypeSubnav(); });
+    }, { passive: true });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMore(true);
+    });
 
     $('langToggle').addEventListener('click', function (e) {
       const btn = e.target.closest('.lang-opt');

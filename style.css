@@ -1625,3 +1625,119 @@ button, a, [role="button"], [tabindex] { touch-action: manipulation; }
   text-align: center; font-size: var(--fs-2xs);
   color: var(--text-soft); opacity: .8; letter-spacing: .3px;
 }
+
+/* ==========================================================================
+   v35 — navigazione, tabelle, varianti del carattere
+   ========================================================================== */
+
+/* I punti esperienza sono diventati un pulsante: portano al profilo */
+.xp-chip { border:none; cursor:pointer; font-family:inherit; min-height:32px; }
+.xp-chip:hover { background:var(--border); }
+
+/* Voce a fisarmonica: le altre lingue stanno sotto il nome, più piccole */
+.item-main .lang-tags { margin:5px 0 0; }
+
+/* Le descrizioni delle card della home: tre righe, tagliate dal CSS a fine
+   parola invece che dal JS a metà parola */
+.tile-desc {
+  display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3;
+  overflow:hidden;
+}
+
+/* ---- Timeline: secoli e segnale di apertura ---- */
+.tl-century {
+  font-family:'Blacker Sans Pro', sans-serif; font-size:var(--fs-xs); font-weight:800;
+  text-transform:uppercase; letter-spacing:.08em; color:var(--text-soft);
+  margin:var(--sp-3) 0 var(--sp-4) 74px;
+}
+.tl-century:first-child { margin-top:0; }
+.tl-top { display:flex; align-items:flex-start; gap:var(--sp-3); }
+.tl-top .tl-title { flex:1; }
+.tl-top .item-chev { line-height:1.2; }
+
+/* ---- Pannello « Altro » (solo mobile) ---- */
+.more-sheet[hidden] { display:none; }
+.more-sheet {
+  position:fixed; inset:0; z-index:49;
+  background:rgba(20,16,12,.32);
+  display:flex; align-items:flex-end;
+  padding-bottom:calc(66px + env(safe-area-inset-bottom));
+  animation:fade .18s ease;
+}
+.more-panel {
+  width:100%; background:var(--surface);
+  border-top:1px solid var(--border); border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+  padding:var(--sp-3) var(--sp-3) var(--sp-2);
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2);
+  box-shadow:0 -8px 24px rgba(27,23,18,.12);
+}
+.more-item {
+  display:flex; align-items:center; gap:var(--sp-3);
+  border:1px solid var(--border); background:var(--bg); color:var(--text);
+  border-radius:var(--radius); padding:12px 14px; min-height:52px; cursor:pointer;
+  font-size:var(--fs-base); font-weight:700; text-align:left;
+}
+.more-item svg { width:20px; height:20px; flex-shrink:0; }
+.more-item.active { color:var(--accent1); border-color:var(--accent1); background:var(--chip); }
+@media (min-width: 860px) { .more-sheet { display:none !important; } }
+
+/* ---- Indice della sezione Type ---- */
+.type-subnav {
+  position:sticky; top:var(--topbar-h); z-index:20;
+  display:flex; gap:6px; overflow-x:auto; scrollbar-width:none;
+  margin:0 calc(var(--sp-4) * -1) var(--sp-5); padding:10px var(--sp-4);
+  background:var(--bg); border-bottom:1px solid var(--border);
+}
+.type-subnav::-webkit-scrollbar { display:none; }
+.subnav-chip {
+  flex-shrink:0; border:1px solid var(--border); background:var(--surface); color:var(--text-soft);
+  border-radius:999px; padding:7px 13px; min-height:36px; cursor:pointer;
+  font-size:var(--fs-xs); font-weight:800; white-space:nowrap;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.subnav-chip:hover { color:var(--text); border-color:var(--text-soft); }
+.subnav-chip.active { background:var(--accent1); border-color:var(--accent1); color:var(--on-accent); }
+#typePeriodic, #typeProposals, #typeSystems, #typeRecognition, #typeHandbook, #typeLegend {
+  scroll-margin-top:calc(var(--topbar-h) + 70px);
+}
+/* Le voci raggiunte dalla ricerca non devono finire sotto la barra */
+[data-key] { scroll-margin-top:calc(var(--topbar-h) + 16px); }
+
+/* ---- Tabelle dei contenuti ---- */
+.dt-fig { margin:var(--sp-5) 0 var(--sp-2); }
+.dt-caption {
+  font-family:'Blacker Sans Pro', sans-serif; font-size:var(--fs-xs); font-weight:800;
+  text-transform:uppercase; letter-spacing:.08em; color:var(--text-soft); margin-bottom:var(--sp-2);
+}
+.dt-scroll {
+  overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius);
+  background:var(--surface); -webkit-overflow-scrolling:touch;
+}
+.dt-scroll:focus-visible { outline:2px solid var(--accent1); outline-offset:3px; }
+.dt { width:100%; border-collapse:collapse; font-size:var(--fs-sm); line-height:1.45; }
+.dt th, .dt td { padding:9px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+.dt thead th {
+  font-size:var(--fs-2xs); font-weight:800; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--text-soft); background:var(--chip);
+}
+.dt tbody tr:last-child th, .dt tbody tr:last-child td { border-bottom:none; }
+.dt tbody th { font-weight:800; color:var(--text); white-space:nowrap; }
+.dt td { color:var(--text-soft); min-width:9ch; }
+.dt .dt-num { font-variant-numeric:lining-nums; font-family:'Blacker Pro Text', Georgia, serif; font-weight:600; color:var(--accent1); }
+.dt thead .dt-num { font-family:inherit; color:var(--text-soft); }
+.dt .dt-empty { color:var(--text-soft); opacity:.55; text-align:center; }
+.dt-note { font-size:var(--fs-xs); color:var(--text-soft); line-height:1.55; margin:var(--sp-2) 0 0; }
+
+/* ---- Campioni composti (varianti del carattere) ---- */
+.samples { display:flex; flex-direction:column; gap:var(--sp-2); margin:var(--sp-4) 0 var(--sp-2); }
+.sample { background:var(--chip); border-radius:var(--radius); padding:12px 16px; }
+.sample-text { font-size:36px; line-height:1.15; color:var(--text); overflow-wrap:anywhere; }
+.sample-label { font-size:var(--fs-xs); color:var(--text-soft); margin-top:4px; line-height:1.45; }
+
+@media (max-width: 859px) {
+  .tl-century { margin-left:74px; }
+  .sample-text { font-size:30px; }
+}
+@media (max-width: 480px) {
+  .dt th, .dt td { padding:8px 9px; }
+}
