@@ -85,7 +85,13 @@
 
   // Iniziali per il monogramma dei designer senza ritratto
   function initials(name) {
-    return name.split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2);
+    // Nome e cognome, senza le particelle minuscole (de, van, di):
+    // «Lucas de Groot» diventa LG, non Ld.
+    const w = name.split(/\s+/).filter(function (x) {
+      return x.charAt(0) !== x.charAt(0).toLowerCase();
+    });
+    if (!w.length) return name.charAt(0);
+    return w.length === 1 ? w[0].charAt(0) : w[0].charAt(0) + w[w.length - 1].charAt(0);
   }
 
   /* ============ 3. ICONE ============

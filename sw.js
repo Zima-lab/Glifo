@@ -5,7 +5,7 @@
    (es. da glifo-v1 a glifo-v2), altrimenti i dispositivi continuano a
    usare la versione salvata in cache. */
 
-const CACHE_VERSION = 'glifo-v37';
+const CACHE_VERSION = 'glifo-v40';
 
 const ASSETS = [
   // Solo './': su Cloudflare 'index.html' risponde 307 verso '/', e un
@@ -125,6 +125,8 @@ const ASSETS = [
   'img/baskerville.jpg',
   'img/tschichold.jpg',
   'img/novarese.jpg',
+  'img/degroot.jpg',
+  'img/spiekermann.jpg',
 ];
 
 self.addEventListener('install', function (event) {

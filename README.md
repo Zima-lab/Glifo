@@ -10,7 +10,7 @@ Atelier di tipografia — app web offline (PWA) in italiano, inglese e tedesco.
 - **Type** — carte d'identità dei caratteri: scheda-specimen colorata che apre storia, « come riconoscerlo », « dove trovarlo » e link di approfondimento
 - **Sette tavole illustrate** in stile enciclopedia ottocentesca, più **tredici figure** sulle correzioni ottiche e la percezione (una per voce)
 - **Storia** — timeline di 31 eventi divisi per secolo, dalla minuscola carolina (789) ai font variabili (2016)
-- **Designer** — 18 schede biografiche
+- **Designer** — 20 schede biografiche
 - **Esercizi** — quattro quiz da 8 domande (classificazione, terminologia, tecnica, storia)
 - **Profilo** — XP, livelli e statistiche di avanzamento
 - Tema chiaro/scuro (alla prima visita segue quello del sistema), funziona **interamente offline**, si installa sul telefono
