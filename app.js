@@ -1066,6 +1066,8 @@
       { key: 'stampa', label: {it:'Tecnologie di stampa', en:'Printing technologies', de:'Drucktechniken'} },
       { key: 'varianti', label: {it:'Varianti del carattere', en:'Type styles', de:'Schriftschnitte'} },
       { key: 'composizione', label: {it:'Parametri di composizione', en:'Typesetting parameters', de:'Satzparameter'} },
+      { key: 'regole', label: {it:'Regole di composizione (Bringhurst)', en:'Typesetting rules (Bringhurst)', de:'Satzregeln (Bringhurst)'} },
+      { key: 'accostare', label: {it:'Accostare i caratteri', en:'Pairing typefaces', de:'Schriften kombinieren'} },
       { key: 'ottica', label: {it:'Correzioni ottiche e percezione', en:'Optical corrections and perception', de:'Optische Korrekturen und Wahrnehmung'} },
     ];
 

@@ -5,12 +5,12 @@ Atelier di tipografia — app web offline (PWA) in italiano, inglese e tedesco.
 ## Cosa contiene
 
 - **Glossario** — 14 classificazioni Vox-ATypI, ciascuna con nome nelle tre lingue, epoca, descrizione, esempi di caratteri e campione tipografico reale
-- **Anatomia** — 37 termini fra linee di costruzione e parti della lettera
-- **Tecnica** — 37 voci fra tecnologie di stampa (dal punzone al digitale, con la cronologia delle macchine dell'Ottocento), varianti del carattere (postura, peso, larghezza, numerazione di Frutiger, con tabelle), tipometria, parametri di composizione e correzioni ottiche
+- **Anatomia** — 54 termini fra linee di costruzione e parti della lettera (con bicamerale, grazie riflessive e transitive, filettato)
+- **Tecnica** — 61 voci, fra cui 16 regole di composizione tratte da Bringhurst e 4 voci sull’accostamento dei caratteri; fra tecnologie di stampa (dal punzone al digitale, con la cronologia delle macchine dell'Ottocento), varianti del carattere (postura, peso, larghezza, numerazione di Frutiger, con tabelle), tipometria, parametri di composizione e correzioni ottiche
 - **Type** — carte d'identità dei caratteri: scheda-specimen colorata che apre storia, « come riconoscerlo », « dove trovarlo » e link di approfondimento
 - **Sette tavole illustrate** in stile enciclopedia ottocentesca, più **tredici figure** sulle correzioni ottiche e la percezione (una per voce)
 - **Storia** — timeline di 31 eventi divisi per secolo, dalla minuscola carolina (789) ai font variabili (2016)
-- **Designer** — 14 schede biografiche
+- **Designer** — 18 schede biografiche
 - **Esercizi** — quattro quiz da 8 domande (classificazione, terminologia, tecnica, storia)
 - **Profilo** — XP, livelli e statistiche di avanzamento
 - Tema chiaro/scuro (alla prima visita segue quello del sistema), funziona **interamente offline**, si installa sul telefono
